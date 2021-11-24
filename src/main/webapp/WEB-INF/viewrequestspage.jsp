@@ -12,14 +12,13 @@
     <link rel="stylesheet" href="../style.css">
 </head>
 <body>
-<div class="container ">
+<div class="container">
     <div class="top">
-
-        <div id="navigation ">
+        <div id="navigation">
             <!-- Navbar -->
             <nav class="navbar navbar-expand-lg navbar-dark bg-dark p-0" style="background-color:#0c2169 !important;">
                 <div class="float-left" id="logoimg" style="width:126px;">
-                    <a href="${pageContext.request.contextPath}/fc/customerpage">
+                    <a href="${pageContext.request.contextPath}/fc/employeepage">
                         <img src="${pageContext.request.contextPath}/images/logo.png" height="auto" width="100%"/>
                     </a>
                 </div>
@@ -42,8 +41,12 @@
                         <!-- Left links -->
                         <ul class="navbar-nav me-auto mb-2 mb-lg-0">
                             <li class="nav-item">
-                                <a class="nav-link" href="${pageContext.request.contextPath}/fc/myrequests">Mine forespørgelser</a>
+                                <a class="nav-link" href="${pageContext.request.contextPath}/fc/viewcustomerspage">Kunder</a>
                             </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="${pageContext.request.contextPath}/fc/viewrequestspage">Forespørgelser</a>
+                            </li>
+
                         </ul>
                         <!-- Left links -->
                     </div>
@@ -57,7 +60,7 @@
                         </a>
                         <ul class="navbar-nav me-auto mb-2 mb-lg-0">
                             <li class="nav-item">
-                                <a class="nav-link" href="#" style="pointer-events: none">test@test.dk</a>
+                                <a class="nav-link" href="#" style="pointer-events: none">admin@test.dk</a>
                             </li>
                             <li class="nav-item">
                                 <a class="nav-link" href="signout.html">Log ud</a>
@@ -71,37 +74,61 @@
         </div>
     </div>
     <div class="content">
-        <div class="jumbotron bg-light mt-5 p-5 shadow-lg p-3 mb-5 bg-white rounded">
-            <h1 class="display-4">QUICK-BYG TILBUD</h1>
-            <p class="lead">Med et specialudviklet computerprogram kan vi lynhurtigt beregne prisen og udskrive en skitsetegning på en carport indenfor vores standardprogram, der tilpasses
-                dine specifikke ønsker.</br></br>
-
-                Tilbud og skitsetegning fremsendes med post hurtigst muligt.
-                Ved bestilling medfølger standardbyggevejledning.</br></br>
-
-                Rekvirér tilbud - start med at vælge type:  </p>
-
-            <div class="row w-75" style="margin:auto">
-                <div class="col-sm-6">
-                    <div class="card text-center">
-                        <div class="card-body">
-                            <h5 class="card-title">Carport med fladt tag</h5>
-                            <p class="card-text"><img src="${pageContext.request.contextPath}/images/fladtTag.png" alt=""></p>
-                            <a href="${pageContext.request.contextPath}/fc/flatcarportpage" class="btn btn-primary fogbtn w-100">Design carport</a>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-sm-6">
-                    <div class="card text-center">
-                        <div class="card-body">
-                            <h5 class="card-title">Carport med rejsning</h5>
-                            <p class="card-text"><img src="../${pageContext.request.contextPath}/images/rejsningTag.png" alt=""></p>
-                            <a href="${pageContext.request.contextPath}/fc/slopecarportpage" class="btn btn-primary fogbtn w-100" >Design carport</a>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
+        <table class="table table-striped mt-5" id="bottoms">
+            <thead>
+            <tr>
+                <th scope="col">Foresprørgsels NR</th>
+                <th scope="col">Kunde email</th>
+                <th scope="col"></th>
+            </tr>
+            </thead>
+            <tbody>
+            <form action="${pageContext.request.contextPath}/fc/viewrequestinfopage" method="POST">
+                <tr>
+                    <td>1</td>
+                    <td>test@test.dk</td>
+                    <td class="text-end">
+                        <button type="submit" name="infoButton"
+                                class="btn btn-outline-primary float-end"><i
+                                class="bi bi-info-circle"></i></button>
+                    </td>
+            </form>
+            </tr>
+            <form action="${pageContext.request.contextPath}/fc/viewrequestinfopage" method="POST">
+                <tr>
+                    <td>1</td>
+                    <td>test@test.dk</td>
+                    <td class="text-end">
+                        <button type="submit" name="infoButton"
+                                class="btn btn-outline-primary float-end"><i
+                                class="bi bi-info-circle"></i></button>
+                    </td>
+            </form>
+            </tr>
+            <form action="${pageContext.request.contextPath}/fc/viewrequestinfopage" method="POST">
+                <tr>
+                    <td>1</td>
+                    <td>test@test.dk</td>
+                    <td class="text-end">
+                        <button type="submit" name="infoButton"
+                                class="btn btn-outline-primary float-end"><i
+                                class="bi bi-info-circle"></i></button>
+                    </td>
+            </form>
+            </tr>
+            <form action="${pageContext.request.contextPath}/fc/viewrequestinfopage" method="POST">
+                <tr>
+                    <td>1</td>
+                    <td>test@test.dk</td>
+                    <td class="text-end">
+                        <button type="submit" name="infoButton"
+                                class="btn btn-outline-primary float-end"><i
+                                class="bi bi-info-circle"></i></button>
+                    </td>
+            </form>
+            </tr>
+            </tbody>
+        </table>
     </div>
     <div class="bottom"></div>
 </div>
@@ -109,4 +136,3 @@
 
 </body>
 </html>
-

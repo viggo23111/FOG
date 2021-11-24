@@ -75,10 +75,68 @@
     </div>
     <div class="content">
         <div class="jumbotron bg-light mt-5 p-5 shadow-lg p-3 mb-5 bg-white rounded">
-            <h1 class="display-4">VELKOMMEN $navn</h1>
-            <p class="lead">Dette er administrator siden,
-                Her kan du se alle kunder og forespørgsler.  </p>
+            <div class="row">
+                <div class="col">
+                    <h1 class="display-4">Customer info</h1>
+                    <form action="${pageContext.request.contextPath}/fc/viewcustomerinfopage" method="POST">
+                        <div class="form-group">
+                            <label for="name">Navn</label>
+                            <input type="text" class="form-control" id="name"
+                                   value="Viktor Bak Nymand" disabled>
+                        </div>
+                        <div class="form-group">
+                            <label for="tlf">Tlf</label>
+                            <input type="text" class="form-control" id="tlf"
+                                   value="22321233" disabled>
+                        </div>
+                        <div class="form-group">
+                            <label for="email">Email</label>
+                            <input type="email" class="form-control" id="email" value="test@test.dk"
+                                   disabled>
+                        </div>
+                        <div class="form-group">
+                            <label for="userBalance">Balance</label>
+                            <input type="number" class="form-control" id="userBalance" name="userBalance"
+                                   value="100">
+                        </div>
+                        <button type="submit" class="btn btn-primary mt-2">Save</button>
+                    </form>
+                </div>
+                <div class="col">
+                    <h1 class="display-4">Forespørgsler</h1>
+                    <table class="table table-striped" id="bottoms">
+                        <thead>
+                        <tr>
+                            <th scope="col">Forespørgsels NR</th>
+                            <th scope="col">Dato</th>
+                            <th scope="col"></th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <tr>
+                            <td>1</td>
+                            <td>20.10.2020</td>
+                            <td class="text-end">
+                                <form action="${pageContext.request.contextPath}/fc/viewrequestinfopage" method="POST"
+                                      class="" style="display: inline-flex;">
+                                    <button type="submit" name="editbtn" value="" class="btn btn-outline-primary"><i
+                                            class="bi bi-info-circle"></i></button>
+                                </form>
+                                <form action="${pageContext.request.contextPath}/fc/viewcustomerinfopage"
+                                      method="POST" style="display: inline-flex;">
 
+                                    <button type="submit" name="removebtn" value="" class="btn btn-outline-danger">
+                                        <i
+                                                class="bi bi-trash"></i></button>
+                                </form>
+                            </td>
+
+                        </tr>
+
+                        </tbody>
+                    </table>
+                </div>
+            </div>
         </div>
     </div>
     <div class="bottom"></div>

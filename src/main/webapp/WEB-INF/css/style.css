@@ -1,0 +1,25 @@
+
+@font-face {
+    font-family: chalet;
+    src: url("fogFont.ttf");
+}
+body h1, h2,h3,h4,h5{
+    font-family:chalet;
+}
+body p{
+    font-family:"Roboto Thin";
+}
+
+.navbar-dark .navbar-nav .nav-link{
+    color:white;
+    text-transform: uppercase;
+    font-size: 27px;
+    font-family:chalet !important;
+}
+
+.navbar-dark .navbar-nav .nav-link:hover{
+   color:#337ab7;
+}
+.fogbtn{
+   background-color:#0c2169 !important;
+}

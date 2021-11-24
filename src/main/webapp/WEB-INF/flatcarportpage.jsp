@@ -72,33 +72,68 @@
     </div>
     <div class="content">
         <div class="jumbotron bg-light mt-5 p-5 shadow-lg p-3 mb-5 bg-white rounded">
-            <h1 class="display-4">QUICK-BYG TILBUD</h1>
-            <p class="lead">Med et specialudviklet computerprogram kan vi lynhurtigt beregne prisen og udskrive en skitsetegning på en carport indenfor vores standardprogram, der tilpasses
-                dine specifikke ønsker.</br></br>
-
-                Tilbud og skitsetegning fremsendes med post hurtigst muligt.
-                Ved bestilling medfølger standardbyggevejledning.</br></br>
-
-                Rekvirér tilbud - start med at vælge type:  </p>
-
-            <div class="row w-75" style="margin:auto">
+            <div class="row" style="margin:auto">
                 <div class="col-sm-6">
-                    <div class="card text-center">
-                        <div class="card-body">
-                            <h5 class="card-title">Carport med fladt tag</h5>
-                            <p class="card-text"><img src="${pageContext.request.contextPath}/images/fladtTag.png" alt=""></p>
-                            <a href="${pageContext.request.contextPath}/fc/flatcarportpage" class="btn btn-primary fogbtn w-100">Design carport</a>
+                    <form class="card p-3 " action="${pageContext.request.contextPath}/fc/carportoverviewpage" method="post">
+                        <h1>QUICK-BYG TILBUD - CARPORT MED FLADT TAG</h1>
+                        <p class="mb-5">Udfyld alle felter og tryk send forespørgelse</p>
+                        <div class="form-outline mb-4">
+                            <label for="sel1">Carport bredde:</label>
+                            <select class="form-control" id="sel1">
+                                <option selected>Vælg bredde</option>
+                                <option>200</option>
+                                <option>210</option>
+                                <option>220</option>
+                                <option>230</option>
+                            </select>
                         </div>
-                    </div>
+                        <div class="form-outline mb-4">
+                            <label for="sel2">Carport længde:</label>
+                            <select class="form-control" id="sel2">
+                                <option selected>Vælg længde</option>
+                                <option>200</option>
+                                <option>210</option>
+                                <option>220</option>
+                                <option>230</option>
+                            </select>
+                        </div>
+                        <div class="form-outline mb-4">
+                            <label for="sel3">Carport tag:</label>
+                            <select class="form-control" id="sel3">
+                                <option selected>Vælg tag</option>
+                                <option>Plastik</option>
+                                <option>Træ</option>
+                            </select>
+                        </div>
+                        <p class="mb" style="font-weight: bold">Redskabsrum</p>
+                        <p class="mb-5">NB! Der skal beregnes 15cm tagudhæng på hver side af redskabsrummet!</p>
+
+                        <div class="form-outline mb-4">
+                            <label for="sel4">Redskabsrum bredde:</label>
+                            <select class="form-control" id="sel4">
+                                <option selected>Ønsker ikke redskabsrum</option>
+                                <option>200</option>
+                                <option>210</option>
+                                <option>220</option>
+                                <option>230</option>
+                            </select>
+                        </div>
+
+                        <div class="form-outline mb-4">
+                            <label for="sel5">Redskabsrum længde:</label>
+                            <select class="form-control" id="sel5">
+                                <option selected>Ønsker ikke redskabsrum</option>
+                                <option>200</option>
+                                <option>210</option>
+                                <option>220</option>
+                                <option>230</option>
+                            </select>
+                        </div>
+                        <button class="btn btn-primary btn-lg btn-block fogbtn" type="submit" >Videre</button>
+                    </form>
                 </div>
-                <div class="col-sm-6">
-                    <div class="card text-center">
-                        <div class="card-body">
-                            <h5 class="card-title">Carport med rejsning</h5>
-                            <p class="card-text"><img src="../${pageContext.request.contextPath}/images/rejsningTag.png" alt=""></p>
-                            <a href="${pageContext.request.contextPath}/fc/slopecarportpage" class="btn btn-primary fogbtn w-100" >Design carport</a>
-                        </div>
-                    </div>
+                <div class="col-sm-6 text-center">
+                    <img src="${pageContext.request.contextPath}/images/fladtTag.png" alt="" width="100%"></p>
                 </div>
             </div>
         </div>

@@ -9,7 +9,7 @@
     <meta name="viewport" content="wi dth=device-width, initial-scale=1">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
     <title>Fog</title>
-    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="../style.css">
 </head>
 <body>
 <div class="container ">
@@ -19,7 +19,7 @@
             <!-- Navbar -->
             <nav class="navbar navbar-expand-lg navbar-dark bg-dark p-0" style="background-color:#0c2169 !important;">
                 <div class="float-left" id="logoimg" style="width:126px;">
-                    <a href="${pageContext.request.contextPath}/fc/index">
+                    <a href="${pageContext.request.contextPath}/fc/customerpage">
                         <img src="${pageContext.request.contextPath}/images/logo.png" height="auto" width="100%"/>
                     </a>
                 </div>
@@ -41,7 +41,9 @@
                         <!-- Navbar brand -->
                         <!-- Left links -->
                         <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-
+                            <li class="nav-item">
+                                <a class="nav-link" href="${pageContext.request.contextPath}/fc/myrequests">Mine forespørgelser</a>
+                            </li>
                         </ul>
                         <!-- Left links -->
                     </div>
@@ -55,10 +57,10 @@
                         </a>
                         <ul class="navbar-nav me-auto mb-2 mb-lg-0">
                             <li class="nav-item">
-                                <a class="nav-link" href="${pageContext.request.contextPath}/fc/loginpage">Log ind</a>
+                                <a class="nav-link" href="#" style="pointer-events: none">test@test.dk</a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link" href="${pageContext.request.contextPath}/fc/registerpage">Registrer</a>
+                                <a class="nav-link" href="signout.html">Log ud</a>
                             </li>
                         </ul>
                     </div>
@@ -70,8 +72,7 @@
     </div>
     <div class="content">
         <div class="jumbotron bg-light mt-5 p-5 shadow-lg p-3 mb-5 bg-white rounded">
-            <h1 class="display-4">Velkommen til Fog carport</h1>
-            <p class="lead">Her kan du designe en carport ud fra specifikke længde og bredde mål. </br> For at designe din carport skal du logge ind. </p>
+            <h1 class="display-4">Tak for din forespørgsel! Afvent godkendelse. Forespørgsels nr: 164</h1>
         </div>
     </div>
     <div class="bottom"></div>
@@ -80,3 +81,4 @@
 
 </body>
 </html>
+
