@@ -27,5 +27,9 @@
     <exception-type>java.lang.Exception</exception-type>
     <location>/errorpage.jsp</location>
   </error-page>
+  <mime-mapping>
+    <extension>ttf</extension>
+    <mime-type>application/x-font-ttf</mime-type>
+  </mime-mapping>
 
 </web-app>
