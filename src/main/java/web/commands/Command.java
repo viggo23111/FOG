@@ -28,6 +28,8 @@ public abstract class Command
         commands.put("registercommand", new RegisterCommand(""));
         commands.put("customerpage", new CommandProtectedPage("customerpage", "customer"));
         commands.put("employeepage", new CommandProtectedPage("employeepage", "employee"));
+        commands.put("flatcarportcommand", new DesignFlatCarportCommand("flatcarportpage", "customer"));
+        commands.put("slopecarportcommand", new DesignSlopeCarportCommand("slopecarportpage", "customer"));
     }
 
     public static Command fromPath(

@@ -101,8 +101,9 @@
                             <label for="sel3">Carport tag:</label>
                             <select class="form-control" id="sel3">
                                 <option selected>Vælg tag</option>
-                                <option>Plastik</option>
-                                <option>Træ</option>
+                                <c:forEach var="roofitem" items="${requestScope.roofList}">
+                                    <option>${roofitem.name}</option>
+                                </c:forEach>
                             </select>
                         </div>
                         <div class="form-outline mb-4">

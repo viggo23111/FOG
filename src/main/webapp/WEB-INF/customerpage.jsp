@@ -87,7 +87,7 @@
                         <div class="card-body">
                             <h5 class="card-title">Carport med fladt tag</h5>
                             <p class="card-text"><img src="${pageContext.request.contextPath}/images/fladtTag.png" alt=""></p>
-                            <a href="${pageContext.request.contextPath}/fc/flatcarportpage" class="btn btn-primary fogbtn w-100">Design carport</a>
+                            <a href="${pageContext.request.contextPath}/fc/flatcarportcommand" class="btn btn-primary fogbtn w-100">Design carport</a>
                         </div>
                     </div>
                 </div>
@@ -95,8 +95,8 @@
                     <div class="card text-center">
                         <div class="card-body">
                             <h5 class="card-title">Carport med rejsning</h5>
-                            <p class="card-text"><img src="../${pageContext.request.contextPath}/images/rejsningTag.png" alt=""></p>
-                            <a href="${pageContext.request.contextPath}/fc/slopecarportpage" class="btn btn-primary fogbtn w-100" >Design carport</a>
+                            <p class="card-text"><img src="${pageContext.request.contextPath}/images/rejsningTag.png" alt=""></p>
+                            <a href="${pageContext.request.contextPath}/fc/slopecarportcommand" class="btn btn-primary fogbtn w-100" >Design carport</a>
                         </div>
                     </div>
                 </div>

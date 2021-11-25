@@ -22,9 +22,9 @@ public class Database
             URL = System.getenv("JDBC_CONNECTION_STRING");
         } else
         {
-            USER = user;
-            PASSWORD = password;
-            URL = url;
+            USER = "root";
+            PASSWORD = "Datamatiker123";
+            URL = "jdbc:mysql://localhost:3306/fog?serverTimezone=CET&useSSL=false";
         }
         Class.forName("com.mysql.cj.jdbc.Driver");
     }
