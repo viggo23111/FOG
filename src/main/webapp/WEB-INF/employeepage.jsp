@@ -75,7 +75,7 @@
     </div>
     <div class="content">
         <div class="jumbotron bg-light mt-5 p-5 shadow-lg p-3 mb-5 bg-white rounded">
-            <h1 class="display-4">VELKOMMEN $navn</h1>
+            <h1 class="display-4">VELKOMMEN ${sessionScope.name}</h1>
             <p class="lead">Dette er administrator siden,
                 Her kan du se alle kunder og forespørgsler.  </p>
 
