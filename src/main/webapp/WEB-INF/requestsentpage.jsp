@@ -19,7 +19,7 @@
             <!-- Navbar -->
             <nav class="navbar navbar-expand-lg navbar-dark bg-dark p-0" style="background-color:#0c2169 !important;">
                 <div class="float-left" id="logoimg" style="width:126px;">
-                    <a href="${pageContext.request.contextPath}/fc/customerpage">
+                    <a href="${pageContext.request.contextPath}/fc/myrequestscommand">
                         <img src="${pageContext.request.contextPath}/images/logo.png" height="auto" width="100%"/>
                     </a>
                 </div>

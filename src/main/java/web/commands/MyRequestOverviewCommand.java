@@ -29,7 +29,22 @@ public class MyRequestOverviewCommand extends CommandProtectedPage {
         }
 
 
-        request.setAttribute("width", requestfound.getWidth());
+        request.setAttribute("width", requestfound.getWidth() + " cm");
+        request.setAttribute("length", requestfound.getWidth() +" cm");
+        request.setAttribute("roof", requestfound.getRoofName());
+        request.setAttribute("slope", requestfound.getSlope() + " grader");
+        request.setAttribute("shedwidth", requestfound.getShedWidth() +" cm");
+        request.setAttribute("shedlength", requestfound.getShedLength() + " cm");
+
+        request.setAttribute("statusID", requestfound.getStatusID());
+
+
+        if (requestfound.getStatusID()==3){
+            request.setAttribute("price", requestfound.getPrice() + " DKK");
+        }else{
+            request.setAttribute("price", "ikke klar!");
+        }
+
         return "myrequestoverviewpage";
     }
 }
