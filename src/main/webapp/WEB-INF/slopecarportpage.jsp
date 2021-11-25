@@ -126,7 +126,7 @@
                             <select name="roof" class="form-control" id="roof">
                                 <option selected>Vælg tag</option>
                                 <c:forEach var="roofitem" items="${requestScope.roofList}">
-                                    <option>${roofitem.name}</option>
+                                    <option>${roofitem.name} </option>
                                 </c:forEach>
                             </select>
                         </div>

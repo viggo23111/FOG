@@ -29,4 +29,8 @@ public class LogicFacade {
     public Request getRequestByID(int requestID) throws UserException {
         return requestMapper.getRequestByID(requestID);
     }
+
+    public void createRequestForCarportTypeTwo(int userID, int statusID, int width, int length, int roofID, int slope, int shedWidth, int shedLength) throws UserException {
+        requestMapper.createRequestForCarportTypeTwo(userID,statusID,width,length,roofID,slope,shedWidth,shedLength);
+    }
 }

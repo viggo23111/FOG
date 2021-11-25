@@ -94,4 +94,37 @@ public class RequestMapper {
         }
         return request;
     }
+
+    public void createRequestForCarportTypeTwo(int userID, int statusID, int width, int length, int roofID, int slope, int shedWidth, int shedLength) throws UserException
+    {
+
+        try (Connection connection = database.connect())
+        {
+            String sql = "INSERT INTO requests (user_id, status_id, width, length, roof_id, slope, shed_width, shed_length) VALUES (?,?,?,?,?,?,?,?)";
+
+            try (PreparedStatement ps = connection.prepareStatement(sql)) {
+
+                ps.setInt(1, userID);
+                ps.setInt(2, statusID);
+                ps.setInt(3, width);
+                ps.setInt(4, length);
+                ps.setInt(5, roofID);
+                ps.setInt(6, slope);
+                ps.setInt(7, shedWidth);
+                ps.setInt(8, shedLength);
+
+                ps.executeUpdate();
+            }
+            catch (SQLException ex)
+            {
+
+                throw new UserException(ex.getMessage());
+            }
+        }
+        catch (SQLException ex)
+        {
+
+            throw new UserException(ex.getMessage());
+        }
+    }
 }

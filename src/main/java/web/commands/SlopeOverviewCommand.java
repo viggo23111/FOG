@@ -1,5 +1,7 @@
 package web.commands;
 
+import business.entities.Roof;
+import business.exceptions.UserException;
 import business.services.LogicFacade;
 
 import javax.servlet.http.HttpServletRequest;
@@ -21,6 +23,17 @@ public class SlopeOverviewCommand extends CommandProtectedPage{
         int length = Integer.parseInt(request.getParameter("length"));
         String roof = request.getParameter("roof");
         int slope = Integer.parseInt(request.getParameter("slope"));
+        int roofID = 0;
+
+        try {
+            for (Roof roof1 :logicFacade.getAllRoofsByType(2)) {
+                if(roof1.getName().equals(roof)){
+                    roofID = roof1.getID();
+                }
+            }
+        } catch (UserException e) {
+            e.printStackTrace();
+        }
 
 
         int shedWidth = Integer.parseInt(request.getParameter("shedWidth"));
@@ -39,10 +52,13 @@ public class SlopeOverviewCommand extends CommandProtectedPage{
         request.setAttribute("length", length);
         request.setAttribute("roof", roof);
         request.setAttribute("slope",slope);
-        request.setAttribute("shedWidth", width);
+        request.setAttribute("shedWidth", shedWidth);
         request.setAttribute("shedLength", shedLength);
+        request.setAttribute("roofID",roofID);
 
         request.setAttribute("carportType", 2);
+
+
 
 
 

@@ -1,9 +1,11 @@
 package web.commands;
 
+import business.exceptions.UserException;
 import business.services.LogicFacade;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 public class SendRequestCommand extends CommandProtectedPage{
     LogicFacade logicFacade;
@@ -17,34 +19,38 @@ public class SendRequestCommand extends CommandProtectedPage{
     public String execute(HttpServletRequest request, HttpServletResponse response) {
 
 
-        int width = Integer.parseInt(request.getParameter("width"));
-        int length = Integer.parseInt(request.getParameter("length"));
-        String roof = request.getParameter("roof");
+        HttpSession session = request.getSession();
 
-        System.out.println("are we here? 2");
+
+
+        int userID = Integer.parseInt(String.valueOf(session.getAttribute("userid")));
+
+        System.out.println("userid: " + userID);
+
+        int roofID = Integer.parseInt(request.getParameter("roofID"));
+        System.out.println("roofID: " + roofID);
+
+        int width = Integer.parseInt(request.getParameter("width"));
+        System.out.println("width: " + width);
+        int length = Integer.parseInt(request.getParameter("length"));
+        System.out.println("length: " + length);
+
+        int slope = Integer.parseInt(request.getParameter("slope"));
+        System.out.println("slope: " + slope);
+
 
         int shedWidth = Integer.parseInt(request.getParameter("shedWidth"));
+        System.out.println("shedWidth: " + shedWidth);
         int shedLength = Integer.parseInt(request.getParameter("shedLength"));
+        System.out.println("shedLength: " + shedLength);
 
-        System.out.println("are we here? 3");
 
-        if (shedWidth != 0 && shedLength != 0){
-            shedWidth = Integer.parseInt(request.getParameter("shedWidth"));
-            shedLength = Integer.parseInt(request.getParameter("shedLength"));
+        try {
+            logicFacade.createRequestForCarportTypeTwo(userID,1,width,length,roofID,slope,shedWidth,shedLength);
+        } catch (UserException e) {
+            e.printStackTrace();
         }
 
-        System.out.println("are we here? 4");
-
-        request.setAttribute("width", width);
-        request.setAttribute("length", length);
-        request.setAttribute("roof", roof);
-        request.setAttribute("shedWidth", width);
-        request.setAttribute("shedLength", shedLength);
-
-        request.setAttribute("carportType", 1);
-
-
-        System.out.println("are we here? 5");
-        return "carportoverviewpage";
+        return "requestsentpage";
     }
 }

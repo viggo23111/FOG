@@ -74,47 +74,57 @@
         <div class="jumbotron bg-light mt-5 p-5 shadow-lg p-3 mb-5 bg-white rounded">
             <div class="row" style="margin:auto">
                 <div class="col-sm-6">
-                    <form class="card p-3 " action="${pageContext.request.contextPath}/fc/requestsentpage.html" method="post">
+                    <form class="card p-3 " action="${pageContext.request.contextPath}/fc/sendrequestcommand" method="post">
+                        <input type="hidden" name="roofID" value="${requestScope.roofID}">
                         <h1>OVERSIGT</h1>
                         <div class="form-outline mb-4">
-                            <label for="sel1">Carport bredde:</label>
-                            <input type="text" class="form-control" id="sel1" disabled value="${requestScope.width}">
+                            <label for="width">Carport bredde:</label>
+                            <input name="width" type="text" class="form-control" id="width" readonly value="${requestScope.width}">
                         </div>
                         <div class="form-outline mb-4">
-                            <label for="sel2">Carport længde:</label>
-                            <input type="text" class="form-control" id="sel2" disabled value="${requestScope.length}">
+                            <label for="length">Carport længde:</label>
+                            <input name="length" type="text" class="form-control" id="length" readonly value="${requestScope.length}">
                         </div>
                         <div class="form-outline mb-4">
-                            <label for="sel3">Carport tag:</label>
-                            <input type="text" class="form-control" id="sel3" disabled value="${requestScope.roof}">
+                            <label for="roof">Carport tag:</label>
+                            <input name="roof" type="text" class="form-control" id="roof" readonly value="${requestScope.roof}">
                         </div>
 
                         <c:if test="${requestScope.carportType == 2}">
 
                         <div class="form-outline mb-4">
-                            <label for="sel6">Taghældning:</label>
-                            <input type="text" class="form-control" id="sel6" disabled value="${requestScope.slope} grader">
+                            <label for="slope">Taghældning:</label>
+                            <input name="slope" type="text" class="form-control" id="slope" readonly value="${requestScope.slope}">
                         </div>
 
+                        </c:if>
+
+                        <c:if test="${requestScope.shedLength == 0 && requestScope.shedWidth == 0}">
+                        <input type="hidden" name="shedWidth" value="0">
+                        <input type="hidden" name="shedLength" value="0">
                         </c:if>
 
                         <c:if test="${requestScope.shedLength != 0 && requestScope.shedWidth != 0}">
 
 
-                        <p class="mb" style="font-weight: bold">Redskabsrum</p>
-                        <p class="mb-5">NB! Der skal beregnes 15cm tagudhæng på hver side af redskabsrummet!</p>
+                            <p class="mb" style="font-weight: bold">Redskabsrum</p>
+                            <p class="mb-5">NB! Der skal beregnes 15cm tagudhæng på hver side af redskabsrummet!</p>
 
-                        <div class="form-outline mb-4">
-                            <label for="sel4">Redskabsrum bredde:</label>
-                            <input type="text" class="form-control" id="sel4" disabled value="${requestScope.shedWidth}">
+                            <div class="form-outline mb-4">
+                            <label for="shedWidth">Redskabsrum bredde:</label>
+                            <input name="shedWidth" type="text" class="form-control" id="shedWidth" readonly value="${requestScope.shedWidth}">
                         </div>
 
-                        <div class="form-outline mb-4">
-                            <label for="sel5">Redskabsrum længde:</label>
-                            <input type="text" class="form-control" id="sel5" disabled value="${requestScope.shedLength}">
+                            <div class="form-outline mb-4">
+                            <label for="shedLength">Redskabsrum længde:</label>
+                            <input name="shedLength" type="text" class="form-control" id="shedLength" readonly value="${requestScope.shedLength}">
                         </div>
+
+
 
                         </c:if>
+
+
                         <button class="btn btn-primary btn-lg btn-block fogbtn" type="submit" >Send forespørgsel</button>
                     </form>
                 </div>

@@ -39,6 +39,14 @@ public class Request {
         this.createdAt=createdAt;
     }
 
+    public Request(int userID, int statusID, int width, int length, int roofId){
+        this.userID = userID;
+        this.statusID = statusID;
+        this.width = width;
+        this.length = length;
+        this.roofId = roofId;
+    }
+
     public int getID() {
         return ID;
     }
