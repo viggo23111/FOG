@@ -88,7 +88,7 @@
                 <form action="${pageContext.request.contextPath}/fc/myrequestoverviewpage" method="POST">
                     <tr>
                         <td>${requestitem.ID}</td>
-                        <td>24.11.2021</td>
+                        <td>${requestitem.createdAt}</td>
                         <td>${requestitem.statusName}</td>
                         <td class="text-end">
                             <button type="submit" name="infoButton"

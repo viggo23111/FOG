@@ -1,5 +1,7 @@
 package business.entities;
 
+import java.sql.Timestamp;
+
 public class Request {
     private int ID;
     private int userID;
@@ -16,8 +18,9 @@ public class Request {
     private int shedWidth;
     private int shedLength;
     private double price;
+    private Timestamp createdAt;
 
-    public Request(int ID, int userID, String email, String name, String phone, int statusID, String statusName, int width, int length, int roofId,String roofName, int slope, int shedWidth, int shedLength, double price) {
+    public Request(int ID, int userID, String email, String name, String phone, int statusID, String statusName, int width, int length, int roofId,String roofName, int slope, int shedWidth, int shedLength, double price,Timestamp createdAt) {
         this.ID = ID;
         this.userID = userID;
         this.email = email;
@@ -33,6 +36,7 @@ public class Request {
         this.shedWidth = shedWidth;
         this.shedLength = shedLength;
         this.price = price;
+        this.createdAt=createdAt;
     }
 
     public int getID() {
@@ -153,5 +157,13 @@ public class Request {
 
     public void setPrice(double price) {
         this.price = price;
+    }
+
+    public Timestamp getCreatedAt() {
+        return createdAt;
+    }
+
+    public void setCreatedAt(Timestamp createdAt) {
+        this.createdAt = createdAt;
     }
 }

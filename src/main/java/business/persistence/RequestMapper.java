@@ -4,10 +4,7 @@ import business.entities.Request;
 import business.entities.Roof;
 import business.exceptions.UserException;
 
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
+import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -49,10 +46,11 @@ public class RequestMapper {
                     int shedWidth = rs.getInt("shed_width");
                     int shedLength = rs.getInt("shed_length");
                     double price = rs.getDouble("price");
+                    Timestamp createdAt = rs.getTimestamp("created_at");
 
                     //System.out.println(id+userID+email+name+phone+statusID+status+width+length+roofID+roofName+slope+shedWidth+shedLength+price);
 
-                   Request request = new Request(id,userID,email,name,phone,statusID,status,width,length,roofID,roofName,slope,shedWidth,shedLength,price);
+                   Request request = new Request(id,userID,email,name,phone,statusID,status,width,length,roofID,roofName,slope,shedWidth,shedLength,price,createdAt);
                    requestList.add(request);
                 }
             } catch (SQLException ex) {
