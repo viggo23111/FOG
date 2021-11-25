@@ -70,7 +70,7 @@ public class User
         return phone;
     }
 
-    public void setPhone(String tlf) {
-        this.phone = tlf;
+    public void setPhone(String phone) {
+        this.phone = phone;
     }
 }
