@@ -74,13 +74,13 @@
         <div class="jumbotron bg-light mt-5 p-5 shadow-lg p-3 mb-5 bg-white rounded">
             <div class="row" style="margin:auto">
                 <div class="col-sm-6">
-                    <form class="card p-3 " action="${pageContext.request.contextPath}/fc/carportoverviewpage" method="post">
+                    <form class="card p-3 " action="${pageContext.request.contextPath}/fc/slopeoverviewcommand" method="post">
                         <h1>QUICK-BYG TILBUD - CARPORT MED FLADT TAG</h1>
                         <p class="mb-5">Udfyld alle felter og tryk send forespørgelse</p>
                         <div class="form-outline mb-4">
-                            <label for="sel1">Carport bredde:</label>
-                            <select class="form-control" id="sel1">
-                                <option selected>Vælg bredde</option>
+                            <label for="width">Carport bredde:</label>
+                            <select name="width" class="form-control" id="width">
+                                <option value="0" selected>Vælg bredde</option>
                                 <option value="240">240 cm</option>
                                 <option value="270">270 cm</option>
                                 <option value="300">300 cm</option>
@@ -97,10 +97,9 @@
                             </select>
                         </div>
                         <div class="form-outline mb-4">
-                            <label for="sel2">Carport længde:</label>
-                            <select class="form-control" id="sel2">
-                                <option selected>Vælg længde</option>
-                                <option selected>Vælg længde</option>
+                            <label for="length">Carport længde:</label>
+                            <select name="length" class="form-control" id="length">
+                                <option value="0" selected>Vælg længde</option>
                                 <option value="240">240 cm</option>
                                 <option value="270">270 cm</option>
                                 <option value="300">300 cm</option>
@@ -123,8 +122,8 @@
                             </select>
                         </div>
                         <div class="form-outline mb-4">
-                            <label for="sel3">Carport tag:</label>
-                            <select class="form-control" id="sel3">
+                            <label for="roof">Carport tag:</label>
+                            <select name="roof" class="form-control" id="roof">
                                 <option selected>Vælg tag</option>
                                 <c:forEach var="roofitem" items="${requestScope.roofList}">
                                     <option>${roofitem.name}</option>
@@ -132,8 +131,8 @@
                             </select>
                         </div>
                         <div class="form-outline mb-4">
-                            <label for="sel6">Taghældning</label>
-                            <select class="form-control" id="sel6" name="taghaeldning">
+                            <label for="slope">Taghældning</label>
+                            <select class="form-control" id="slope" name="slope">
                                 <option value="15">15 grader</option>
                                 <option value="20">20 grader</option>
                                 <option selected="selected" value="25">25 grader</option>
@@ -147,9 +146,9 @@
                         <p class="mb-5">NB! Der skal beregnes 15cm tagudhæng på hver side af redskabsrummet!</p>
 
                         <div class="form-outline mb-4">
-                            <label for="sel4">Redskabsrum bredde:</label>
-                            <select class="form-control" id="sel4">
-                                <option selected>Ønsker ikke redskabsrum</option>
+                            <label for="shedWidth">Redskabsrum bredde:</label>
+                            <select name="shedWidth" class="form-control" id="shedWidth">
+                                <option value="0" selected>Ønsker ikke redskabsrum</option>
                                 <option value="150">150</option>
                                 <option value="180">180</option>
                                 <option value="210">210</option>
@@ -173,9 +172,9 @@
                         </div>
 
                         <div class="form-outline mb-4">
-                            <label for="sel5">Redskabsrum længde:</label>
-                            <select class="form-control" id="sel5">
-                                <option selected>Ønsker ikke redskabsrum</option>
+                            <label for="shedLength">Redskabsrum længde:</label>
+                            <select name="shedLength" class="form-control" id="shedLength">
+                                <option value="0" selected>Ønsker ikke redskabsrum</option>
                                 <option>200</option>
                                 <option>210</option>
                                 <option>220</option>

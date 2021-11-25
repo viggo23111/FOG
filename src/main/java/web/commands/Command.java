@@ -30,6 +30,8 @@ public abstract class Command
         commands.put("employeepage", new CommandProtectedPage("employeepage", "employee"));
         commands.put("flatcarportcommand", new DesignFlatCarportCommand("flatcarportpage", "customer"));
         commands.put("slopecarportcommand", new DesignSlopeCarportCommand("slopecarportpage", "customer"));
+        commands.put("flatoverviewcommand", new FlatOverviewCommand("carportoverviewpage", "customer"));
+        commands.put("slopeoverviewcommand", new SlopeOverviewCommand("carportoverviewpage", "customer"));
     }
 
     public static Command fromPath(

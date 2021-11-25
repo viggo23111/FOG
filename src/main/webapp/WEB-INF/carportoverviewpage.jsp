@@ -78,33 +78,43 @@
                         <h1>OVERSIGT</h1>
                         <div class="form-outline mb-4">
                             <label for="sel1">Carport bredde:</label>
-                            <input type="text" class="form-control" id="sel1" disabled value="200">
+                            <input type="text" class="form-control" id="sel1" disabled value="${requestScope.width}">
                         </div>
                         <div class="form-outline mb-4">
                             <label for="sel2">Carport længde:</label>
-                            <input type="text" class="form-control" id="sel2" disabled value="200">
+                            <input type="text" class="form-control" id="sel2" disabled value="${requestScope.length}">
                         </div>
                         <div class="form-outline mb-4">
                             <label for="sel3">Carport tag:</label>
-                            <input type="text" class="form-control" id="sel3" disabled value="Plastik">
+                            <input type="text" class="form-control" id="sel3" disabled value="${requestScope.roof}">
                         </div>
+
+                        <c:if test="${requestScope.carportType == 2}">
 
                         <div class="form-outline mb-4">
                             <label for="sel6">Taghældning:</label>
-                            <input type="text" class="form-control" id="sel6" disabled value="Ingen taghældning">
+                            <input type="text" class="form-control" id="sel6" disabled value="${requestScope.slope} grader">
                         </div>
+
+                        </c:if>
+
+                        <c:if test="${requestScope.shedLength != 0 && requestScope.shedWidth != 0}">
+
+
                         <p class="mb" style="font-weight: bold">Redskabsrum</p>
                         <p class="mb-5">NB! Der skal beregnes 15cm tagudhæng på hver side af redskabsrummet!</p>
 
                         <div class="form-outline mb-4">
                             <label for="sel4">Redskabsrum bredde:</label>
-                            <input type="text" class="form-control" id="sel4" disabled value="Ønsker ikke redskabsrum">
+                            <input type="text" class="form-control" id="sel4" disabled value="${requestScope.shedWidth}">
                         </div>
 
                         <div class="form-outline mb-4">
                             <label for="sel5">Redskabsrum længde:</label>
-                            <input type="text" class="form-control" id="sel5" disabled value="Ønsker ikke redskabsrum">
+                            <input type="text" class="form-control" id="sel5" disabled value="${requestScope.shedLength}">
                         </div>
+
+                        </c:if>
                         <button class="btn btn-primary btn-lg btn-block fogbtn" type="submit" >Send forespørgsel</button>
                     </form>
                 </div>
