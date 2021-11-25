@@ -81,20 +81,45 @@
                             <label for="sel1">Carport bredde:</label>
                             <select class="form-control" id="sel1">
                                 <option selected>Vælg bredde</option>
-                                <option>200</option>
-                                <option>210</option>
-                                <option>220</option>
-                                <option>230</option>
+                                <option value="240">240 cm</option>
+                                <option value="270">270 cm</option>
+                                <option value="300">300 cm</option>
+                                <option value="330">330 cm</option>
+                                <option value="360">360 cm</option>
+                                <option value="390">390 cm</option>
+                                <option value="420">420 cm</option>
+                                <option value="450">450 cm</option>
+                                <option value="480">480 cm</option>
+                                <option value="510">510 cm</option>
+                                <option value="540">540 cm</option>
+                                <option value="570">570 cm</option>
+                                <option value="600">600 cm</option>
+
                             </select>
                         </div>
                         <div class="form-outline mb-4">
                             <label for="sel2">Carport længde:</label>
                             <select class="form-control" id="sel2">
                                 <option selected>Vælg længde</option>
-                                <option>200</option>
-                                <option>210</option>
-                                <option>220</option>
-                                <option>230</option>
+                                <option value="240">240 cm</option>
+                                <option value="270">270 cm</option>
+                                <option value="300">300 cm</option>
+                                <option value="330">330 cm</option>
+                                <option value="360">360 cm</option>
+                                <option value="390">390 cm</option>
+                                <option value="420">420 cm</option>
+                                <option value="450">450 cm</option>
+                                <option value="480">480 cm</option>
+                                <option value="510">510 cm</option>
+                                <option value="540">540 cm</option>
+                                <option value="570">570 cm</option>
+                                <option value="600">600 cm</option>
+                                <option value="630">630 cm</option>
+                                <option value="660">660 cm</option>
+                                <option value="690">690 cm</option>
+                                <option value="720">720 cm</option>
+                                <option value="750">750 cm</option>
+                                <option value="780">780 cm</option>
                             </select>
                         </div>
                         <div class="form-outline mb-4">
@@ -113,10 +138,24 @@
                             <label for="sel4">Redskabsrum bredde:</label>
                             <select class="form-control" id="sel4">
                                 <option selected>Ønsker ikke redskabsrum</option>
-                                <option>200</option>
-                                <option>210</option>
-                                <option>220</option>
-                                <option>230</option>
+                                <option value="210">210</option>
+                                <option value="240">240</option>
+                                <option value="270">270</option>
+                                <option value="300">300</option>
+                                <option value="330">330</option>
+                                <option value="360">360</option>
+                                <option value="390">390</option>
+                                <option value="420">420</option>
+                                <option value="450">450</option>
+                                <option value="480">480</option>
+                                <option value="510">510</option>
+                                <option value="540">540</option>
+                                <option value="570">570</option>
+                                <option value="600">600</option>
+                                <option value="630">630</option>
+                                <option value="660">660</option>
+                                <option value="690">690</option>
+                                <option value="720">720</option>
                             </select>
                         </div>
 
@@ -124,10 +163,25 @@
                             <label for="sel5">Redskabsrum længde:</label>
                             <select class="form-control" id="sel5">
                                 <option selected>Ønsker ikke redskabsrum</option>
-                                <option>200</option>
-                                <option>210</option>
-                                <option>220</option>
-                                <option>230</option>
+                                <option value="150">150</option>
+                                <option value="180">180</option>
+                                <option value="210">210</option>
+                                <option value="240">240</option>
+                                <option value="270">270</option>
+                                <option value="300">300</option>
+                                <option value="330">330</option>
+                                <option value="360">360</option>
+                                <option value="390">390</option>
+                                <option value="420">420</option>
+                                <option value="450">450</option>
+                                <option value="480">480</option>
+                                <option value="510">510</option>
+                                <option value="540">540</option>
+                                <option value="570">570</option>
+                                <option value="600">600</option>
+                                <option value="630">630</option>
+                                <option value="660">660</option>
+                                <option value="690">690</option>
                             </select>
                         </div>
                         <button class="btn btn-primary btn-lg btn-block fogbtn" type="submit" >Videre</button>
