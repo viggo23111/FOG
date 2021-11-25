@@ -86,7 +86,8 @@
                 </thead>
                 <tbody>
                 <c:forEach var="requestitem" items="${requestScope.requestList}">
-                <form action="${pageContext.request.contextPath}/fc/myrequestoverviewpage" method="POST">
+                <form action="${pageContext.request.contextPath}/fc/myrequestoverviewcommand" method="POST">
+                    <input type="hidden" name="requestID" value="${requestitem.ID}">
                     <tr>
                         <td>${requestitem.ID}</td>
                         <td>${requestitem.createdAt}</td>

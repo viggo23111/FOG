@@ -11,7 +11,6 @@ import java.util.List;
 
 public class MyRequestOverviewCommand extends CommandProtectedPage {
     LogicFacade logicFacade;
-    List<Request> requestList;
 
     public MyRequestOverviewCommand(String pageToShow, String role) {
         super(pageToShow, role);
@@ -20,15 +19,17 @@ public class MyRequestOverviewCommand extends CommandProtectedPage {
 
     @Override
     public String execute(HttpServletRequest request, HttpServletResponse response) {
-        HttpSession session = request.getSession();
-        int userid= (int) session.getAttribute("userid");
+        int requestID = Integer.parseInt(request.getParameter("requestID"));
+
+        Request requestfound= null;
         try {
-            requestList = logicFacade.getAllRequestsByID(userid);
+            requestfound = logicFacade.getRequestByID(requestID);
         } catch (UserException e) {
             e.printStackTrace();
         }
 
-       request.setAttribute("requestList", requestList);
-        return "myrequests";
+
+        request.setAttribute("width", requestfound.getWidth());
+        return "myrequestoverviewpage";
     }
 }

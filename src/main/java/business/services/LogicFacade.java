@@ -25,4 +25,8 @@ public class LogicFacade {
     public List<Request> getAllRequestsByID(int userID) throws UserException {
         return requestMapper.getAllRequestsByID(userID);
     }
+
+    public Request getRequestByID(int requestID) throws UserException {
+        return requestMapper.getRequestByID(requestID);
+    }
 }

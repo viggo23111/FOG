@@ -78,7 +78,7 @@
                         <h1>OVERSIGT</h1>
                         <div class="form-outline mb-4">
                             <label for="sel1">Carport bredde:</label>
-                            <input type="text" class="form-control" id="sel1" disabled value="200">
+                            <input type="text" class="form-control" id="sel1" disabled value="${requestScope.width}">
                         </div>
                         <div class="form-outline mb-4">
                             <label for="sel2">Carport længde:</label>
