@@ -7,6 +7,7 @@ import business.services.LogicFacade;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 import java.util.List;
 
 public class MyRequestsCommand extends CommandProtectedPage {
@@ -20,17 +21,15 @@ public class MyRequestsCommand extends CommandProtectedPage {
 
     @Override
     public String execute(HttpServletRequest request, HttpServletResponse response) {
+        HttpSession session = request.getSession();
+        int userid= (int) session.getAttribute("userid");
         try {
-            requestList = logicFacade.getAllRequestsByID(1);
+            requestList = logicFacade.getAllRequestsByID(userid);
         } catch (UserException e) {
             e.printStackTrace();
         }
 
        request.setAttribute("requestList", requestList);
-        for (Request request1 : requestList) {
-            System.out.println("id: " + request1.getID());
-            System.out.println("Status name: " + request1.getStatusName());
-        }
         return "myrequests";
     }
 }

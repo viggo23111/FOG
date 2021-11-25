@@ -73,6 +73,7 @@
     </div>
     <div class="content">
         <div class="jumbotron bg-light mt-5 p-5 shadow-lg p-3 mb-5 bg-white rounded">
+
             <h1 class="display-4">Forespørgsler</h1>
             <table class="table table-striped mt-5" id="bottoms">
                 <thead>
