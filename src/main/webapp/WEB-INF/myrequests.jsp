@@ -84,17 +84,19 @@
                 </tr>
                 </thead>
                 <tbody>
+                <c:forEach var="requestitem" items="${requestScope.requestList}">
                 <form action="${pageContext.request.contextPath}/fc/myrequestoverviewpage" method="POST">
                     <tr>
-                        <td>164</td>
+                        <td>${requestitem.ID}</td>
                         <td>24.11.2021</td>
-                        <td>Godkendt</td>
+                        <td>${requestitem.statusName}</td>
                         <td class="text-end">
                             <button type="submit" name="infoButton"
                                     class="btn btn-outline-primary float-end"><i
                                     class="bi bi-info-circle"></i></button>
                         </td>
                 </form>
+                </c:forEach>
                 </tbody>
             </table>
         </div>
