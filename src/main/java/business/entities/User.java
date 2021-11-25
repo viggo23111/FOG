@@ -14,6 +14,8 @@ public class User
     private String email;
     private String password; // Should be hashed and secured
     private String role;
+    private String name;
+    private String phone;
 
     public String getEmail()
     {
@@ -55,4 +57,20 @@ public class User
         this.id = id;
     }
 
+    public String getName() {
+        return name;
+    }
+
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public String getPhone() {
+        return phone;
+    }
+
+    public void setPhone(String tlf) {
+        this.phone = tlf;
+    }
 }

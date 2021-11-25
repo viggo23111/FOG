@@ -68,7 +68,7 @@
     </div>
     <div class="content">
         <div class="loginform col-12 col-md-8 col-lg-6 col-xl-5 text-center m-auto mt-5">
-            <form class="card p-3 bg-light shadow-lg p-3 mb-5 bg-white rounded" action="customerpage.html" method="post">
+            <form class="card p-3 bg-light shadow-lg p-3 mb-5 bg-white rounded" action="${pageContext.request.contextPath}/fc/registercommand" method="post">
                 <h1 class="mb-5">Opret bruger</h1>
                 <c:if test="${requestScope.error != null }">
                     <p style="color:red">
@@ -91,7 +91,7 @@
                     <input type="password" id="password2" name="password2" class="form-control form-control-lg" placeholder="Gentag kodeord" />
                 </div>
                 <button class="btn btn-primary btn-lg btn-block fogbtn" type="submit">Opret bruger</button>
-                <a class="p-3 text-decoration-underline" href="login.html">Har du allerede en bruger? Log ind </a>
+                <a class="p-3 text-decoration-underline" href="${pageContext.request.contextPath}/fc/loginpage">Har du allerede en bruger? Log ind </a>
             </form>
         </div>
 
