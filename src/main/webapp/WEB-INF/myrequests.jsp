@@ -61,7 +61,7 @@
                                 <a class="nav-link" href="#" style="pointer-events: none">test@test.dk</a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link" href="signout.html">Log ud</a>
+                                <a class="nav-link" href="${pageContext.request.contextPath}/fc/logoutcommand">Log ud</a>
                             </li>
                         </ul>
                     </div>
