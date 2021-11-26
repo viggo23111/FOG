@@ -76,7 +76,7 @@
             <table class="table table-striped mt-3 border border-dark">
                 <thead class="mt-3">
                 <tr>
-                    <th scope="col">Træ & Tagplader</th>
+                    <th scope="col">${requestScope.category1}</th>
                     <th scope="col">Længde</th>
                     <th scope="col">Antal</th>
                     <th scope="col">Enhed</th>
@@ -84,7 +84,7 @@
                 </tr>
                 </thead>
                 <tbody>
-                <c:forEach var="bomItem" items="${requestScope.BOMList}">
+                <c:forEach var="bomItem" items="${requestScope.BOMlistcategory1}">
                 <tr>
                     <td>${bomItem.name}</td>
                     <td>${bomItem.length}</td>
@@ -94,32 +94,26 @@
                 </tr>
                 </c:forEach>
 
-
                 </tbody>
             </table>
             <table class="table table-striped mt-3 border border-dark">
                 <thead class="mt-3">
                 <tr>
-                    <th scope="col">Beslag & Skruer</th>
+                    <th scope="col">${requestScope.category2}</th>
                     <th scope="col">Antal</th>
                     <th scope="col">Enhed</th>
                     <th scope="col">Beskrivelse</th>
                 </tr>
                 </thead>
                 <tbody>
-                <tr>
-                    <td>plastmo bundskruer 200 stk.</td>
-                    <td>3</td>
-                    <td>pakke</td>
-                    <td>Skruer til tagplader</td>
-                </tr>
-                <tr>
-                    <td>hulbånd 1x20 mm. 10 mtr.</td>
-
-                    <td>2</td>
-                    <td>Rulle</td>
-                    <td>Til vindkryds på spær</td>
-                </tr>
+                <c:forEach var="bomItem" items="${requestScope.BOMlistcategory2}">
+                    <tr>
+                        <td>${bomItem.name}</td>
+                        <td>${bomItem.amount}</td>
+                        <td>${bomItem.unit}</td>
+                        <td>${bomItem.description}</td>
+                    </tr>
+                </c:forEach>
                 </tbody>
             </table>
         </div>
