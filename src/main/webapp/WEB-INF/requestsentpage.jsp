@@ -19,7 +19,7 @@
             <!-- Navbar -->
             <nav class="navbar navbar-expand-lg navbar-dark bg-dark p-0" style="background-color:#0c2169 !important;">
                 <div class="float-left" id="logoimg" style="width:126px;">
-                    <a href="${pageContext.request.contextPath}/fc/myrequestscommand">
+                    <a href="${pageContext.request.contextPath}/fc/customerpage">
                         <img src="${pageContext.request.contextPath}/images/logo.png" height="auto" width="100%"/>
                     </a>
                 </div>
@@ -42,7 +42,7 @@
                         <!-- Left links -->
                         <ul class="navbar-nav me-auto mb-2 mb-lg-0">
                             <li class="nav-item">
-                                <a class="nav-link" href="${pageContext.request.contextPath}/fc/myrequests">Mine forespørgelser</a>
+                                <a class="nav-link" href="${pageContext.request.contextPath}/fc/myrequestscommand">Mine forespørgelser</a>
                             </li>
                         </ul>
                         <!-- Left links -->
@@ -57,7 +57,7 @@
                         </a>
                         <ul class="navbar-nav me-auto mb-2 mb-lg-0">
                             <li class="nav-item">
-                                <a class="nav-link" href="#" style="pointer-events: none">test@test.dk</a>
+                                <a class="nav-link" href="#" style="pointer-events: none">${sessionScope.email}</a>
                             </li>
                             <li class="nav-item">
                                 <a class="nav-link" href="${pageContext.request.contextPath}/fc/logoutcommand">Log ud</a>

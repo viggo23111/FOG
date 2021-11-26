@@ -57,7 +57,7 @@
                         </a>
                         <ul class="navbar-nav me-auto mb-2 mb-lg-0">
                             <li class="nav-item">
-                                <a class="nav-link" href="#" style="pointer-events: none">test@test.dk</a>
+                                <a class="nav-link" href="#" style="pointer-events: none">${sessionScope.email}</a>
                             </li>
                             <li class="nav-item">
                                 <a class="nav-link" href="${pageContext.request.contextPath}/fc/logoutcommand">Log ud</a>
@@ -107,7 +107,7 @@
                         </div>
                         <h3>Pris: ${requestScope.price}</h3>
                         <c:if test="${requestScope.statusID== 3}">
-                            <button class="btn btn-primary btn-lg btn-block fogbtn" type="submit" >Se stykliste</button>
+                             <button class="btn btn-primary btn-lg btn-block fogbtn" type="submit" >Se stykliste</button>
                         </c:if>
                     </form>
                 </div>

@@ -33,8 +33,7 @@ public class MyRequestOverviewCommand extends CommandProtectedPage {
         request.setAttribute("length", requestfound.getWidth() +" cm");
         request.setAttribute("roof", requestfound.getRoofName());
         request.setAttribute("slope", requestfound.getSlope() + " grader");
-        request.setAttribute("shedwidth", requestfound.getShedWidth() +" cm");
-        request.setAttribute("shedlength", requestfound.getShedLength() + " cm");
+
 
         request.setAttribute("statusID", requestfound.getStatusID());
 
@@ -44,6 +43,15 @@ public class MyRequestOverviewCommand extends CommandProtectedPage {
         }else{
             request.setAttribute("price", "ikke klar!");
         }
+
+        if (requestfound.getShedWidth()!=0){
+            request.setAttribute("shedwidth", requestfound.getShedWidth() +" cm");
+            request.setAttribute("shedlength", requestfound.getShedLength() + " cm");
+        }else{
+            request.setAttribute("shedwidth", "Ønsker ikke redskabsrum");
+            request.setAttribute("shedlength", "Ønsker ikke redskabsrum");
+        }
+
 
         return "myrequestoverviewpage";
     }
