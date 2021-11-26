@@ -30,7 +30,10 @@ public class LogicFacade {
         return requestMapper.getRequestByID(requestID);
     }
 
-    public void createRequestForCarportTypeTwo(int userID, int statusID, int width, int length, int roofID, int slope, int shedWidth, int shedLength) throws UserException {
-        requestMapper.createRequestForCarportTypeTwo(userID,statusID,width,length,roofID,slope,shedWidth,shedLength);
+    public int createRequestForCarportTypeTwo(int userID, int statusID, int width, int length, int roofID, int slope, int shedWidth, int shedLength) throws UserException {
+        return requestMapper.createRequestForCarportTypeTwo(userID,statusID,width,length,roofID,slope,shedWidth,shedLength);
+    }
+    public int createRequestForCarportTypeOne(int userID, int statusID, int width, int length, int roofID, int shedWidth, int shedLength) throws UserException {
+        return requestMapper.createRequestForCarportTypeOne(userID,statusID,width,length,roofID,shedWidth,shedLength);
     }
 }

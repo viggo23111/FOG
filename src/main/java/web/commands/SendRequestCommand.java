@@ -21,35 +21,41 @@ public class SendRequestCommand extends CommandProtectedPage{
 
         HttpSession session = request.getSession();
 
-
-
+        int carportType = Integer.parseInt(request.getParameter("carportType"));
         int userID = Integer.parseInt(String.valueOf(session.getAttribute("userid")));
 
-        System.out.println("userid: " + userID);
+
 
         int roofID = Integer.parseInt(request.getParameter("roofID"));
-        System.out.println("roofID: " + roofID);
-
         int width = Integer.parseInt(request.getParameter("width"));
-        System.out.println("width: " + width);
         int length = Integer.parseInt(request.getParameter("length"));
-        System.out.println("length: " + length);
-
-        int slope = Integer.parseInt(request.getParameter("slope"));
-        System.out.println("slope: " + slope);
-
-
         int shedWidth = Integer.parseInt(request.getParameter("shedWidth"));
-        System.out.println("shedWidth: " + shedWidth);
         int shedLength = Integer.parseInt(request.getParameter("shedLength"));
-        System.out.println("shedLength: " + shedLength);
+
+        System.out.println("roof id is: " + roofID);
+
+        int id = 0;
+
+        if(carportType == 2) {
+            int slope = Integer.parseInt(request.getParameter("slope"));
 
 
-        try {
-            logicFacade.createRequestForCarportTypeTwo(userID,1,width,length,roofID,slope,shedWidth,shedLength);
-        } catch (UserException e) {
-            e.printStackTrace();
+            try {
+                id = logicFacade.createRequestForCarportTypeTwo(userID, 1, width, length, roofID, slope, shedWidth, shedLength);
+            } catch (UserException e) {
+                e.printStackTrace();
+            }
         }
+
+        if (carportType == 1){
+            try {
+                id = logicFacade.createRequestForCarportTypeOne(userID, 1, width, length, roofID, shedWidth, shedLength);
+            } catch (UserException e) {
+                e.printStackTrace();
+            }
+        }
+
+        request.setAttribute("requestID", id);
 
         return "requestsentpage";
     }

@@ -24,26 +24,36 @@ public class FlatOverviewCommand extends CommandProtectedPage{
         int length = Integer.parseInt(request.getParameter("length"));
         String roof = request.getParameter("roof");
 
-        System.out.println("are we here? 2");
+        int roofID = 0;
+
+        try {
+            for (Roof roof1 :logicFacade.getAllRoofsByType(1)) {
+                if(roof1.getName().equals(roof)){
+                    roofID = roof1.getID();
+                }
+            }
+        } catch (UserException e) {
+            e.printStackTrace();
+        }
 
         int shedWidth = Integer.parseInt(request.getParameter("shedWidth"));
         int shedLength = Integer.parseInt(request.getParameter("shedLength"));
 
-        System.out.println("are we here? 3");
+
 
         if (shedWidth != 0 && shedLength != 0){
             shedWidth = Integer.parseInt(request.getParameter("shedWidth"));
             shedLength = Integer.parseInt(request.getParameter("shedLength"));
         }
 
-        System.out.println("are we here? 4");
+
 
         request.setAttribute("width", width);
         request.setAttribute("length", length);
         request.setAttribute("roof", roof);
-        request.setAttribute("shedWidth", width);
+        request.setAttribute("shedWidth", shedWidth);
         request.setAttribute("shedLength", shedLength);
-
+        request.setAttribute("roofID",roofID);
         request.setAttribute("carportType", 1);
 
 

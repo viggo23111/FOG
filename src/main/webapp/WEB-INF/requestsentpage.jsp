@@ -72,7 +72,7 @@
     </div>
     <div class="content">
         <div class="jumbotron bg-light mt-5 p-5 shadow-lg p-3 mb-5 bg-white rounded">
-            <h1 class="display-4">Tak for din forespørgsel! Afvent godkendelse. Forespørgsels nr: 164</h1>
+            <h1 class="display-4">Tak for din forespørgsel! Afvent godkendelse. Forespørgsels nr: ${requestScope.requestID}</h1>
         </div>
     </div>
     <div class="bottom"></div>

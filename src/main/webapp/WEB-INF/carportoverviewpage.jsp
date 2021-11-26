@@ -90,12 +90,18 @@
                             <input name="roof" type="text" class="form-control" id="roof" readonly value="${requestScope.roof}">
                         </div>
 
+                        <c:if test="${requestScope.carportType == 1}">
+                            <input type="hidden" name="carportType" value="1">
+                        </c:if>
+
                         <c:if test="${requestScope.carportType == 2}">
 
                         <div class="form-outline mb-4">
                             <label for="slope">Taghældning:</label>
                             <input name="slope" type="text" class="form-control" id="slope" readonly value="${requestScope.slope}">
                         </div>
+
+                            <input type="hidden" name="carportType" value="2">
 
                         </c:if>
 

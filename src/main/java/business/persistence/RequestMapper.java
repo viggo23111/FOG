@@ -95,14 +95,15 @@ public class RequestMapper {
         return request;
     }
 
-    public void createRequestForCarportTypeTwo(int userID, int statusID, int width, int length, int roofID, int slope, int shedWidth, int shedLength) throws UserException
+    public int createRequestForCarportTypeTwo(int userID, int statusID, int width, int length, int roofID, int slope, int shedWidth, int shedLength) throws UserException
     {
+        int id = 0;
 
         try (Connection connection = database.connect())
         {
             String sql = "INSERT INTO requests (user_id, status_id, width, length, roof_id, slope, shed_width, shed_length) VALUES (?,?,?,?,?,?,?,?)";
 
-            try (PreparedStatement ps = connection.prepareStatement(sql)) {
+            try (PreparedStatement ps = connection.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS)) {
 
                 ps.setInt(1, userID);
                 ps.setInt(2, statusID);
@@ -114,6 +115,13 @@ public class RequestMapper {
                 ps.setInt(8, shedLength);
 
                 ps.executeUpdate();
+
+                ResultSet ids = ps.getGeneratedKeys();
+                ids.next();
+                id = ids.getInt(1);
+
+
+
             }
             catch (SQLException ex)
             {
@@ -126,5 +134,47 @@ public class RequestMapper {
 
             throw new UserException(ex.getMessage());
         }
+        return id;
+    }
+
+    public int createRequestForCarportTypeOne(int userID, int statusID, int width, int length, int roofID, int shedWidth, int shedLength) throws UserException
+    {
+        int id = 0;
+
+        try (Connection connection = database.connect())
+        {
+            String sql = "INSERT INTO requests (user_id, status_id, width, length, roof_id, shed_width, shed_length) VALUES (?,?,?,?,?,?,?)";
+
+            try (PreparedStatement ps = connection.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS)) {
+
+                ps.setInt(1, userID);
+                ps.setInt(2, statusID);
+                ps.setInt(3, width);
+                ps.setInt(4, length);
+                ps.setInt(5, roofID);
+                ps.setInt(6, shedWidth);
+                ps.setInt(7, shedLength);
+
+                ps.executeUpdate();
+
+                ResultSet ids = ps.getGeneratedKeys();
+                ids.next();
+                id = ids.getInt(1);
+
+
+
+            }
+            catch (SQLException ex)
+            {
+
+                throw new UserException(ex.getMessage());
+            }
+        }
+        catch (SQLException ex)
+        {
+
+            throw new UserException(ex.getMessage());
+        }
+        return id;
     }
 }
