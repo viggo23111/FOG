@@ -100,8 +100,9 @@
                     <table class="table table-striped" id="bottoms">
                         <thead>
                         <tr>
-                            <th scope="col">Forespørgsels NR</th>
+                            <th scope="col">NR</th>
                             <th scope="col">Dato</th>
+                            <th scope="col">Status</th>
                             <th scope="col"></th>
                         </tr>
                         </thead>
@@ -111,18 +112,13 @@
                         <tr>
                             <td>${requestItem.ID}</td>
                             <td>${requestItem.createdAt}</td>
+                            <td>${requestItem.statusName}</td>
                             <td class="text-end">
-                                <form action="${pageContext.request.contextPath}/fc/viewrequestinfopage" method="POST"
+                                <form action="${pageContext.request.contextPath}/fc/viewrequestinfocommand" method="POST"
                                       class="" style="display: inline-flex;">
+                                    <input type="hidden" name="requestID" value="${requestItem.ID}">
                                     <button type="submit" name="editbtn" value="" class="btn btn-outline-primary"><i
                                             class="bi bi-info-circle"></i></button>
-                                </form>
-                                <form action="${pageContext.request.contextPath}/fc/viewcustomerinfopage"
-                                      method="POST" style="display: inline-flex;">
-
-                                    <button type="submit" name="removebtn" value="" class="btn btn-outline-danger">
-                                        <i
-                                                class="bi bi-trash"></i></button>
                                 </form>
                             </td>
 

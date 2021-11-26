@@ -41,7 +41,7 @@
                         <!-- Left links -->
                         <ul class="navbar-nav me-auto mb-2 mb-lg-0">
                             <li class="nav-item">
-                                <a class="nav-link" href="${pageContext.request.contextPath}/fc/viewcustomerspage">Kunder</a>
+                                <a class="nav-link" href="${pageContext.request.contextPath}/fc/viewcustomerscommand">Kunder</a>
                             </li>
                             <li class="nav-item">
                                 <a class="nav-link" href="${pageContext.request.contextPath}/fc/viewrequestspage">Forespørgelser</a>
@@ -78,31 +78,66 @@
             <div class="row" style="margin:auto">
                 <div class="col-sm-6">
                     <form class="card p-3 " action="${pageContext.request.contextPath}/fc/viewrequestBOM" method="post">
-                        <h1>OVERSIGT FOR FORESPØRGSEL: 164 </h1>
+                        <h1>OVERSIGT FOR FORESPØRGSEL: ${requestScope.requestID} </h1>
                         <div class="form-outline mb-4">
                             <label for="sel1">Carport bredde:</label>
                             <select class="form-control" id="sel1">
-                                <option selected>Vælg bredde</option>
-                                <option>200</option>
-                                <option>210</option>
-                                <option>220</option>
-                                <option>230</option>
+                                <option value="${requestScope.width}" selected>${requestScope.width} cm</option>
+                                <option value="240">240 cm</option>
+                                <option value="270">270 cm</option>
+                                <option value="300">300 cm</option>
+                                <option value="330">330 cm</option>
+                                <option value="360">360 cm</option>
+                                <option value="390">390 cm</option>
+                                <option value="420">420 cm</option>
+                                <option value="450">450 cm</option>
+                                <option value="480">480 cm</option>
+                                <option value="510">510 cm</option>
+                                <option value="540">540 cm</option>
+                                <option value="570">570 cm</option>
+                                <option value="600">600 cm</option>
                             </select>
                         </div>
                         <div class="form-outline mb-4">
                             <label for="sel2">Carport længde:</label>
                             <select class="form-control" id="sel2">
-                                <option selected>Vælg længde</option>
-                                <option>200</option>
-                                <option>210</option>
-                                <option>220</option>
-                                <option>230</option>
+                                <option value="${requestScope.length}" selected>${requestScope.length} cm</option>
+                                <option value="240">240 cm</option>
+                                <option value="270">270 cm</option>
+                                <option value="300">300 cm</option>
+                                <option value="330">330 cm</option>
+                                <option value="360">360 cm</option>
+                                <option value="390">390 cm</option>
+                                <option value="420">420 cm</option>
+                                <option value="450">450 cm</option>
+                                <option value="480">480 cm</option>
+                                <option value="510">510 cm</option>
+                                <option value="540">540 cm</option>
+                                <option value="570">570 cm</option>
+                                <option value="600">600 cm</option>
+                                <option value="630">630 cm</option>
+                                <option value="660">660 cm</option>
+                                <option value="690">690 cm</option>
+                                <option value="720">720 cm</option>
+                                <option value="750">750 cm</option>
+                                <option value="780">780 cm</option>
                             </select>
                         </div>
+                        <c:if test="${requestScope.carportType == 1}">
+                            <div class="form-outline mb-4">
+                            <label for="rooftype1">Carport tag:</label>
+                            <select class="form-control" id="rooftype1">
+                            <option selected>${requestScope.roof}</option>
+                            <option>Plastik</option>
+                            <option>Træ</option>
+                            </select>
+                            </div>
+                        </c:if>
+                        <c:if test="${requestScope.carportType == 2}">
                         <div class="form-outline mb-4">
-                            <label for="sel3">Carport tag:</label>
-                            <select class="form-control" id="sel3">
-                                <option selected>Vælg tag</option>
+                            <label for="rooftype2">Carport tag:</label>
+                            <select class="form-control" id="rooftype2">
+                                <option selected>${requestScope.roof}</option>
                                 <option>Plastik</option>
                                 <option>Træ</option>
                             </select>
@@ -110,18 +145,29 @@
                         <div class="form-outline mb-4">
                             <label for="sel6">Taghældning:</label>
                             <select class="form-control" id="sel6">
-                                <option selected>Vælg taghældning</option>
-                                <option>25 grader</option>
-                                <option>30 grader</option>
+                                <option value ="${requestScope.slope}" selected>${requestScope.slope} grader</option>
+                                <option value="15">15 grader</option>
+                                <option value="20">20 grader</option>
+                                <option value="30">30 grader</option>
+                                <option value="35">35 grader</option>
+                                <option value="40">40 grader</option>
+                                <option value="45">45 grader</option>
                             </select>
                         </div>
+                        </c:if>
+
                         <p class="mb" style="font-weight: bold">Redskabsrum</p>
                         <p class="mb-5">NB! Der skal beregnes 15cm tagudhæng på hver side af redskabsrummet!</p>
 
                         <div class="form-outline mb-4">
                             <label for="sel4">Redskabsrum bredde:</label>
                             <select class="form-control" id="sel4">
-                                <option selected>Ønsker ikke redskabsrum</option>
+                                <c:if test="${requestScope.shedLength != 0 && requestScope.shedWidth != 0}">
+                                <option value="${requestScope.shedWidth}" selected>${requestScope.shedWidth} cm</option>
+                                </c:if>
+                                <c:if test="${requestScope.shedLength == 0 && requestScope.shedWidth == 0}">
+                                    <option value="0" selected>Ønsker ikke redskabsrum</option>
+                                </c:if>
                                 <option>200</option>
                                 <option>210</option>
                                 <option>220</option>
@@ -132,7 +178,12 @@
                         <div class="form-outline mb-4">
                             <label for="sel5">Redskabsrum længde:</label>
                             <select class="form-control" id="sel5">
-                                <option selected>Ønsker ikke redskabsrum</option>
+                                <c:if test="${requestScope.shedLength != 0 && requestScope.shedWidth != 0}">
+                                    <option value="${requestScope.shedLength}" selected>${requestScope.shedLength} cm</option>
+                                </c:if>
+                                <c:if test="${requestScope.shedLength == 0 && requestScope.shedWidth == 0}">
+                                    <option value="0" selected>Ønsker ikke redskabsrum</option>
+                                </c:if>
                                 <option>200</option>
                                 <option>210</option>
                                 <option>220</option>

@@ -44,11 +44,13 @@ public class RequestMapper {
                     int shedWidth = rs.getInt("shed_width");
                     int shedLength = rs.getInt("shed_length");
                     double price = rs.getDouble("price");
+                    int carportType = rs.getInt("carport_type");
                     Timestamp createdAt = rs.getTimestamp("created_at");
 
                     //System.out.println(id+userID+email+name+phone+statusID+status+width+length+roofID+roofName+slope+shedWidth+shedLength+price);
 
                     Request request = new Request(id, userID, email, name, phone, statusID, status, width, length, roofID, roofName, slope, shedWidth, shedLength, price, createdAt);
+                    request.setCarportType(carportType);
                     requestList.add(request);
                 }
             } catch (SQLException ex) {
@@ -64,7 +66,7 @@ public class RequestMapper {
         Request request = null;
 
         try (Connection connection = database.connect()) {
-            String sql = "SELECT * FROM request_overview WHERE id =+ '" + requestID + "'";
+            String sql = "SELECT * FROM request_overview WHERE id =+ '" + requestID + "' order by id";
 
             try (PreparedStatement ps = connection.prepareStatement(sql)) {
                 ResultSet rs = ps.executeQuery();
@@ -84,8 +86,11 @@ public class RequestMapper {
                     int shedWidth = rs.getInt("shed_width");
                     int shedLength = rs.getInt("shed_length");
                     double price = rs.getDouble("price");
+                    int carportType = rs.getInt("carport_type");
                     Timestamp createdAt = rs.getTimestamp("created_at");
                     request = new Request(id, userID, email, name, phone, statusID, status, width, length, roofID, roofName, slope, shedWidth, shedLength, price, createdAt);
+                    request.setCarportType(carportType);
+
                 }
             }
         } catch (
@@ -101,7 +106,7 @@ public class RequestMapper {
 
         try (Connection connection = database.connect())
         {
-            String sql = "INSERT INTO requests (user_id, status_id, width, length, roof_id, slope, shed_width, shed_length) VALUES (?,?,?,?,?,?,?,?)";
+            String sql = "INSERT INTO requests (user_id, status_id, width, length, roof_id, slope, shed_width, shed_length,carport_type) VALUES (?,?,?,?,?,?,?,?,?)";
 
             try (PreparedStatement ps = connection.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS)) {
 
@@ -113,14 +118,13 @@ public class RequestMapper {
                 ps.setInt(6, slope);
                 ps.setInt(7, shedWidth);
                 ps.setInt(8, shedLength);
+                ps.setInt(9, 2);
 
                 ps.executeUpdate();
 
                 ResultSet ids = ps.getGeneratedKeys();
                 ids.next();
                 id = ids.getInt(1);
-
-
 
             }
             catch (SQLException ex)
@@ -143,7 +147,7 @@ public class RequestMapper {
 
         try (Connection connection = database.connect())
         {
-            String sql = "INSERT INTO requests (user_id, status_id, width, length, roof_id, shed_width, shed_length) VALUES (?,?,?,?,?,?,?)";
+            String sql = "INSERT INTO requests (user_id, status_id, width, length, roof_id, shed_width, shed_length,carport_type) VALUES (?,?,?,?,?,?,?,?)";
 
             try (PreparedStatement ps = connection.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS)) {
 
@@ -154,6 +158,7 @@ public class RequestMapper {
                 ps.setInt(5, roofID);
                 ps.setInt(6, shedWidth);
                 ps.setInt(7, shedLength);
+                ps.setInt(8, 1);
 
                 ps.executeUpdate();
 

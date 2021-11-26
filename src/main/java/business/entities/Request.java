@@ -19,6 +19,7 @@ public class Request {
     private int shedLength;
     private double price;
     private Timestamp createdAt;
+    private int carportType;
 
     public Request(int ID, int userID, String email, String name, String phone, int statusID, String statusName, int width, int length, int roofId,String roofName, int slope, int shedWidth, int shedLength, double price,Timestamp createdAt) {
         this.ID = ID;
@@ -173,5 +174,13 @@ public class Request {
 
     public void setCreatedAt(Timestamp createdAt) {
         this.createdAt = createdAt;
+    }
+
+    public int getCarportType() {
+        return carportType;
+    }
+
+    public void setCarportType(int carportType) {
+        this.carportType = carportType;
     }
 }
