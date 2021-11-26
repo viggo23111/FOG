@@ -34,4 +34,8 @@ public class UserFacade
         return userMapper.getAllCustomers();
     }
 
+    public User getUserById(int userID) throws UserException {
+        return userMapper.getUserById(userID);
+    }
+
 }

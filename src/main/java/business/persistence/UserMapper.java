@@ -116,4 +116,31 @@ public class UserMapper
         return userList;
     }
 
+    public User getUserById(int userID) throws UserException {
+        User user=null;
+
+        try (Connection connection = database.connect()) {
+            String sql = "SELECT email,name,phone FROM users WHERE id = + '" + userID + "'";
+
+            try (PreparedStatement ps = connection.prepareStatement(sql)) {
+                ResultSet rs = ps.executeQuery();
+
+                while (rs.next()) {
+                    String email=rs.getString("email");
+                    String name=rs.getString("name");
+                    String phone=rs.getString("phone");
+                    user=new User(userID,email,name,phone);
+                }
+
+            } catch (SQLException ex) {
+                throw new UserException(ex.getMessage());
+            }
+        } catch (SQLException ex) {
+            throw new UserException("Connection to database could not be established");
+        }
+        return user;
+    }
+
+
+
 }

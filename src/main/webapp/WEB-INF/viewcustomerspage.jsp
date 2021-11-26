@@ -81,18 +81,17 @@
                 <th scope="col">Kunde ID</th>
                 <th scope="col">Kunde Navn</th>
                 <th scope="col">Kunde Email</th>
-                <th scope="col">Kunde Telefon</th>
                 <th scope="col"></th>
             </tr>
             </thead>
             <tbody>
             <c:forEach var="customerItem" items="${requestScope.userList}">
-            <form action="${pageContext.request.contextPath}/fc/viewcustomerinfopage" method="POST">
+            <form action="${pageContext.request.contextPath}/fc/viewcustomerinfocommand" method="POST">
+                <input type="hidden" name="customerID" value="${customerItem.id}">
                 <tr>
                     <td>${customerItem.id}</td>
                     <td>${customerItem.name}</td>
                     <td>${customerItem.email}</td>
-                    <td>${customerItem.phone}</td>
                     <td class="text-end">
                         <button type="submit" name="infoButton"
                                 class="btn btn-outline-primary float-end"><i

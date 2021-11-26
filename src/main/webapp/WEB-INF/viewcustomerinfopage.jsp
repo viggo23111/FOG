@@ -9,6 +9,7 @@
     <meta name="viewport" content="wi dth=device-width, initial-scale=1">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
     <title>Fog</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.3.0/font/bootstrap-icons.css" rel="stylesheet">
     <t:genericpage> </t:genericpage>
 </head>
 <body>
@@ -41,7 +42,7 @@
                         <!-- Left links -->
                         <ul class="navbar-nav me-auto mb-2 mb-lg-0">
                             <li class="nav-item">
-                                <a class="nav-link" href="${pageContext.request.contextPath}/fc/viewcustomerspage">Kunder</a>
+                                <a class="nav-link" href="${pageContext.request.contextPath}/fc/viewcustomerscommand">Kunder</a>
                             </li>
                             <li class="nav-item">
                                 <a class="nav-link" href="${pageContext.request.contextPath}/fc/viewrequestspage">Forespørgelser</a>
@@ -78,29 +79,21 @@
             <div class="row">
                 <div class="col">
                     <h1 class="display-4">Customer info</h1>
-                    <form action="${pageContext.request.contextPath}/fc/viewcustomerinfopage" method="POST">
                         <div class="form-group">
                             <label for="name">Navn</label>
                             <input type="text" class="form-control" id="name"
-                                   value="Viktor Bak Nymand" disabled>
+                                   value="${requestScope.customer.name}" disabled>
                         </div>
                         <div class="form-group">
                             <label for="tlf">Tlf</label>
                             <input type="text" class="form-control" id="tlf"
-                                   value="22321233" disabled>
+                                   value="${requestScope.customer.phone}" disabled>
                         </div>
                         <div class="form-group">
                             <label for="email">Email</label>
-                            <input type="email" class="form-control" id="email" value="test@test.dk"
+                            <input type="email" class="form-control" id="email" value="${requestScope.customer.email}"
                                    disabled>
                         </div>
-                        <div class="form-group">
-                            <label for="userBalance">Balance</label>
-                            <input type="number" class="form-control" id="userBalance" name="userBalance"
-                                   value="100">
-                        </div>
-                        <button type="submit" class="btn btn-primary mt-2">Save</button>
-                    </form>
                 </div>
                 <div class="col">
                     <h1 class="display-4">Forespørgsler</h1>
@@ -113,9 +106,11 @@
                         </tr>
                         </thead>
                         <tbody>
+                        <c:forEach var="requestItem" items="${requestScope.requestList}">
+
                         <tr>
-                            <td>1</td>
-                            <td>20.10.2020</td>
+                            <td>${requestItem.ID}</td>
+                            <td>${requestItem.createdAt}</td>
                             <td class="text-end">
                                 <form action="${pageContext.request.contextPath}/fc/viewrequestinfopage" method="POST"
                                       class="" style="display: inline-flex;">
@@ -132,6 +127,7 @@
                             </td>
 
                         </tr>
+                        </c:forEach>
 
                         </tbody>
                     </table>
