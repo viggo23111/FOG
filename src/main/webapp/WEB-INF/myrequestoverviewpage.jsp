@@ -74,7 +74,8 @@
         <div class="jumbotron bg-light mt-5 p-5 shadow-lg p-3 mb-5 bg-white rounded">
             <div class="row" style="margin:auto">
                 <div class="col-sm-6">
-                    <form class="card p-3 " action="${pageContext.request.contextPath}/fc/myrequestBOM" method="post">
+                    <form class="card p-3 " action="${pageContext.request.contextPath}/fc/myrequestbomcommand" method="post">
+                        <input type="hidden" name="requestID" value="${requestScope.requestID}">
                         <h1>OVERSIGT</h1>
                         <div class="form-outline mb-4">
                             <label for="sel1">Carport bredde:</label>

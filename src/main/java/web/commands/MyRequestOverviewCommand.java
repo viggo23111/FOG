@@ -28,7 +28,7 @@ public class MyRequestOverviewCommand extends CommandProtectedPage {
             e.printStackTrace();
         }
 
-
+        request.setAttribute("requestID", requestID);
         request.setAttribute("width", requestfound.getWidth() + " cm");
         request.setAttribute("length", requestfound.getWidth() +" cm");
         request.setAttribute("roof", requestfound.getRoofName());

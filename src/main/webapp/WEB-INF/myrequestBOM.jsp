@@ -72,7 +72,7 @@
     </div>
     <div class="content">
         <div class="jumbotron bg-light mt-5 p-5 shadow-lg p-3 mb-5 bg-white rounded">
-            <h1 class="display-4">Stykliste for forspørgsel: 164</h1>
+            <h1 class="display-4">Stykliste for forspørgsel: ${requestScope.requestID}</h1>
             <table class="table table-striped mt-3 border border-dark">
                 <thead class="mt-3">
                 <tr>
@@ -84,27 +84,17 @@
                 </tr>
                 </thead>
                 <tbody>
+                <c:forEach var="bomItem" items="${requestScope.BOMList}">
                 <tr>
-                    <td>25x200 mm. trykimp. Brædt</td>
-                    <td>360</td>
-                    <td>4</td>
-                    <td>Stk</td>
-                    <td>understernbrædder til for & bag ende</td>
+                    <td>${bomItem.name}</td>
+                    <td>${bomItem.length}</td>
+                    <td>${bomItem.amount}</td>
+                    <td>${bomItem.unit}</td>
+                    <td>${bomItem.description}</td>
                 </tr>
-                <tr>
-                    <td>25x200 mm. trykimp. Brædt</td>
-                    <td>540</td>
-                    <td>4</td>
-                    <td>Stk</td>
-                    <td>understernbrædder til siderne</td>
-                </tr>
-                <tr>
-                    <td>25x200 mm. trykimp. Brædt</td>
-                    <td>360</td>
-                    <td>2</td>
-                    <td>Stk</td>
-                    <td>oversternbrædder til forenden</td>
-                </tr>
+                </c:forEach>
+
+
                 </tbody>
             </table>
             <table class="table table-striped mt-3 border border-dark">
