@@ -87,7 +87,7 @@
                     <p style="font-size: large">${param.msg}</p>
                 </c:if>
                 <button class="btn btn-primary btn-lg btn-block fogbtn" type="submit" >Log ind</button>
-                <a class="p-3 text-decoration-underline" href="register.html">Opret bruger </a>
+                <a class="p-3 text-decoration-underline" href="${pageContext.request.contextPath}/fc/registerpage">Opret bruger </a>
             </form>
         </div>
         <div class="bottom"></div>

@@ -35,6 +35,7 @@ public abstract class Command
         commands.put("myrequestscommand", new MyRequestsCommand("myrequests", "customer"));
         commands.put("sendrequestcommand", new SendRequestCommand("requestsentpage", "customer"));
         commands.put("myrequestoverviewcommand", new MyRequestOverviewCommand("myrequests", "customer"));
+        commands.put("viewcustomerscommand", new ViewCustomersCommand("viewcustomerspage","employee"));
     }
 
     public static Command fromPath(

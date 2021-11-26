@@ -9,6 +9,7 @@
     <meta name="viewport" content="wi dth=device-width, initial-scale=1">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
     <title>Fog</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.3.0/font/bootstrap-icons.css" rel="stylesheet">
     <t:genericpage> </t:genericpage>
 </head>
 <body>
@@ -78,54 +79,27 @@
             <thead>
             <tr>
                 <th scope="col">Kunde ID</th>
-                <th scope="col">Kunde email</th>
+                <th scope="col">Kunde Navn</th>
+                <th scope="col">Kunde Email</th>
+                <th scope="col">Kunde Telefon</th>
                 <th scope="col"></th>
             </tr>
             </thead>
             <tbody>
+            <c:forEach var="customerItem" items="${requestScope.userList}">
             <form action="${pageContext.request.contextPath}/fc/viewcustomerinfopage" method="POST">
                 <tr>
-                    <td>1</td>
-                    <td>test@test.dk</td>
+                    <td>${customerItem.id}</td>
+                    <td>${customerItem.name}</td>
+                    <td>${customerItem.email}</td>
+                    <td>${customerItem.phone}</td>
                     <td class="text-end">
                         <button type="submit" name="infoButton"
                                 class="btn btn-outline-primary float-end"><i
                                 class="bi bi-info-circle"></i></button>
                     </td>
             </form>
-            </tr>
-            <form action="${pageContext.request.contextPath}/fc/viewcustomerinfopage" method="POST">
-                <tr>
-                    <td>1</td>
-                    <td>test@test.dk</td>
-                    <td class="text-end">
-                        <button type="submit" name="infoButton"
-                                class="btn btn-outline-primary float-end"><i
-                                class="bi bi-info-circle"></i></button>
-                    </td>
-            </form>
-            </tr>
-            <form action="${pageContext.request.contextPath}/fc/viewcustomerinfopage" method="POST">
-                <tr>
-                    <td>1</td>
-                    <td>test@test.dk</td>
-                    <td class="text-end">
-                        <button type="submit" name="infoButton"
-                                class="btn btn-outline-primary float-end"><i
-                                class="bi bi-info-circle"></i></button>
-                    </td>
-            </form>
-            </tr>
-            <form action="${pageContext.request.contextPath}/fc/viewcustomerinfopage" method="POST">
-                <tr>
-                    <td>1</td>
-                    <td>test@test.dk</td>
-                    <td class="text-end">
-                        <button type="submit" name="infoButton"
-                                class="btn btn-outline-primary float-end"><i
-                                class="bi bi-info-circle"></i></button>
-                    </td>
-            </form>
+            </c:forEach>
             </tr>
             </tbody>
         </table>
