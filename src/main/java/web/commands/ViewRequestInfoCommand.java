@@ -1,6 +1,7 @@
 package web.commands;
 
 import business.entities.Request;
+import business.entities.Roof;
 import business.entities.User;
 import business.exceptions.UserException;
 import business.services.LogicFacade;
@@ -30,16 +31,35 @@ public class ViewRequestInfoCommand extends CommandProtectedPage {
         } catch (UserException e) {
             e.printStackTrace();
         }
+
+        List<Roof> roofList = null;
+
         request.setAttribute("requestID", requestFound.getID());
         request.setAttribute("width", requestFound.getWidth());
         request.setAttribute("length", requestFound.getLength());
         request.setAttribute("roof", requestFound.getRoofName());
+        request.setAttribute("roofID",requestFound.getRoofId());
+
+        System.out.println("roofid: "+requestFound.getRoofId());
         if(requestFound.getCarportType() == 2) {
             request.setAttribute("slope", requestFound.getSlope());
+
+            try {
+                roofList = logicFacade.getAllRoofsByType(2);
+            } catch (UserException e) {
+                e.printStackTrace();
+            }
+
         }
         if (requestFound.getCarportType() == 1){
+            try {
+                roofList = logicFacade.getAllRoofsByType(1);
+            } catch (UserException e) {
+                e.printStackTrace();
+            }
         }
 
+        request.setAttribute("roofList",roofList);
         request.setAttribute("shedWidth", requestFound.getShedWidth());
         request.setAttribute("shedLength", requestFound.getShedLength());
         request.setAttribute("carportType", requestFound.getCarportType());

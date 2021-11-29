@@ -46,4 +46,11 @@ public class LogicFacade {
     public Category getCategoryByID(int categoryID) throws UserException {
         return categoryMapper.getCategoryByID(categoryID);
     }
+    public void updateRequestCarportTypeTwo(int requestID, int width, int length, int roofID, int slope, int shedWidth, int shedLength) throws UserException {
+        requestMapper.updateRequestCarportTypeTwo(requestID,width,length,roofID,slope,shedWidth,shedLength);
+    }
+
+    public void updateRequestCarportTypeOne(int requestID, int width, int length, int roofID, int shedWidth, int shedLength) throws UserException {
+        requestMapper.updateRequestCarportTypeOne(requestID,width,length,roofID,shedWidth,shedLength);
+    }
 }

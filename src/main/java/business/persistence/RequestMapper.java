@@ -182,4 +182,63 @@ public class RequestMapper {
         }
         return id;
     }
+
+    public void updateRequestCarportTypeTwo(int requestID, int width, int length, int roofID, int slope, int shedWidth, int shedLength) throws UserException {
+
+        try (Connection connection = database.connect()) {
+
+            String sql = "UPDATE requests SET width =?, length =?, roof_id=?, slope =?, shed_width =?, shed_length =? WHERE id =?";
+
+            try (PreparedStatement ps = connection.prepareStatement(sql)) {
+
+
+                ps.setInt(1,width);
+                ps.setInt(2,length);
+                ps.setInt(3,roofID);
+                ps.setInt(4,slope);
+                ps.setInt(5,shedWidth);
+                ps.setInt(6,shedLength);
+                ps.setInt(7,requestID);
+
+                int result = ps.executeUpdate();
+
+
+
+
+            } catch (SQLException ex) {
+                throw new UserException(ex.getMessage());
+            }
+        } catch (SQLException ex) {
+            throw new UserException("Connection to database could not be established");
+        }
+    }
+
+    public void updateRequestCarportTypeOne(int requestID, int width, int length, int roofID, int shedWidth, int shedLength) throws UserException {
+
+        try (Connection connection = database.connect()) {
+
+            String sql = "UPDATE requests SET width =?, length =?, roof_id=?, shed_width =?, shed_length =? WHERE id =?";
+
+            try (PreparedStatement ps = connection.prepareStatement(sql)) {
+
+
+                ps.setInt(1,width);
+                ps.setInt(2,length);
+                ps.setInt(3,roofID);
+                ps.setInt(4,shedWidth);
+                ps.setInt(5,shedLength);
+                ps.setInt(6,requestID);
+
+                int result = ps.executeUpdate();
+
+
+
+
+            } catch (SQLException ex) {
+                throw new UserException(ex.getMessage());
+            }
+        } catch (SQLException ex) {
+            throw new UserException("Connection to database could not be established");
+        }
+    }
 }

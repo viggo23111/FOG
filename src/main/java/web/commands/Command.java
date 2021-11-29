@@ -39,6 +39,7 @@ public abstract class Command
         commands.put("myrequestbomcommand", new MyRequestBomCommand("myrequestBOM", "customer"));
         commands.put("viewcustomerinfocommand", new ViewCustomerInfoCommand("viewcustomerinfopage","employee"));
         commands.put("viewrequestinfocommand", new ViewRequestInfoCommand("viewrequestinfopage","employee"));
+        commands.put("updaterequestcommand", new UpdateRequestCommand("viewrequestinfopage","employee"));
     }
 
     public static Command fromPath(

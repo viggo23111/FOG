@@ -77,11 +77,13 @@
         <div class="jumbotron bg-light mt-5 p-5 shadow-lg p-3 mb-5 bg-white rounded">
             <div class="row" style="margin:auto">
                 <div class="col-sm-6">
-                    <form class="card p-3 " action="${pageContext.request.contextPath}/fc/viewrequestBOM" method="post">
+                    <form class="card p-3 " action="${pageContext.request.contextPath}/fc/updaterequestcommand" method="post">
+                        <input type="hidden" name="requestID" value="${requestScope.requestID}">
+                        <input type="hidden" name="carportType" value="${requestScope.carportType}">
                         <h1>OVERSIGT FOR FORESPØRGSEL: ${requestScope.requestID} </h1>
                         <div class="form-outline mb-4">
                             <label for="sel1">Carport bredde:</label>
-                            <select class="form-control" id="sel1">
+                            <select name="width" class="form-control" id="sel1">
                                 <option value="${requestScope.width}" selected>${requestScope.width} cm</option>
                                 <option value="240">240 cm</option>
                                 <option value="270">270 cm</option>
@@ -100,7 +102,7 @@
                         </div>
                         <div class="form-outline mb-4">
                             <label for="sel2">Carport længde:</label>
-                            <select class="form-control" id="sel2">
+                            <select name="length" class="form-control" id="sel2">
                                 <option value="${requestScope.length}" selected>${requestScope.length} cm</option>
                                 <option value="240">240 cm</option>
                                 <option value="270">270 cm</option>
@@ -126,25 +128,27 @@
                         <c:if test="${requestScope.carportType == 1}">
                             <div class="form-outline mb-4">
                             <label for="rooftype1">Carport tag:</label>
-                            <select class="form-control" id="rooftype1">
-                            <option selected>${requestScope.roof}</option>
-                            <option>Plastik</option>
-                            <option>Træ</option>
+                            <select name="roofID" class="form-control" id="rooftype1">
+                            <option value="${requestScope.roofID}" selected>${requestScope.roof}</option>
+                                <c:forEach var="roofItem" items="${requestScope.roofList}">
+                                    <option value="${roofItem.ID}">${roofItem.name}</option>
+                                </c:forEach>
                             </select>
                             </div>
                         </c:if>
                         <c:if test="${requestScope.carportType == 2}">
                         <div class="form-outline mb-4">
                             <label for="rooftype2">Carport tag:</label>
-                            <select class="form-control" id="rooftype2">
-                                <option selected>${requestScope.roof}</option>
-                                <option>Plastik</option>
-                                <option>Træ</option>
+                            <select name="roofID" class="form-control" id="rooftype2">
+                                <option value="${requestScope.roofID}" selected>${requestScope.roof}</option>
+                                <c:forEach var="roofItem" items="${requestScope.roofList}">
+                                    <option value="${roofItem.ID}">${roofItem.name}</option>
+                                </c:forEach>
                             </select>
                         </div>
                         <div class="form-outline mb-4">
                             <label for="sel6">Taghældning:</label>
-                            <select class="form-control" id="sel6">
+                            <select name="slope" class="form-control" id="sel6">
                                 <option value ="${requestScope.slope}" selected>${requestScope.slope} grader</option>
                                 <option value="15">15 grader</option>
                                 <option value="20">20 grader</option>
@@ -161,7 +165,7 @@
 
                         <div class="form-outline mb-4">
                             <label for="sel4">Redskabsrum bredde:</label>
-                            <select class="form-control" id="sel4">
+                            <select name="shedWidth" class="form-control" id="sel4">
                                 <c:if test="${requestScope.shedLength != 0 && requestScope.shedWidth != 0}">
                                 <option value="${requestScope.shedWidth}" selected>${requestScope.shedWidth} cm</option>
                                 </c:if>
@@ -177,7 +181,7 @@
 
                         <div class="form-outline mb-4">
                             <label for="sel5">Redskabsrum længde:</label>
-                            <select class="form-control" id="sel5">
+                            <select name="shedLength" class="form-control" id="sel5">
                                 <c:if test="${requestScope.shedLength != 0 && requestScope.shedWidth != 0}">
                                     <option value="${requestScope.shedLength}" selected>${requestScope.shedLength} cm</option>
                                 </c:if>
