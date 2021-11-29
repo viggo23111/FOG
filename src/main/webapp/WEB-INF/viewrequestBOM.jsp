@@ -41,7 +41,7 @@
                         <!-- Left links -->
                         <ul class="navbar-nav me-auto mb-2 mb-lg-0">
                             <li class="nav-item">
-                                <a class="nav-link" href="${pageContext.request.contextPath}/fc/viewcustomerspage">Kunder</a>
+                                <a class="nav-link" href="${pageContext.request.contextPath}/fc/viewcustomerscommand">Kunder</a>
                             </li>
                             <li class="nav-item">
                                 <a class="nav-link" href="${pageContext.request.contextPath}/fc/viewrequestspage">Forespørgelser</a>
@@ -75,11 +75,11 @@
     </div>
     <div class="content">
         <div class="jumbotron bg-light mt-5 p-5 shadow-lg p-3 mb-5 bg-white rounded">
-            <h1 class="display-4">Stykliste for forspørgsel: 164</h1>
+            <h1 class="display-4">Stykliste for forspørgsel: ${requestScope.requestID}</h1>
             <table class="table table-striped mt-3 border border-dark">
                 <thead class="mt-3">
                 <tr>
-                    <th scope="col">Træ & Tagplader</th>
+                    <th scope="col">${requestScope.category1}</th>
                     <th scope="col">Længde</th>
                     <th scope="col">Antal</th>
                     <th scope="col">Enhed</th>
@@ -87,52 +87,36 @@
                 </tr>
                 </thead>
                 <tbody>
-                <tr>
-                    <td>25x200 mm. trykimp. Brædt</td>
-                    <td>360</td>
-                    <td>4</td>
-                    <td>Stk</td>
-                    <td>understernbrædder til for & bag ende</td>
-                </tr>
-                <tr>
-                    <td>25x200 mm. trykimp. Brædt</td>
-                    <td>540</td>
-                    <td>4</td>
-                    <td>Stk</td>
-                    <td>understernbrædder til siderne</td>
-                </tr>
-                <tr>
-                    <td>25x200 mm. trykimp. Brædt</td>
-                    <td>360</td>
-                    <td>2</td>
-                    <td>Stk</td>
-                    <td>oversternbrædder til forenden</td>
-                </tr>
+                <c:forEach var="bomItem" items="${requestScope.BOMlistcategory1}">
+                    <tr>
+                        <td>${bomItem.name}</td>
+                        <td>${bomItem.length}</td>
+                        <td>${bomItem.amount}</td>
+                        <td>${bomItem.unit}</td>
+                        <td>${bomItem.description}</td>
+                    </tr>
+                </c:forEach>
+
                 </tbody>
             </table>
             <table class="table table-striped mt-3 border border-dark">
                 <thead class="mt-3">
                 <tr>
-                    <th scope="col">Beslag & Skruer</th>
+                    <th scope="col">${requestScope.category2}</th>
                     <th scope="col">Antal</th>
                     <th scope="col">Enhed</th>
                     <th scope="col">Beskrivelse</th>
                 </tr>
                 </thead>
                 <tbody>
-                <tr>
-                    <td>plastmo bundskruer 200 stk.</td>
-                    <td>3</td>
-                    <td>pakke</td>
-                    <td>Skruer til tagplader</td>
-                </tr>
-                <tr>
-                    <td>hulbånd 1x20 mm. 10 mtr.</td>
-
-                    <td>2</td>
-                    <td>Rulle</td>
-                    <td>Til vindkryds på spær</td>
-                </tr>
+                <c:forEach var="bomItem" items="${requestScope.BOMlistcategory2}">
+                    <tr>
+                        <td>${bomItem.name}</td>
+                        <td>${bomItem.amount}</td>
+                        <td>${bomItem.unit}</td>
+                        <td>${bomItem.description}</td>
+                    </tr>
+                </c:forEach>
                 </tbody>
             </table>
         </div>

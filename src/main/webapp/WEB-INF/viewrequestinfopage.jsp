@@ -199,7 +199,9 @@
                                 <option>230</option>
                             </select>
                         </div>
+                        <c:if test="${requestScope.statusID == 1}">
                         <button class="btn btn-primary btn-lg btn-block fogbtn" type="submit">Opdater</button>
+                        </c:if>
                     </form>
 
                     <form class="card p-3 " action="${pageContext.request.contextPath}/fc/updatepricecommand"
@@ -246,7 +248,10 @@
                 </div>
                 <div class="col-sm-6 text-center">
                     <img src="${pageContext.request.contextPath}/images/carportOverview.PNG" alt="" width="100%"></p>
-                    <button class="btn btn-primary btn-lg btn-block fogbtn" type="submit">Se stykliste</button>
+                    <form method="post" action="${pageContext.request.contextPath}/fc/viewrequestbomcommand">
+                        <input type="hidden" name= "requestID" value="${requestScope.requestID}">
+                    <button class="btn btn-primary btn-lg btn-block fogbtn w-100" type="submit">Se stykliste</button>
+                    </form>
                 </div>
             </div>
         </div>
