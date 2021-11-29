@@ -7,7 +7,8 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="wi dth=device-width, initial-scale=1">
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet"
+          integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
     <title>Fog</title>
     <t:genericpage> </t:genericpage>
 </head>
@@ -42,7 +43,8 @@
                         <!-- Left links -->
                         <ul class="navbar-nav me-auto mb-2 mb-lg-0">
                             <li class="nav-item">
-                                <a class="nav-link" href="${pageContext.request.contextPath}/fc/myrequestscommand">Mine forespørgelser</a>
+                                <a class="nav-link" href="${pageContext.request.contextPath}/fc/myrequestscommand">Mine
+                                    forespørgelser</a>
                             </li>
                         </ul>
                         <!-- Left links -->
@@ -60,7 +62,8 @@
                                 <a class="nav-link" href="#" style="pointer-events: none">${sessionScope.email}</a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link" href="${pageContext.request.contextPath}/fc/logoutcommand">Log ud</a>
+                                <a class="nav-link" href="${pageContext.request.contextPath}/fc/logoutcommand">Log
+                                    ud</a>
                             </li>
                         </ul>
                     </div>
@@ -74,9 +77,10 @@
         <div class="jumbotron bg-light mt-5 p-5 shadow-lg p-3 mb-5 bg-white rounded">
             <div class="row" style="margin:auto">
                 <div class="col-sm-6">
-                    <form class="card p-3 " action="${pageContext.request.contextPath}/fc/myrequestbomcommand" method="post">
+                    <div class="card p-3 ">
+                    <form>
                         <input type="hidden" name="requestID" value="${requestScope.requestID}">
-                        <h1>OVERSIGT</h1>
+                        <h1>OVERSIGT FOR NR: ${requestScope.requestID}</h1>
                         <div class="form-outline mb-4">
                             <label for="sel1">Carport bredde:</label>
                             <input type="text" class="form-control" id="sel1" disabled value="${requestScope.width}">
@@ -99,18 +103,49 @@
 
                         <div class="form-outline mb-4">
                             <label for="sel4">Redskabsrum bredde:</label>
-                            <input type="text" class="form-control" id="sel4" disabled value="${requestScope.shedwidth}">
+                            <input type="text" class="form-control" id="sel4" disabled
+                                   value="${requestScope.shedwidth}">
                         </div>
 
                         <div class="form-outline mb-4">
                             <label for="sel5">Redskabsrum længde:</label>
-                            <input type="text" class="form-control" id="sel5" disabled value="${requestScope.shedlength}">
+                            <input type="text" class="form-control" id="sel5" disabled
+                                   value="${requestScope.shedlength}">
                         </div>
-                        <h3>Pris: ${requestScope.price}</h3>
-                        <c:if test="${requestScope.statusID== 3}">
-                             <button class="btn btn-primary btn-lg btn-block fogbtn" type="submit" >Se stykliste</button>
-                        </c:if>
                     </form>
+                        <c:if test="${requestScope.statusID== 1}">
+                            <h3>Pris: ikke klar!</h3>
+                        </c:if>
+
+                        <c:if test="${requestScope.statusID== 2}">
+                            <h3>Afvist!</h3>
+                        </c:if>
+
+                        <c:if test="${requestScope.statusID== 3}">
+                            <h3>Betalt ${requestScope.price} </h3>
+
+                        </c:if>
+
+                        <c:if test="${requestScope.statusID== 4}">
+                        <h3>${requestScope.price}</h3>
+
+                    <form action="${pageContext.request.contextPath}/fc/paycommand" method="post">
+                        <input type="hidden" name="requestID" value="${requestScope.requestID}">
+                        <button class="btn btn-primary btn-lg btn-block fogbtn w-100" name="status" value="3" type="submit">
+                            Betal
+                        </button>
+                    </form>
+                    </c:if>
+
+                    <c:if test="${requestScope.statusID== 3}">
+                        <form action="${pageContext.request.contextPath}/fc/myrequestbomcommand"
+                              method="post">
+                            <input type="hidden" name="requestID" value="${requestScope.requestID}">
+                            <button class="btn btn-primary btn-lg btn-block fogbtn w-100" type="submit">Se stykliste</button>
+                        </form>
+                    </c:if>
+
+                    </div>
                 </div>
                 <div class="col-sm-6 text-center">
                     <img src="${pageContext.request.contextPath}/images/carportOverview.PNG" alt="" width="100%"></p>
@@ -121,7 +156,9 @@
 </div>
 <div class="bottom"></div>
 </div>
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p"
+        crossorigin="anonymous"></script>
 
 </body>
 </html>

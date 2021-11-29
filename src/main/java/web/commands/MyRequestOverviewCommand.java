@@ -30,19 +30,11 @@ public class MyRequestOverviewCommand extends CommandProtectedPage {
 
         request.setAttribute("requestID", requestID);
         request.setAttribute("width", requestfound.getWidth() + " cm");
-        request.setAttribute("length", requestfound.getWidth() +" cm");
+        request.setAttribute("length", requestfound.getLength() +" cm");
         request.setAttribute("roof", requestfound.getRoofName());
         request.setAttribute("slope", requestfound.getSlope() + " grader");
-
-
         request.setAttribute("statusID", requestfound.getStatusID());
-
-
-        if (requestfound.getStatusID()==3){
-            request.setAttribute("price", requestfound.getPrice() + " DKK");
-        }else{
-            request.setAttribute("price", "ikke klar!");
-        }
+        request.setAttribute("price", requestfound.getPrice() + " DKK");
 
         if (requestfound.getShedWidth()!=0){
             request.setAttribute("shedwidth", requestfound.getShedWidth() +" cm");
