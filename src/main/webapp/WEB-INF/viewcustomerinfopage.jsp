@@ -45,7 +45,7 @@
                                 <a class="nav-link" href="${pageContext.request.contextPath}/fc/viewcustomerscommand">Kunder</a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link" href="${pageContext.request.contextPath}/fc/viewrequestspage">Forespørgelser</a>
+                                <a class="nav-link" href="${pageContext.request.contextPath}/fc/viewrequestscommand">Forespørgelser</a>
                             </li>
 
                         </ul>

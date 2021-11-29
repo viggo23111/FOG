@@ -15,6 +15,49 @@ public class RequestMapper {
         this.database = database;
     }
 
+    public List<Request> getAllRequests() throws UserException {
+        List<Request> requestList = null;
+
+        try (Connection connection = database.connect()) {
+            String sql = "SELECT * FROM request_overview";
+
+
+            try (PreparedStatement ps = connection.prepareStatement(sql)) {
+                ResultSet rs = ps.executeQuery();
+                while (rs.next()) {
+                    if (requestList == null) {
+                        requestList = new ArrayList<>();
+                    }
+                    int id = rs.getInt("id");
+                    int userID = rs.getInt("user_id");
+                    String email = rs.getString("email");
+                    String name = rs.getString("name");
+                    String phone = rs.getString("phone");
+                    int statusID = rs.getInt("status_id");
+                    String status = rs.getString("status");
+                    int width = rs.getInt("width");
+                    int length = rs.getInt("length");
+                    int roofID = rs.getInt("roof_id");
+                    String roofName = rs.getString("roof_name");
+                    int slope = rs.getInt("slope");
+                    int shedWidth = rs.getInt("shed_width");
+                    int shedLength = rs.getInt("shed_length");
+                    double price = rs.getDouble("price");
+                    int carportType = rs.getInt("carport_type");
+                    Timestamp createdAt = rs.getTimestamp("created_at");
+                    Request request = new Request(id, userID, email, name, phone, statusID, status, width, length, roofID, roofName, slope, shedWidth, shedLength, price, createdAt);
+                    request.setCarportType(carportType);
+                    requestList.add(request);
+                }
+            } catch (SQLException ex) {
+                throw new UserException(ex.getMessage());
+            }
+        } catch (SQLException ex) {
+            throw new UserException("Connection to database could not be established");
+        }
+        return requestList;
+    }
+
     public List<Request> getAllRequestsByID(int userID) throws UserException {
         List<Request> requestList = null;
 

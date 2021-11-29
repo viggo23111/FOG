@@ -23,6 +23,9 @@ public class LogicFacade {
     public List<Roof> getAllRoofsByType(int caportType) throws UserException {
         return roofMapper.getAllRoofsByType(caportType);
     }
+    public List<Request> getAllRequests() throws UserException {
+        return requestMapper.getAllRequests();
+    }
 
     public List<Request> getAllRequestsByID(int userID) throws UserException {
         return requestMapper.getAllRequestsByID(userID);

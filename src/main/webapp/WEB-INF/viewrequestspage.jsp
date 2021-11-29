@@ -7,7 +7,9 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="wi dth=device-width, initial-scale=1">
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet"
+          integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.3.0/font/bootstrap-icons.css" rel="stylesheet">
     <title>Fog</title>
     <t:genericpage> </t:genericpage>
 </head>
@@ -41,10 +43,10 @@
                         <!-- Left links -->
                         <ul class="navbar-nav me-auto mb-2 mb-lg-0">
                             <li class="nav-item">
-                                <a class="nav-link" href="${pageContext.request.contextPath}/fc/viewcustomerspage">Kunder</a>
+                                <a class="nav-link" href="${pageContext.request.contextPath}/fc/viewcustomerscommand">Kunder</a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link" href="${pageContext.request.contextPath}/fc/viewrequestspage">Forespørgelser</a>
+                                <a class="nav-link" href="${pageContext.request.contextPath}/fc/viewrequestscommand">Forespørgelser</a>
                             </li>
 
                         </ul>
@@ -63,7 +65,8 @@
                                 <a class="nav-link" href="#" style="pointer-events: none">admin@test.dk</a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link" href="${pageContext.request.contextPath}/fc/logoutcommand">Log ud</a>
+                                <a class="nav-link" href="${pageContext.request.contextPath}/fc/logoutcommand">Log
+                                    ud</a>
                             </li>
                         </ul>
                     </div>
@@ -77,62 +80,37 @@
         <table class="table table-striped mt-5" id="bottoms">
             <thead>
             <tr>
-                <th scope="col">Foresprørgsels NR</th>
+                <th scope="col">NR</th>
+                <th scope="col">Status</th>
+                <th scope="col">Kunde Tlf</th>
                 <th scope="col">Kunde email</th>
                 <th scope="col"></th>
             </tr>
             </thead>
             <tbody>
-            <form action="${pageContext.request.contextPath}/fc/viewrequestinfopage" method="POST">
-                <tr>
-                    <td>1</td>
-                    <td>test@test.dk</td>
-                    <td class="text-end">
-                        <button type="submit" name="infoButton"
-                                class="btn btn-outline-primary float-end"><i
-                                class="bi bi-info-circle"></i></button>
-                    </td>
-            </form>
-            </tr>
-            <form action="${pageContext.request.contextPath}/fc/viewrequestinfopage" method="POST">
-                <tr>
-                    <td>1</td>
-                    <td>test@test.dk</td>
-                    <td class="text-end">
-                        <button type="submit" name="infoButton"
-                                class="btn btn-outline-primary float-end"><i
-                                class="bi bi-info-circle"></i></button>
-                    </td>
-            </form>
-            </tr>
-            <form action="${pageContext.request.contextPath}/fc/viewrequestinfopage" method="POST">
-                <tr>
-                    <td>1</td>
-                    <td>test@test.dk</td>
-                    <td class="text-end">
-                        <button type="submit" name="infoButton"
-                                class="btn btn-outline-primary float-end"><i
-                                class="bi bi-info-circle"></i></button>
-                    </td>
-            </form>
-            </tr>
-            <form action="${pageContext.request.contextPath}/fc/viewrequestinfopage" method="POST">
-                <tr>
-                    <td>1</td>
-                    <td>test@test.dk</td>
-                    <td class="text-end">
-                        <button type="submit" name="infoButton"
-                                class="btn btn-outline-primary float-end"><i
-                                class="bi bi-info-circle"></i></button>
-                    </td>
-            </form>
-            </tr>
+            <c:forEach var="requestItem" items="${requestScope.requestList}">
+                <form action="${pageContext.request.contextPath}/fc/viewrequestinfocommand" method="POST">
+                    <tr>
+                        <td>${requestItem.ID}</td>
+                        <td>${requestItem.statusName}</td>
+                        <td>${requestItem.phone}</td>
+                        <td>${requestItem.email}</td>
+                        <td class="text-end">
+                            <button type="submit" name="requestID" value="${requestItem.ID}" name="infoButton"
+                                    class="btn btn-outline-primary float-end"><i
+                                    class="bi bi-info-circle"></i></button>
+                        </td>
+                    </tr>
+                </form>
+            </c:forEach>
             </tbody>
         </table>
     </div>
     <div class="bottom"></div>
 </div>
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p"
+        crossorigin="anonymous"></script>
 
 </body>
 </html>
