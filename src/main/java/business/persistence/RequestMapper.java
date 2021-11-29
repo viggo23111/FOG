@@ -241,4 +241,54 @@ public class RequestMapper {
             throw new UserException("Connection to database could not be established");
         }
     }
+
+    public void updatePrice(int requestID, double price) throws UserException {
+
+        try (Connection connection = database.connect()) {
+
+            String sql = "UPDATE requests SET price =? WHERE id =?";
+
+            try (PreparedStatement ps = connection.prepareStatement(sql)) {
+
+
+                ps.setDouble(1,price);
+                ps.setInt(2,requestID);
+
+                int result = ps.executeUpdate();
+
+
+
+
+            } catch (SQLException ex) {
+                throw new UserException(ex.getMessage());
+            }
+        } catch (SQLException ex) {
+            throw new UserException("Connection to database could not be established");
+        }
+    }
+
+    public void updateStatus(int requestID, int status) throws UserException {
+
+        try (Connection connection = database.connect()) {
+
+            String sql = "UPDATE requests SET status_id =? WHERE id =?";
+
+            try (PreparedStatement ps = connection.prepareStatement(sql)) {
+
+
+                ps.setDouble(1,status);
+                ps.setInt(2,requestID);
+
+                int result = ps.executeUpdate();
+
+
+
+
+            } catch (SQLException ex) {
+                throw new UserException(ex.getMessage());
+            }
+        } catch (SQLException ex) {
+            throw new UserException("Connection to database could not be established");
+        }
+    }
 }

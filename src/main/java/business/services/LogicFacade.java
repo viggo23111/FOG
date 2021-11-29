@@ -1,9 +1,6 @@
 package business.services;
 
-import business.entities.BomItem;
-import business.entities.Category;
-import business.entities.Request;
-import business.entities.Roof;
+import business.entities.*;
 import business.exceptions.UserException;
 import business.persistence.*;
 
@@ -14,11 +11,13 @@ public class LogicFacade {
     RequestMapper requestMapper;
     BomItemMapper bomItemMapper;
     CategoryMapper categoryMapper;
+    StatusMapper statusMapper;
     public LogicFacade(Database database) {
         this.roofMapper = new RoofMapper(database);
         this.requestMapper = new RequestMapper(database);
         this.bomItemMapper = new BomItemMapper(database);
         this.categoryMapper = new CategoryMapper(database);
+        this.statusMapper = new StatusMapper(database);
     }
 
     public List<Roof> getAllRoofsByType(int caportType) throws UserException {
@@ -52,5 +51,17 @@ public class LogicFacade {
 
     public void updateRequestCarportTypeOne(int requestID, int width, int length, int roofID, int shedWidth, int shedLength) throws UserException {
         requestMapper.updateRequestCarportTypeOne(requestID,width,length,roofID,shedWidth,shedLength);
+    }
+
+    public void updatePrice(int requestID, double price) throws UserException {
+        requestMapper.updatePrice(requestID,price);
+    }
+
+    public void updateStatus(int requestID, int statusID) throws UserException {
+        requestMapper.updateStatus(requestID,statusID);
+    }
+
+    public List<Status> getAllStatus() throws UserException {
+        return statusMapper.getAllStatus();
     }
 }

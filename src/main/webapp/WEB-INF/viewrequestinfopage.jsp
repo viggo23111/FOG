@@ -7,7 +7,8 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="wi dth=device-width, initial-scale=1">
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet"
+          integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
     <title>Fog</title>
     <t:genericpage> </t:genericpage>
 </head>
@@ -63,7 +64,8 @@
                                 <a class="nav-link" href="#" style="pointer-events: none">admin@test.dk</a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link" href="${pageContext.request.contextPath}/fc/logoutcommand">Log ud</a>
+                                <a class="nav-link" href="${pageContext.request.contextPath}/fc/logoutcommand">Log
+                                    ud</a>
                             </li>
                         </ul>
                     </div>
@@ -77,7 +79,8 @@
         <div class="jumbotron bg-light mt-5 p-5 shadow-lg p-3 mb-5 bg-white rounded">
             <div class="row" style="margin:auto">
                 <div class="col-sm-6">
-                    <form class="card p-3 " action="${pageContext.request.contextPath}/fc/updaterequestcommand" method="post">
+                    <form class="card p-3 " action="${pageContext.request.contextPath}/fc/updaterequestcommand"
+                          method="post">
                         <input type="hidden" name="requestID" value="${requestScope.requestID}">
                         <input type="hidden" name="carportType" value="${requestScope.carportType}">
                         <h1>OVERSIGT FOR FORESPØRGSEL: ${requestScope.requestID} </h1>
@@ -127,37 +130,37 @@
                         </div>
                         <c:if test="${requestScope.carportType == 1}">
                             <div class="form-outline mb-4">
-                            <label for="rooftype1">Carport tag:</label>
-                            <select name="roofID" class="form-control" id="rooftype1">
-                            <option value="${requestScope.roofID}" selected>${requestScope.roof}</option>
-                                <c:forEach var="roofItem" items="${requestScope.roofList}">
-                                    <option value="${roofItem.ID}">${roofItem.name}</option>
-                                </c:forEach>
-                            </select>
+                                <label for="rooftype1">Carport tag:</label>
+                                <select name="roofID" class="form-control" id="rooftype1">
+                                    <option value="${requestScope.roofID}" selected>${requestScope.roof}</option>
+                                    <c:forEach var="roofItem" items="${requestScope.roofList}">
+                                        <option value="${roofItem.ID}">${roofItem.name}</option>
+                                    </c:forEach>
+                                </select>
                             </div>
                         </c:if>
                         <c:if test="${requestScope.carportType == 2}">
-                        <div class="form-outline mb-4">
-                            <label for="rooftype2">Carport tag:</label>
-                            <select name="roofID" class="form-control" id="rooftype2">
-                                <option value="${requestScope.roofID}" selected>${requestScope.roof}</option>
-                                <c:forEach var="roofItem" items="${requestScope.roofList}">
-                                    <option value="${roofItem.ID}">${roofItem.name}</option>
-                                </c:forEach>
-                            </select>
-                        </div>
-                        <div class="form-outline mb-4">
-                            <label for="sel6">Taghældning:</label>
-                            <select name="slope" class="form-control" id="sel6">
-                                <option value ="${requestScope.slope}" selected>${requestScope.slope} grader</option>
-                                <option value="15">15 grader</option>
-                                <option value="20">20 grader</option>
-                                <option value="30">30 grader</option>
-                                <option value="35">35 grader</option>
-                                <option value="40">40 grader</option>
-                                <option value="45">45 grader</option>
-                            </select>
-                        </div>
+                            <div class="form-outline mb-4">
+                                <label for="rooftype2">Carport tag:</label>
+                                <select name="roofID" class="form-control" id="rooftype2">
+                                    <option value="${requestScope.roofID}" selected>${requestScope.roof}</option>
+                                    <c:forEach var="roofItem" items="${requestScope.roofList}">
+                                        <option value="${roofItem.ID}">${roofItem.name}</option>
+                                    </c:forEach>
+                                </select>
+                            </div>
+                            <div class="form-outline mb-4">
+                                <label for="sel6">Taghældning:</label>
+                                <select name="slope" class="form-control" id="sel6">
+                                    <option value="${requestScope.slope}" selected>${requestScope.slope} grader</option>
+                                    <option value="15">15 grader</option>
+                                    <option value="20">20 grader</option>
+                                    <option value="30">30 grader</option>
+                                    <option value="35">35 grader</option>
+                                    <option value="40">40 grader</option>
+                                    <option value="45">45 grader</option>
+                                </select>
+                            </div>
                         </c:if>
 
                         <p class="mb" style="font-weight: bold">Redskabsrum</p>
@@ -167,7 +170,8 @@
                             <label for="sel4">Redskabsrum bredde:</label>
                             <select name="shedWidth" class="form-control" id="sel4">
                                 <c:if test="${requestScope.shedLength != 0 && requestScope.shedWidth != 0}">
-                                <option value="${requestScope.shedWidth}" selected>${requestScope.shedWidth} cm</option>
+                                    <option value="${requestScope.shedWidth}" selected>${requestScope.shedWidth} cm
+                                    </option>
                                 </c:if>
                                 <c:if test="${requestScope.shedLength == 0 && requestScope.shedWidth == 0}">
                                     <option value="0" selected>Ønsker ikke redskabsrum</option>
@@ -183,7 +187,8 @@
                             <label for="sel5">Redskabsrum længde:</label>
                             <select name="shedLength" class="form-control" id="sel5">
                                 <c:if test="${requestScope.shedLength != 0 && requestScope.shedWidth != 0}">
-                                    <option value="${requestScope.shedLength}" selected>${requestScope.shedLength} cm</option>
+                                    <option value="${requestScope.shedLength}" selected>${requestScope.shedLength} cm
+                                    </option>
                                 </c:if>
                                 <c:if test="${requestScope.shedLength == 0 && requestScope.shedWidth == 0}">
                                     <option value="0" selected>Ønsker ikke redskabsrum</option>
@@ -194,38 +199,63 @@
                                 <option>230</option>
                             </select>
                         </div>
-                        <button class="btn btn-primary btn-lg btn-block fogbtn" type="submit" >Opdater</button>
+                        <button class="btn btn-primary btn-lg btn-block fogbtn" type="submit">Opdater</button>
                     </form>
 
-                    <form class="card p-3 " action="${pageContext.request.contextPath}/fc/viewrequestBOM" method="post">
+                    <form class="card p-3 " action="${pageContext.request.contextPath}/fc/updatepricecommand"
+                          method="post">
+                        <input type="hidden" name="requestID" value="${requestScope.requestID}">
                         <div class="form-outline mb-4">
                             <label>Forespørgsels status:</label>
-                            <input type="text" class="form-control" disabled value="Afventer godkendelse">
+                            <input type="text" class="form-control" disabled value="${requestScope.status}">
                         </div>
                         <div class="form-outline mb-4">
                             <label>Forslået pris:</label>
                             <input type="text" class="form-control" disabled value="20000.00 DKK">
                         </div>
                         <div class="form-outline mb-4">
-                            <label>Ret pris:</label>
-                            <input type="number" class="form-control" value="20000.00">
+                            <label>Pris:</label>
+                            <c:if test="${requestScope.statusID == 1 && requestScope.price < 1}">
+                                <input name="price" type="number" class="form-control" value="20000.00">
+                            </c:if>
+                            <c:if test="${requestScope.statusID == 1 && requestScope.price > 0}">
+                                <input name="price" type="number" class="form-control" value="${requestScope.price}">
+                            </c:if>
+                            <c:if test="${requestScope.statusID != 1 }">
+                                <input name="price" type="number" class="form-control" disabled
+                                       value="${requestScope.price}">
+                            </c:if>
                         </div>
-                        <button class="btn btn-primary btn-lg btn-block fogbtn" type="submit" >Se stykliste</button>
-                        <div class="mt-3">
-                            <button class="btn btn-success btn-lg btn-block" type="submit" >Godkend</button>
-                            <button class="btn btn-danger btn-lg btn-block" type="submit" >Afvis</button>
-                        </div>
+                        <c:if test="${requestScope.statusID == 1}">
+                            <button class="btn btn-primary btn-lg btn-block fogbtn" type="submit">Opdater pris</button>
+                        </c:if>
                     </form>
+                    <div class="mt-3">
+                        <c:if test="${requestScope.statusID == 1}">
+                            <form method="post" action="${pageContext.request.contextPath}/fc/updatestatuscommand">
+                                <input type="hidden" name="requestID" value="${requestScope.requestID}">
+                                <button name="status" value="4" class="btn btn-success btn-lg btn-block" type="submit">
+                                    Godkend
+                                </button>
+                                <button name="status" value="2" class="btn btn-danger btn-lg btn-block" type="submit">
+                                    Afvis
+                                </button>
+                            </form>
+                        </c:if>
+                    </div>
                 </div>
                 <div class="col-sm-6 text-center">
                     <img src="${pageContext.request.contextPath}/images/carportOverview.PNG" alt="" width="100%"></p>
+                    <button class="btn btn-primary btn-lg btn-block fogbtn" type="submit">Se stykliste</button>
                 </div>
             </div>
         </div>
     </div>
     <div class="bottom"></div>
 </div>
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p"
+        crossorigin="anonymous"></script>
 
 </body>
 </html>
