@@ -23,30 +23,23 @@ public class CarportCalculator {
 
         //SPÆR: (afstand mellem spær ca. 55cm, max 70cm)
         int amountOfRafters = Math.abs(length/55);
-        int lengthOfRafters = 0;
-        int id = 0;
 
+        int id = 0;
         if(width <= 300){
-            lengthOfRafters = 300;
             id = 43;
         } else if (width <=360){
-            lengthOfRafters = 360;
             id = 44;
         } else if(width <= 420){
-            lengthOfRafters = 420;
             id = 45;
         } else if(width <= 480){
-            lengthOfRafters = 480;
             id = 46;
         } else if(width <= 540){
-            lengthOfRafters = 540;
             id = 47;
         } else if (width <= 600){
-            lengthOfRafters = 600;
             id = 48;
         }
 
-        Material rafters = new Material(id,lengthOfRafters);
+        Material rafters = new Material(id,amountOfRafters);
 
         BOM.add(rafters);
 
@@ -78,18 +71,22 @@ public class CarportCalculator {
         if(width <= 240){
             widthOfRoof = 240;
             id = 49;
-        } else if (width <=360){
-            widthOfRoof = 360;
+        }else if (width <=300) {
+            widthOfRoof = 300;
             id = 50;
+        }
+        else if (width <=360){
+            widthOfRoof = 360;
+            id = 51;
         } else if(width <= 420){
             widthOfRoof = 420;
-            id = 51;
+            id = 52;
         } else if(width <= 480){
             widthOfRoof = 480;
-            id = 52;
+            id = 53;
         }  else if (width <= 600){
             widthOfRoof = 600;
-            id = 53;
+            id = 54;
         }
 
         //Udregning af antal
@@ -100,7 +97,7 @@ public class CarportCalculator {
 
 
         //Skruer til tag (12 pr kvm)
-        int area = width * length;
+        int area = width/100 * length/100;
         int amountOfRoofScrews = area * 12;
 
         int amountOfRoofScrewPackages = (int) Math.ceil((double)amountOfRoofScrews/200);

@@ -1,6 +1,7 @@
 package business.persistence;
 
 import business.entities.BomItem;
+import business.entities.Material;
 import business.entities.Request;
 import business.exceptions.UserException;
 
@@ -38,7 +39,7 @@ public class BomItemMapper {
                     int categoryID = rs.getInt("category_id");
                     String categoryName = rs.getString("category_name");
 
-                    BomItem bomItem = new BomItem(id,requestID,materialID,amount,name,unit,description,categoryID,categoryName);
+                    BomItem bomItem = new BomItem(id, requestID, materialID, amount, name, unit, description, categoryID, categoryName);
                     bomItem.setLength(length);
                     BOMList.add(bomItem);
                 }
@@ -50,4 +51,24 @@ public class BomItemMapper {
         }
         return BOMList;
     }
+
+    public void createBomItem(int requestID, List<Material> materialList) throws UserException {
+
+        try (Connection connection = database.connect()) {
+            String sql = "INSERT INTO bom (request_id, material_id, amount) VALUES (?,?,?)";
+            try (PreparedStatement ps = connection.prepareStatement(sql)) {
+                for (Material material : materialList) {
+                    ps.setInt(1, requestID);
+                    ps.setInt(2, material.getId());
+                    ps.setInt(3, material.getAmount());
+                    ps.executeUpdate();
+                }
+            } catch (SQLException ex) {
+                throw new UserException(ex.getMessage());
+            }
+        } catch (SQLException ex) {
+            throw new UserException(ex.getMessage());
+        }
+    }
+
 }

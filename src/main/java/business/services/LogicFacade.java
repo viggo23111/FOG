@@ -12,12 +12,15 @@ public class LogicFacade {
     BomItemMapper bomItemMapper;
     CategoryMapper categoryMapper;
     StatusMapper statusMapper;
+    MaterialMapper materialMapper;
+
     public LogicFacade(Database database) {
         this.roofMapper = new RoofMapper(database);
         this.requestMapper = new RequestMapper(database);
         this.bomItemMapper = new BomItemMapper(database);
         this.categoryMapper = new CategoryMapper(database);
         this.statusMapper = new StatusMapper(database);
+        this.materialMapper = new MaterialMapper(database);
     }
 
     public List<Roof> getAllRoofsByType(int caportType) throws UserException {
@@ -66,5 +69,14 @@ public class LogicFacade {
 
     public List<Status> getAllStatus() throws UserException {
         return statusMapper.getAllStatus();
+    }
+
+    public List<Material> getAllMaterials() throws UserException {
+        return materialMapper.getAllMaterials();
+    }
+
+    public void createBomItem(int requestID, List<Material> materialList) throws UserException
+    {
+        bomItemMapper.createBomItem(requestID,materialList);
     }
 }

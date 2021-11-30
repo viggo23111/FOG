@@ -1,11 +1,15 @@
 package web.commands;
 
+import business.Calculator.CarportCalculator;
+import business.entities.Material;
 import business.exceptions.UserException;
 import business.services.LogicFacade;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+import java.util.ArrayList;
+import java.util.List;
 
 public class SendRequestCommand extends CommandProtectedPage{
     LogicFacade logicFacade;
@@ -17,7 +21,7 @@ public class SendRequestCommand extends CommandProtectedPage{
 
     @Override
     public String execute(HttpServletRequest request, HttpServletResponse response) {
-
+        CarportCalculator carportCalculator = new CarportCalculator();
 
         HttpSession session = request.getSession();
 
@@ -50,6 +54,12 @@ public class SendRequestCommand extends CommandProtectedPage{
         if (carportType == 1){
             try {
                 id = logicFacade.createRequestForCarportTypeOne(userID, 1, width, length, roofID, shedWidth, shedLength);
+              //  List<Material> materialList = logicFacade.getAllMaterials();
+                List<Material> BOM = carportCalculator.flatCarportBOM(width,length,roofID);
+                logicFacade.createBomItem(id,BOM);
+
+
+
             } catch (UserException e) {
                 e.printStackTrace();
             }
