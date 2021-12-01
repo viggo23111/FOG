@@ -149,6 +149,7 @@
                                 <option value="450">450</option>
                                 <option value="480">480</option>
                                 <option value="510">510</option>
+                                <option value="530">530</option>
                                 <option value="540">540</option>
                                 <option value="570">570</option>
                                 <option value="600">600</option>

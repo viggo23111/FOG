@@ -8,10 +8,10 @@ import java.util.List;
 public class CarportCalculator {
 
 
-    public List<Material> flatCarportBOM(int width, int length){
+    public List<Material> flatCarportBOM(int width, int length, int shedWidth, int shedLength){
         List<Material> BOM = new ArrayList<>();
 
-        BOM.add(calucaltePoles(length));
+        BOM.add(calculatePoles(length));
         BOM.add(calculateRafters(width,length));
         BOM.add(calculateFittingsRight(width,length));
         BOM.add(calculateFittingsLeft(width,length));
@@ -22,11 +22,25 @@ public class CarportCalculator {
         BOM.add(calculateUnderFasciaBoardSides(length));
         BOM.add(calculateOverFasciaBoardFront(width));
         BOM.add(calculateOverFasciaBoardSides(length));
+        BOM.add(calculateFrameSides(length));
+        BOM.add(calculateWeatherboardFront(width));
+        BOM.add(calculateWeatherboardSides(length));
+        BOM.add(calculatePerforatedTape(width,length));
+        BOM.add(calculateAmountOfBoardBolts(length));
+        BOM.add(calculateAmountOfSquareWashers(length));
+
+        if(shedLength > 0){
+            BOM.add(calculateCladdingBoards(shedWidth,shedLength));
+        }
+
+        //skruer til montering af vandbræt og stern, her skal altid bruges 1 pakke
+        BOM.add(new Material(34,1));
+
 
         return BOM;
     }
 
-    public Material calucaltePoles(int length){
+    public Material calculatePoles(int length){
         //STOLPER: (Under 5,1M 4 stolper.. over 5,1M 6 stolper)
         Material pole;
 
@@ -35,7 +49,7 @@ public class CarportCalculator {
 
         }
         else {
-            return pole = new Material(24, 4);
+            return pole = new Material(24, 6);
         }
     }
 
@@ -270,6 +284,170 @@ public class CarportCalculator {
         }
 
         return fasciaBoard = new Material(id,amountOfBoards);
+    }
+
+    public Material calculateFrameSides(int length){
+        //UNDERSTERNBRÆDDER til sider
+        Material frame;
+
+        int id = 0;
+
+        int amountOfBoards = 0;
+
+        if(length <= 300){
+            id = 43;
+            amountOfBoards = 2;
+        } else if(length <=360){
+            id = 44;
+            amountOfBoards = 2;
+        } else if(length <= 420){
+            id = 45;
+            amountOfBoards = 2;
+        } else if(length<= 480){
+            id = 46;
+            amountOfBoards = 2;
+        } else if(length <=540){
+            id = 47;
+            amountOfBoards = 2;
+        } else if (length <= 600){
+            id = 48;
+            amountOfBoards = 2;
+        } else if (length <= 720){
+            id = 44;
+            amountOfBoards = 4;
+        } else if (length <= 840){
+            id = 45;
+            amountOfBoards = 4;
+        } else if (length <= 960){
+            id = 46;
+            amountOfBoards = 4;
+        } else if (length <= 1080){
+            id = 47;
+            amountOfBoards = 4;
+        } else if (length <= 1200){
+            id = 48;
+            amountOfBoards = 4;
+        }
+
+        return frame = new Material(id, amountOfBoards);
+    }
+
+    public Material calculateWeatherboardFront(int width){
+        //Vandbræt til fronten
+        Material weatherboard;
+
+        int id = 0;
+
+        int amountOfBoards = 0;
+
+        if(width <= 300){
+            id = 67;
+            amountOfBoards = 1;
+        } else if(width <=360){
+            id = 68;
+            amountOfBoards = 1;
+        } else if(width <= 420){
+            id = 69;
+            amountOfBoards = 1;
+        } else if(width<= 480){
+            id = 70;
+            amountOfBoards = 1;
+        } else if(width <=600){
+            id = 67;
+            amountOfBoards = 2;
+        } else if (width <= 720){
+            id = 68;
+            amountOfBoards = 2;
+        } else if (width <= 840) {
+            id = 69;
+            amountOfBoards = 2;
+        } else if(width <= 960){
+            id = 70;
+            amountOfBoards = 2;
+        }
+
+        return weatherboard = new Material(id, amountOfBoards);
+    }
+
+    public Material calculateWeatherboardSides(int length){
+        //vandbrædder til siderne
+        Material weatherboard;
+
+        int id = 0;
+
+        int amountOfBoards = 0;
+
+        if(length <= 300){
+            id = 67;
+            amountOfBoards = 2;
+        } else if(length <=360){
+            id = 68;
+            amountOfBoards = 2;
+        } else if(length <= 420){
+            id = 69;
+            amountOfBoards = 2;
+        } else if(length<= 480){
+            id = 70;
+            amountOfBoards = 2;
+        } else if (length <= 600){
+            id = 67;
+            amountOfBoards = 4;
+        } else if (length <= 720){
+            id = 68;
+            amountOfBoards = 4;
+        } else if (length <= 840){
+            id = 69;
+            amountOfBoards = 4;
+        } else if (length <= 960){
+            id = 70;
+            amountOfBoards = 4;
+        }
+
+        return weatherboard = new Material(id, amountOfBoards);
+    }
+
+    public Material calculatePerforatedTape(int carportWidth, int carportLength){
+        //Uregner hulbånd
+        Material perforatedTape;
+
+        double width= carportWidth;
+        double length = carportLength;
+
+        int amount = 0;
+
+        if(Math.sqrt(Math.pow(width,2) + Math.pow(length,2)) <= 500){
+            amount = 1;
+        } else if (Math.sqrt(Math.pow(width,2) + Math.pow(length,2)) <= 1000) {
+            amount = 2;
+        }
+
+        return perforatedTape = new Material(31,amount);
+    }
+
+    public Material calculateAmountOfBoardBolts(int length){
+        //Udregner mængden af bræddebolte, 3 pr stolpe
+        Material boardBolt;
+
+        return boardBolt = new Material(36,3*calculatePoles(length).getAmount());
+    }
+
+    public Material calculateAmountOfSquareWashers(int length){
+        //Udregner mængden af bræddebolte, 3 pr stolpe
+        Material squareWasher;
+
+        return squareWasher = new Material(37,2*calculatePoles(length).getAmount());
+    }
+
+    public Material calculateCladdingBoards(int shedWidth, int shedLength){
+        //Udregner beklædningsbrædder
+        Material claddingBoard;
+
+        double width = shedWidth;
+        double length = shedLength;
+
+        int amount = (int) Math.ceil((width/14.8*2*2) + (length/14.8*2*2));
+
+        return claddingBoard = new Material(67, amount);
     }
 
 

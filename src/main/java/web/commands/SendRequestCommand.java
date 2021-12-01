@@ -55,7 +55,7 @@ public class SendRequestCommand extends CommandProtectedPage{
             try {
                 id = logicFacade.createRequestForCarportTypeOne(userID, 1, width, length, roofID, shedWidth, shedLength);
               //  List<Material> materialList = logicFacade.getAllMaterials();
-                List<Material> BOM = carportCalculator.flatCarportBOM(width,length);
+                List<Material> BOM = carportCalculator.flatCarportBOM(width,length,shedWidth,shedLength);
                 logicFacade.createBomItem(id,BOM);
 
 
