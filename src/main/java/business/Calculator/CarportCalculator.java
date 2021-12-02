@@ -31,6 +31,7 @@ public class CarportCalculator {
 
         if(shedLength > 0){
             BOM.add(calculateCladdingBoards(shedWidth,shedLength));
+            BOM.add(calculatePolesForShed(width,length,shedWidth,shedLength));
         }
 
         //skruer til montering af vandbræt og stern, her skal altid bruges 1 pakke
@@ -439,7 +440,7 @@ public class CarportCalculator {
     }
 
     public Material calculateCladdingBoards(int shedWidth, int shedLength){
-        //Udregner beklædningsbrædder
+        //Udregner beklædningsbrædder til skur
         Material claddingBoard;
 
         double width = shedWidth;
@@ -456,6 +457,25 @@ public class CarportCalculator {
 
 
         return claddingBoard = new Material(67, amount);
+    }
+
+    public Material calculatePolesForShed(int width, int length, int shedWidth, int shedLength){
+        //beregner hvor mange ekstra stolper der skal være hvis der skal redskabsskur på.
+        Material poles;
+        int amount = 0;
+
+        //her vil stolperne gå helt ud til remmen
+        if (shedWidth == width-30){
+            amount = 4;
+        }
+        //her vil der være brug for en stolpe mere i hver side, da brættet max kan være 540cm
+        else if(shedWidth > 540){
+            amount = 5;
+        }
+        else {
+            amount = 3;
+        }
+        return poles = new Material(24,amount);
     }
 
 
