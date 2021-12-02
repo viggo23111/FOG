@@ -459,8 +459,14 @@ public class CarportCalculator {
     public Material calculateAmountOfSquareWashers(int length){
         //Udregner mængden af bræddebolte, 3 pr stolpe
         Material squareWasher;
+
+        double amountOfScrews = (double)calculatePoles(length).getAmount()*2;
+
+        int amount = (int) Math.ceil(amountOfScrews/50);
+
+
         String description = "Til montering af rem på stolper";
-        return squareWasher = new Material(37,2*calculatePoles(length).getAmount(),description);
+        return squareWasher = new Material(37,amount,description);
     }
 
     public Material calculateCladdingBoards(int shedWidth, int shedLength){
