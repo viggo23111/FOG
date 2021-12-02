@@ -10,6 +10,7 @@ public class CarportCalculator {
 
     public List<Material> flatCarportBOM(int width, int length, int shedWidth, int shedLength){
         List<Material> BOM = new ArrayList<>();
+        String description;
 
         BOM.add(calculatePoles(length));
         BOM.add(calculateRafters(width,length));
@@ -32,10 +33,28 @@ public class CarportCalculator {
         if(shedLength > 0){
             BOM.add(calculateCladdingBoards(shedWidth,shedLength));
             BOM.add(calculatePolesForShed(width,length,shedWidth,shedLength));
+            BOM.add(calculateNoggingsGable(shedWidth));
+            BOM.add(calculateNoggingsSides(shedLength));
+            BOM.add(calculateScrewsForInnerCladding(shedWidth,shedLength));
+            BOM.add(calculateScrewsForOuterCladding(shedWidth,shedLength));
+            BOM.add(calculateAngleFittingForShed(shedWidth,shedLength));
+
+            //Z på bagdør vil altid være det samme, da vi ikke kan ændre på dørens mål
+            description = "Til z på bagside af dør";
+            BOM.add(new Material(82,1,description));
+
+            //dørgreb vil altid være det samme da vi ikke ændrer på døren
+            description = "Til lås på dør i skur";
+            BOM.add(new Material(40, 1,description));
+
+            //der vil altid være to stk hængsler til døren
+            description = "Til skurdør";
+            BOM.add(new Material(41,2,description));
+
         }
 
         //skruer til montering af vandbræt og stern, her skal altid bruges 1 pakke
-        String description ="Til montering af stern & vandbrædt";
+        description ="Til montering af stern & vandbrædt";
         BOM.add(new Material(34,1,description));
 
 
@@ -479,6 +498,150 @@ public class CarportCalculator {
         String description = "Ekstra stolper til skur nedgraves 90 cm. i jord";
         return poles = new Material(24,amount,description);
     }
+
+    public Material calculateNoggingsGable(int shedWidth){
+        //udrenger løsholter til gavle af skur
+        Material nogging;
+
+        int amount = 0;
+        int id = 0;
+
+        if(shedWidth > 540){
+            amount = 12;
+            id = 73;
+        }
+        else if (shedWidth <= 240){
+            amount = 6;
+            id = 71;
+        } else if (shedWidth <= 270) {
+            amount = 6;
+            id = 72;
+        } else if (shedWidth <= 300) {
+            amount = 6;
+            id = 73;
+        } else if (shedWidth <= 330) {
+            amount = 6;
+            id = 74;
+        } else if (shedWidth <= 360) {
+            amount = 6;
+            id = 75;
+        } else if (shedWidth <= 390) {
+            amount = 6;
+            id = 76;
+        } else if (shedWidth <= 420) {
+            amount = 6;
+            id = 77;
+        } else if (shedWidth <= 450) {
+            amount = 6;
+            id = 78;
+        } else if (shedWidth <= 480) {
+            amount = 6;
+            id = 79;
+        } else if (shedWidth <= 510) {
+            amount = 6;
+            id = 80;
+        } else {
+            amount = 6;
+            id = 81;
+        }
+
+        String description = "løsholter til skur gavle";
+        return nogging = new Material(id,amount,description);
+    }
+
+    public Material calculateNoggingsSides(int shedLength){
+        //udrenger løsholter til gavle af skur
+        Material nogging;
+
+        int amount = 0;
+        int id = 0;
+
+        if(shedLength > 540){
+            amount = 8;
+            id = 73;
+        }
+        else if (shedLength <= 240){
+            amount = 4;
+            id = 71;
+        } else if (shedLength <= 270) {
+            amount = 4;
+            id = 72;
+        } else if (shedLength <= 300) {
+            amount = 4;
+            id = 73;
+        } else if (shedLength <= 330) {
+            amount = 4;
+            id = 74;
+        } else if (shedLength <= 360) {
+            amount = 4;
+            id = 75;
+        } else if (shedLength <= 390) {
+            amount = 4;
+            id = 76;
+        } else if (shedLength <= 420) {
+            amount = 4;
+            id = 77;
+        } else if (shedLength <= 450) {
+            amount = 4;
+            id = 78;
+        } else if (shedLength <= 480) {
+            amount = 4;
+            id = 79;
+        } else if (shedLength <= 510) {
+            amount = 4;
+            id = 80;
+        } else {
+            amount = 4;
+            id = 81;
+        }
+
+        String description = "løsholter til skur sider";
+        return nogging = new Material(id,amount,description);
+    }
+
+    public Material calculateAngleFittingForShed(int shedWidth, int shedLength){
+        //udregner vinkelbeslag til skur, 2 pr løsholt
+        Material angleFitting;
+
+        int amount = calculateNoggingsGable(shedWidth).getAmount() * 2 + calculateNoggingsSides(shedLength).getAmount()*2;
+
+        String description = "Til montering af løsholter i skur";
+        return angleFitting = new Material(42,amount,description);
+    }
+
+    public Material calculateScrewsForInnerCladding(int shedWidth, int shedLength){
+        //udrenger antal skruer til den inderste beklædning 2pr løsholt/rem, altså 6 stk pr bræt
+        Material screw;
+
+        double amountOfScrews = (double)calculateCladdingBoards(shedWidth,shedLength).getAmount()/2*6;
+
+        int amount = (int) Math.ceil(amountOfScrews/300);
+
+
+        String description = "til montering af inderste beklædning";
+
+        return screw = new Material(39,amount,description);
+
+    }
+
+    public Material calculateScrewsForOuterCladding(int shedWidth, int shedLength){
+        //udrenger antal skruer til den yderste beklædning 2pr løsholt/rem, altså 6 stk pr bræt
+        Material screw;
+
+        double amountOfScrews = (double)calculateCladdingBoards(shedWidth,shedLength).getAmount()/2*6;
+
+        int amount = (int) Math.ceil(amountOfScrews/400);
+
+
+        String description = "til montering af yderste beklædning";
+
+        return screw = new Material(38,amount,description);
+
+    }
+
+
+
+
 
 
 }
