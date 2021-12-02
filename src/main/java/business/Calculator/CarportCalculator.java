@@ -445,7 +445,15 @@ public class CarportCalculator {
         double width = shedWidth;
         double length = shedLength;
 
-        int amount = (int) Math.ceil((width/14.8*2*2) + (length/14.8*2*2));
+        double overlay = 2.5;
+        double widthOfBoard = 10;
+        double circumference = width*2 + length*2;
+
+        int amount = (int) Math.ceil(circumference/(widthOfBoard+widthOfBoard-overlay*2)*2);
+
+        System.out.println(amount);
+
+
 
         return claddingBoard = new Material(67, amount);
     }
