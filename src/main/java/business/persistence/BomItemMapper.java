@@ -55,12 +55,13 @@ public class BomItemMapper {
     public void createBomItem(int requestID, List<Material> materialList) throws UserException {
 
         try (Connection connection = database.connect()) {
-            String sql = "INSERT INTO bom (request_id, material_id, amount) VALUES (?,?,?)";
+            String sql = "INSERT INTO bom (request_id, material_id, amount,description) VALUES (?,?,?,?)";
             try (PreparedStatement ps = connection.prepareStatement(sql)) {
                 for (Material material : materialList) {
                     ps.setInt(1, requestID);
                     ps.setInt(2, material.getId());
                     ps.setInt(3, material.getAmount());
+                    ps.setString(4, material.getDescription());
                     ps.executeUpdate();
                 }
             } catch (SQLException ex) {

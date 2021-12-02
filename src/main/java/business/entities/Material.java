@@ -5,10 +5,12 @@ public class Material {
     private int length;
     private double price;
     private int amount;
+    private String description;
 
-    public Material(int id, int amount ) {
+    public Material(int id, int amount,String description ) {
         this.id = id;
         this.amount = amount;
+        this.description = description;
     }
 
     public Material(int id, double price) {
@@ -48,5 +50,13 @@ public class Material {
 
     public void setAmount(int amount) {
         this.amount = amount;
+    }
+
+    public String getDescription() {
+        return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
     }
 }
