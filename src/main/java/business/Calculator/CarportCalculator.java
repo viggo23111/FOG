@@ -35,7 +35,8 @@ public class CarportCalculator {
         }
 
         //skruer til montering af vandbræt og stern, her skal altid bruges 1 pakke
-        BOM.add(new Material(34,1));
+        String description ="Til montering af stern & vandbrædt";
+        BOM.add(new Material(34,1,description));
 
 
         return BOM;
@@ -45,12 +46,12 @@ public class CarportCalculator {
         //STOLPER: (Under 5,1M 4 stolper.. over 5,1M 6 stolper)
         Material pole;
 
+        String description = "Stolper nedgraves 90 cm. i jord";
         if(length <= 510) {
-            return pole = new Material(24, 4);
-
+            return pole = new Material(24, 4,description);
         }
         else {
-            return pole = new Material(24, 6);
+            return pole = new Material(24, 6,description);
         }
     }
 
@@ -74,8 +75,9 @@ public class CarportCalculator {
         } else if (width <= 600){
             id = 48;
         }
+        String description = "Spær, monteres på rem";
 
-        return rafters = new Material(id,amountOfRafters);
+        return rafters = new Material(id,amountOfRafters,description);
     }
 
     public Material calculateFittingsRight(int width, int length){
@@ -83,7 +85,9 @@ public class CarportCalculator {
         Material fittingsRight;
 
         int amountOfFittings = calculateRafters(width,length).getAmount() * 2;
-        return fittingsRight = new Material(32,amountOfFittings/2);
+
+        String description = "Til montering af spær på rem";
+        return fittingsRight = new Material(32,amountOfFittings/2,description);
 
     }
 
@@ -92,7 +96,8 @@ public class CarportCalculator {
         Material fittingsLeft;
 
         int amountOfFittings = calculateRafters(width,length).getAmount() * 2;
-        return fittingsLeft = new Material(33,amountOfFittings/2);
+        String description = "Til montering af spær på rem";
+        return fittingsLeft = new Material(33,amountOfFittings/2,description);
 
     }
 
@@ -104,8 +109,8 @@ public class CarportCalculator {
         double amountOfFittingScrews = calculateFittingsLeft(width, length).getAmount() * 2 * 9;
 
         int amountOfFittingScrewPackages = (int) Math.ceil(amountOfFittingScrews/250);
-
-        return fittingScrews = new Material(35,amountOfFittingScrewPackages);
+        String description = "Til montering af universalbeslag + hulbånd";
+        return fittingScrews = new Material(35,amountOfFittingScrewPackages,description);
     }
 
     public Material calculateAmountOfRoofItems(int width, int length){
@@ -131,8 +136,8 @@ public class CarportCalculator {
 
         //Udregning af antal
         int amountOfRoofItems = (int) Math.ceil((double)length/109);
-
-        return roof = new Material (id, amountOfRoofItems);
+        String description = "tagplader monteres på spær";
+        return roof = new Material (id, amountOfRoofItems,description);
     }
 
     public Material calculateAmountOfRoofScrews(int width, int length){
@@ -143,8 +148,8 @@ public class CarportCalculator {
         int amountOfRoofScrews = area * 12;
 
         int amountOfRoofScrewPackages = (int) Math.ceil((double)amountOfRoofScrews/200);
-
-        return roofScrews = new Material(30, amountOfRoofScrewPackages);
+        String description = "Skruer til tagplader";
+        return roofScrews = new Material(30, amountOfRoofScrewPackages,description);
 
     }
 
@@ -168,8 +173,8 @@ public class CarportCalculator {
         } else if (width <= 600){
             id = 66;
         }
-
-        return fasciaBoard = new Material(id,2);
+        String description = "understernbrædder til for & bag ende";
+        return fasciaBoard = new Material(id,2,description);
     }
 
     public Material calculateUnderFasciaBoardSides(int length){
@@ -214,8 +219,8 @@ public class CarportCalculator {
             id = 66;
             amountOfBoards = 4;
         }
-
-        return fasciaBoard = new Material(id, amountOfBoards);
+        String description = "understernbrædder til siderne";
+        return fasciaBoard = new Material(id, amountOfBoards,description);
     }
 
     public Material calculateOverFasciaBoardFront(int width){
@@ -237,8 +242,8 @@ public class CarportCalculator {
         } else if (width <= 600){
             id = 60;
         }
-
-        return fasciaBoard = new Material(id,1);
+        String description = "oversternbrædder til forenden";
+        return fasciaBoard = new Material(id,1,description);
     }
 
     public Material calculateOverFasciaBoardSides(int length){
@@ -283,12 +288,12 @@ public class CarportCalculator {
             id = 60;
             amountOfBoards = 4;
         }
-
-        return fasciaBoard = new Material(id,amountOfBoards);
+        String description = "oversternbrædder til siderne";
+        return fasciaBoard = new Material(id,amountOfBoards,description);
     }
 
     public Material calculateFrameSides(int length){
-        //UNDERSTERNBRÆDDER til sider
+        //Brædder til remmen
         Material frame;
 
         int id = 0;
@@ -329,8 +334,8 @@ public class CarportCalculator {
             id = 48;
             amountOfBoards = 4;
         }
-
-        return frame = new Material(id, amountOfBoards);
+        String description = "Remme i sider, sadles ned i stolper";
+        return frame = new Material(id, amountOfBoards,description);
     }
 
     public Material calculateWeatherboardFront(int width){
@@ -366,8 +371,8 @@ public class CarportCalculator {
             id = 70;
             amountOfBoards = 2;
         }
-
-        return weatherboard = new Material(id, amountOfBoards);
+        String description = "vandbrædt på stern i forende";
+        return weatherboard = new Material(id, amountOfBoards,description);
     }
 
     public Material calculateWeatherboardSides(int length){
@@ -403,8 +408,8 @@ public class CarportCalculator {
             id = 70;
             amountOfBoards = 4;
         }
-
-        return weatherboard = new Material(id, amountOfBoards);
+        String description = "vandbrædt på stern i sider";
+        return weatherboard = new Material(id, amountOfBoards,description);
     }
 
     public Material calculatePerforatedTape(int carportWidth, int carportLength){
@@ -421,22 +426,22 @@ public class CarportCalculator {
         } else if (Math.sqrt(Math.pow(width,2) + Math.pow(length,2)) <= 1000) {
             amount = 2;
         }
-
-        return perforatedTape = new Material(31,amount);
+        String description = "Til vindkryds på spær";
+        return perforatedTape = new Material(31,amount,description);
     }
 
     public Material calculateAmountOfBoardBolts(int length){
         //Udregner mængden af bræddebolte, 3 pr stolpe
         Material boardBolt;
-
-        return boardBolt = new Material(36,3*calculatePoles(length).getAmount());
+        String description = "Til montering af rem på stolper";
+        return boardBolt = new Material(36,3*calculatePoles(length).getAmount(),description);
     }
 
     public Material calculateAmountOfSquareWashers(int length){
         //Udregner mængden af bræddebolte, 3 pr stolpe
         Material squareWasher;
-
-        return squareWasher = new Material(37,2*calculatePoles(length).getAmount());
+        String description = "Til montering af rem på stolper";
+        return squareWasher = new Material(37,2*calculatePoles(length).getAmount(),description);
     }
 
     public Material calculateCladdingBoards(int shedWidth, int shedLength){
@@ -451,12 +456,8 @@ public class CarportCalculator {
         double circumference = width*2 + length*2;
 
         int amount = (int) Math.ceil(circumference/(widthOfBoard+widthOfBoard-overlay*2)*2);
-
-        System.out.println(amount);
-
-
-
-        return claddingBoard = new Material(67, amount);
+        String description = "til beklædning af skur 1 på 2 ";
+        return claddingBoard = new Material(67, amount,description);
     }
 
     public Material calculatePolesForShed(int width, int length, int shedWidth, int shedLength){
@@ -475,7 +476,8 @@ public class CarportCalculator {
         else {
             amount = 3;
         }
-        return poles = new Material(24,amount);
+        String description = "Ekstra stolper til skur nedgraves 90 cm. i jord";
+        return poles = new Material(24,amount,description);
     }
 
 
