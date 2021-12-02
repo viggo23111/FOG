@@ -37,8 +37,6 @@ public class CarportCalculator {
         //skruer til montering af vandbræt og stern, her skal altid bruges 1 pakke
         String description ="Til montering af stern & vandbrædt";
         BOM.add(new Material(34,1,description));
-
-
         return BOM;
     }
 

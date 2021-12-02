@@ -1,9 +1,6 @@
 package web.commands;
 
-import business.entities.Request;
-import business.entities.Roof;
-import business.entities.Status;
-import business.entities.User;
+import business.entities.*;
 import business.exceptions.UserException;
 import business.services.LogicFacade;
 import business.services.UserFacade;
@@ -15,7 +12,7 @@ import java.util.List;
 public class ViewRequestInfoCommand extends CommandProtectedPage {
     UserFacade userFacade;
     LogicFacade logicFacade;
-    List<User> userList;
+    List<BomItem> BOMList;
 
     public ViewRequestInfoCommand(String pageToShow, String role) {
         super(pageToShow, role);
@@ -77,10 +74,36 @@ public class ViewRequestInfoCommand extends CommandProtectedPage {
             }
         }
 
+        try {
+            BOMList = logicFacade.getAllBomItemsByRequestID(requestID);
+        } catch (UserException e) {
+            e.printStackTrace();
+        }
+        double price = 0;
+
+
+        for (BomItem bomItem : BOMList) {
+            price +=bomItem.getPrice();
+        }
+
+        double priceRoundOff = Math.round(price*100)/100;
+
+
+        double suggestedPrice = Math.round(priceRoundOff*2.20*100)/100;
+        double profit =0;
+        if(requestFound.getPrice()>0){
+            profit = requestFound.getPrice()-priceRoundOff;
+        }else{
+            profit = suggestedPrice-priceRoundOff;
+        }
+
+
         request.setAttribute("roofList",roofList);
         request.setAttribute("shedWidth", requestFound.getShedWidth());
         request.setAttribute("shedLength", requestFound.getShedLength());
         request.setAttribute("carportType", requestFound.getCarportType());
+        request.setAttribute("suggestedPrice",suggestedPrice);
+        request.setAttribute("profit",profit);
         return "viewrequestinfopage";
     }
 }

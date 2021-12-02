@@ -61,7 +61,7 @@
                         </a>
                         <ul class="navbar-nav me-auto mb-2 mb-lg-0">
                             <li class="nav-item">
-                                <a class="nav-link" href="#" style="pointer-events: none">admin@test.dk</a>
+                                <a class="nav-link" href="#" style="pointer-events: none">${sessionScope.email}</a>
                             </li>
                             <li class="nav-item">
                                 <a class="nav-link" href="${pageContext.request.contextPath}/fc/logoutcommand">Log
@@ -213,12 +213,12 @@
                         </div>
                         <div class="form-outline mb-4">
                             <label>Forslået pris:</label>
-                            <input type="text" class="form-control" disabled value="20000.00 DKK">
+                            <input type="text" class="form-control" disabled value="${requestScope.suggestedPrice}">
                         </div>
                         <div class="form-outline mb-4">
                             <label>Pris:</label>
                             <c:if test="${requestScope.statusID == 1 && requestScope.price < 1}">
-                                <input name="price" type="number" class="form-control" value="20000.00">
+                                <input name="price" type="number" class="form-control" value="${requestScope.suggestedPrice}">
                             </c:if>
                             <c:if test="${requestScope.statusID == 1 && requestScope.price > 0}">
                                 <input name="price" type="number" class="form-control" value="${requestScope.price}">
@@ -228,6 +228,10 @@
                                        value="${requestScope.price}">
                             </c:if>
                         </div>
+                            <div class="form-outline mb-4">
+                            <label>Dækningsbidrag:</label>
+                            <input name="profit" type="number" class="form-control" disabled value="${requestScope.profit}">
+                            </div>
                         <c:if test="${requestScope.statusID == 1}">
                             <button class="btn btn-primary btn-lg btn-block fogbtn" type="submit">Opdater pris</button>
                         </c:if>

@@ -13,8 +13,9 @@ public class BomItem {
     private String description;
     private int categoryID;
     private String categoryName;
+    private double price;
 
-    public BomItem(int ID, int requestID, int materialID, int amount, String name, String unit, String description, int categoryID, String categoryName) {
+    public BomItem(int ID, int requestID, int materialID, int amount, String name, String unit, String description, int categoryID, String categoryName,double price) {
         this.ID = ID;
         this.requestID = requestID;
         this.materialID = materialID;
@@ -24,6 +25,7 @@ public class BomItem {
         this.description = description;
         this.categoryID = categoryID;
         this.categoryName = categoryName;
+        this.price = price;
     }
 
     public int getID() {
@@ -104,6 +106,14 @@ public class BomItem {
 
     public void setCategoryName(String categoryName) {
         this.categoryName = categoryName;
+    }
+
+    public double getPrice() {
+        return price;
+    }
+
+    public void setPrice(double price) {
+        this.price = price;
     }
 }
 

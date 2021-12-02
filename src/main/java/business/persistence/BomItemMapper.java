@@ -38,8 +38,9 @@ public class BomItemMapper {
                     String description = rs.getString("description");
                     int categoryID = rs.getInt("category_id");
                     String categoryName = rs.getString("category_name");
+                    double price = rs.getDouble("total_price");
 
-                    BomItem bomItem = new BomItem(id, requestID, materialID, amount, name, unit, description, categoryID, categoryName);
+                    BomItem bomItem = new BomItem(id, requestID, materialID, amount, name, unit, description, categoryID, categoryName,price);
                     bomItem.setLength(length);
                     BOMList.add(bomItem);
                 }
