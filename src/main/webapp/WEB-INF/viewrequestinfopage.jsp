@@ -211,10 +211,12 @@
                             <label>Forespørgsels status:</label>
                             <input type="text" class="form-control" disabled value="${requestScope.status}">
                         </div>
-                        <div class="form-outline mb-4">
-                            <label>Forslået pris:</label>
-                            <input type="text" class="form-control" disabled value="${requestScope.suggestedPrice}">
-                        </div>
+                        <c:if test="${requestScope.statusID == 1}">
+                            <div class="form-outline mb-4">
+                                <label>Forslået pris:</label>
+                                <input type="text" class="form-control" disabled value="${requestScope.suggestedPrice} DKK">
+                            </div>
+                        </c:if>
                         <div class="form-outline mb-4">
                             <label>Pris:</label>
                             <c:if test="${requestScope.statusID == 1 && requestScope.price < 1}">
@@ -224,13 +226,13 @@
                                 <input name="price" type="number" class="form-control" value="${requestScope.price}">
                             </c:if>
                             <c:if test="${requestScope.statusID != 1 }">
-                                <input name="price" type="number" class="form-control" disabled
-                                       value="${requestScope.price}">
+                                <input name="price" type="text" class="form-control" disabled
+                                       value="${requestScope.price} DKK">
                             </c:if>
                         </div>
                             <div class="form-outline mb-4">
                             <label>Dækningsbidrag:</label>
-                            <input name="profit" type="number" class="form-control" disabled value="${requestScope.profit}">
+                            <input name="profit" type="text" class="form-control" disabled value="${requestScope.profit} DKK">
                             </div>
                         <c:if test="${requestScope.statusID == 1}">
                             <button class="btn btn-primary btn-lg btn-block fogbtn" type="submit">Opdater pris</button>
