@@ -53,7 +53,7 @@ public class BomItemMapper {
         return BOMList;
     }
 
-    public void createBomItem(int requestID, List<Material> materialList) throws UserException {
+    public void insertBOM(int requestID, List<Material> materialList) throws UserException {
 
         try (Connection connection = database.connect()) {
             String sql = "INSERT INTO bom (request_id, material_id, amount,description) VALUES (?,?,?,?)";
@@ -73,4 +73,17 @@ public class BomItemMapper {
         }
     }
 
+    public void deleteBomItemsByRequestID(int requestID) throws UserException {
+
+        try (Connection connection = database.connect()) {
+            String sql = "DELETE FROM bom WHERE request_id = ('"+requestID+"') ";
+            try (PreparedStatement ps = connection.prepareStatement(sql)) {
+                ps.executeUpdate();
+            } catch (SQLException ex) {
+                throw new UserException(ex.getMessage());
+            }
+        } catch (SQLException ex) {
+            throw new UserException(ex.getMessage());
+        }
+    }
 }

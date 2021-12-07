@@ -125,18 +125,14 @@
                             <label for="shedLength">Redskabsrum længde:</label>
                             <input name="shedLength" type="text" class="form-control" id="shedLength" readonly value="${requestScope.shedLength}">
                         </div>
-
-
-
                         </c:if>
-
 
                         <button class="btn btn-primary btn-lg btn-block fogbtn" type="submit" >Send forespørgsel</button>
                     </form>
                 </div>
                 <div class="col-sm-6 text-center">
-                    ${requestScope.aboveView}
-                    ${requestScope.sideView}
+                    <div>${requestScope.aboveView}</div>
+                    <div>${requestScope.sideView}</div>
                 </div>
             </div>
         </div>

@@ -1,5 +1,7 @@
 package web.commands;
 
+import business.Calculator.CarportCalculator;
+import business.entities.Material;
 import business.entities.Request;
 import business.entities.Roof;
 import business.entities.User;
@@ -24,6 +26,7 @@ public class UpdateRequestCommand extends CommandProtectedPage {
 
     @Override
     public String execute(HttpServletRequest request, HttpServletResponse response) {
+        CarportCalculator carportCalculator = new CarportCalculator();
         int requestID = Integer.parseInt(request.getParameter("requestID"));
         int carportType = Integer.parseInt(request.getParameter("carportType"));
 
@@ -47,6 +50,19 @@ public class UpdateRequestCommand extends CommandProtectedPage {
                 e.printStackTrace();
             }
         }
+        try {
+            logicFacade.deleteBomItemsByRequestID(requestID);
+        } catch (UserException e) {
+            e.printStackTrace();
+        }
+
+        List<Material> BOM = carportCalculator.flatCarportBOM(width,length,shedWidth,shedLength);
+        try {
+            logicFacade.createBomItem(requestID,BOM);
+        } catch (UserException e) {
+            e.printStackTrace();
+        }
+
 
         request.setAttribute("requestID",requestID);
 

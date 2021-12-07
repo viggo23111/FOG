@@ -77,6 +77,9 @@ public class LogicFacade {
 
     public void createBomItem(int requestID, List<Material> materialList) throws UserException
     {
-        bomItemMapper.createBomItem(requestID,materialList);
+        bomItemMapper.insertBOM(requestID,materialList);
+    }
+    public void deleteBomItemsByRequestID(int requestID) throws UserException {
+        bomItemMapper.deleteBomItemsByRequestID(requestID);
     }
 }

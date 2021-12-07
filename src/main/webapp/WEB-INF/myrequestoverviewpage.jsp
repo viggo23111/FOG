@@ -148,8 +148,8 @@
                     </div>
                 </div>
                 <div class="col-sm-6 text-center">
-                    ${requestScope.aboveView}
-                    ${requestScope.sideView}
+                    <div>${requestScope.aboveView}</div>
+                    <div>${requestScope.sideView}</div>
                 </div>
             </div>
         </div>

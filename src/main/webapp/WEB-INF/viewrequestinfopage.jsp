@@ -253,9 +253,9 @@
                     </div>
                 </div>
                 <div class="col-sm-6 text-center">
-                    ${requestScope.aboveView}
-                    ${requestScope.sideView}
-                    <form method="post" action="${pageContext.request.contextPath}/fc/viewrequestbomcommand">
+                    <div>${requestScope.aboveView}</div>
+                    <div>${requestScope.sideView}</div>
+                    <form class="mt-5" method="post" action="${pageContext.request.contextPath}/fc/viewrequestbomcommand">
                         <input type="hidden" name= "requestID" value="${requestScope.requestID}">
                     <button class="btn btn-primary btn-lg btn-block fogbtn w-100" type="submit">Se stykliste</button>
                     </form>
