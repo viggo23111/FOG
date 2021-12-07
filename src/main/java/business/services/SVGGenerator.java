@@ -46,9 +46,19 @@ public class SVGGenerator {
         //poles
         if (length < 510) {
             svg.addRect(55, 12.575, 9.7, 9.7);
-            svg.addRect(length - 55, 12.575, 9.7, 9.7);
-            svg.addRect(length - 55, width - 17.425, 9.7, 9.7);
             svg.addRect(55, width - 17.425, 9.7, 9.7);
+
+            if(shedWidth == 0) {
+                svg.addRect(length - 55, 12.575, 9.7, 9.7);
+                svg.addRect(length - 55, width - 17.425, 9.7, 9.7);
+            }
+
+            //sideview
+            sideView.addRect(55, 20, 210, 9.7);
+            if(shedWidth ==0) {
+                sideView.addRect(length - 55, 20, 210, 9.7);
+            }
+
         }
         if (length > 480) {
             svg.addRect(100, 12.575, 9.7, 9.7);
@@ -56,7 +66,7 @@ public class SVGGenerator {
 
             //sideview
             sideView.addRect(100, 20, 210, 9.7);
-
+        }
             if (shedWidth == 0) {
                 svg.addRect(length - 100, 12.575, 9.7, 9.7);
                 svg.addRect(length - 100, width - 17.425, 9.7, 9.7);
@@ -84,7 +94,7 @@ public class SVGGenerator {
                 svg.addRect(length - 15 - 4.85, 10 + shedWidth / 2, 9.7, 9.7);
                 svg.addRect(length - shedLength - 4.85, 10 + shedWidth / 2, 9.7, 9.7);
             }
-        }
+
 
         if (amountOfPoles > 4) {
             svg.addRect(length / 2, 12.575, 9.7, 9.7);
@@ -95,7 +105,7 @@ public class SVGGenerator {
         }
 
 
-        if (shedWidth == width - 30) {
+        if (shedWidth == width - 30 && shedWidth != 0) {
             svg.addRect(length - 17.425, 12.575, 9.7, 9.7);
             svg.addRect(length - shedLength - 2.425, 12.575, 9.7, 9.7);
 
