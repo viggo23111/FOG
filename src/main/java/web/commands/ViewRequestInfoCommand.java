@@ -3,6 +3,8 @@ package web.commands;
 import business.entities.*;
 import business.exceptions.UserException;
 import business.services.LogicFacade;
+import business.services.SVG;
+import business.services.SVGGenerator;
 import business.services.UserFacade;
 
 import javax.servlet.http.HttpServletRequest;
@@ -13,6 +15,7 @@ public class ViewRequestInfoCommand extends CommandProtectedPage {
     UserFacade userFacade;
     LogicFacade logicFacade;
     List<BomItem> BOMList;
+    SVGGenerator svg;
 
     public ViewRequestInfoCommand(String pageToShow, String role) {
         super(pageToShow, role);
@@ -96,6 +99,22 @@ public class ViewRequestInfoCommand extends CommandProtectedPage {
         }else{
             profit = suggestedPrice-priceRoundOff;
         }
+
+        int amountOfPoles = 0;
+
+        if(requestFound.getLength() <= 510){
+            amountOfPoles = 4;
+        } else{
+            amountOfPoles = 6;
+        }
+
+        svg = new SVGGenerator(requestFound.getWidth(),requestFound.getLength(),Math.abs((double) requestFound.getLength()/55),amountOfPoles,requestFound.getShedWidth(),requestFound.getShedLength());
+
+
+        List<SVG> svgList = svg.generateSVG();
+
+        request.setAttribute("aboveView",svgList.get(0));
+        request.setAttribute("sideView",svgList.get(1));
 
 
         request.setAttribute("roofList",roofList);

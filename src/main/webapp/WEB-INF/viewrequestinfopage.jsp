@@ -253,7 +253,8 @@
                     </div>
                 </div>
                 <div class="col-sm-6 text-center">
-                    <img src="${pageContext.request.contextPath}/images/carportOverview.PNG" alt="" width="100%"></p>
+                    ${requestScope.aboveView}
+                    ${requestScope.sideView}
                     <form method="post" action="${pageContext.request.contextPath}/fc/viewrequestbomcommand">
                         <input type="hidden" name= "requestID" value="${requestScope.requestID}">
                     <button class="btn btn-primary btn-lg btn-block fogbtn w-100" type="submit">Se stykliste</button>

@@ -51,7 +51,7 @@ public class FlatOverviewCommand extends CommandProtectedPage{
         }
         int amountOfPoles = 0;
 
-        if(length >= 510){
+        if(length <= 510){
             amountOfPoles = 4;
         } else{
             amountOfPoles = 6;
