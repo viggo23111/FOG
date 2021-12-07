@@ -25,8 +25,8 @@ public class SVGGenerator {
         List<SVG> drawings = new ArrayList<>();
 
 
-        SVG sideView = new SVG(0, 0, "0 0 " + length + " 230", 50, 50);
-        SVG outerSVG = new SVG(0, 0, "0 0 " + length + 75 + " " + width + 75, 50, 50);
+        SVG sideView = new SVG(0, 0, "0 0 " + length + " 230", 100, 100);
+        SVG outerSVG = new SVG(0, 0, "0 0 " + length + 75 + " " + width + 75, 100, 75);
         SVG svg = new SVG(75, 0, "0 0 " + length + " " + width, 75, 75);
 
         double distance = length / (amountOfRafters - 1) - 4.5 / (amountOfRafters - 1);
@@ -55,14 +55,14 @@ public class SVGGenerator {
             svg.addRect(100, width - 17.425, 9.7, 9.7);
 
             //sideview
-            sideView.addRect(100, 20, 220, 9.7);
+            sideView.addRect(100, 20, 210, 9.7);
 
             if (shedWidth == 0) {
                 svg.addRect(length - 100, 12.575, 9.7, 9.7);
                 svg.addRect(length - 100, width - 17.425, 9.7, 9.7);
 
                 //sideview
-                sideView.addRect(length - 100, 20, 220, 9.7);
+                sideView.addRect(length - 100, 20, 210, 9.7);
             }
 
             if (shedWidth < width - 30 && shedWidth != 0) {
@@ -74,11 +74,11 @@ public class SVGGenerator {
 
                 //sideview
                 //stople til carport
-                sideView.addRect(length - 100, 20, 220, 9.7);
+                sideView.addRect(length - 100, 20, 210, 9.7);
 
                 //stolper til skur
-                sideView.addRect(length - 15, 20, 220, 9.7);
-                sideView.addRect(length - shedLength - 15, 20, 220, 9.7);
+                sideView.addRect(length - 15, 20, 210, 9.7);
+                sideView.addRect(length - shedLength - 15, 20, 210, 9.7);
             }
             if (shedWidth > 540) {
                 svg.addRect(length - 15 - 4.85, 10 + shedWidth / 2, 9.7, 9.7);
@@ -91,7 +91,7 @@ public class SVGGenerator {
             svg.addRect(length / 2, width - 17.425, 9.7, 9.7);
 
             //sideview
-            sideView.addRect(length / 2, 20, 220, 9.7);
+            sideView.addRect(length / 2, 20, 210, 9.7);
         }
 
 
@@ -104,8 +104,8 @@ public class SVGGenerator {
             svg.addRect(length - shedLength - 2.425, width - 17.425, 9.7, 9.7);
 
             //sideview
-            sideView.addRect(length - 15, 20, 220, 9.7);
-            sideView.addRect(length - shedLength - 15, 20, 220, 9.7);
+            sideView.addRect(length - 15, 20, 210, 9.7);
+            sideView.addRect(length - shedLength - 15, 20, 210, 9.7);
 
         }
 

@@ -3,6 +3,8 @@ package web.commands;
 import business.entities.Request;
 import business.exceptions.UserException;
 import business.services.LogicFacade;
+import business.services.SVG;
+import business.services.SVGGenerator;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -11,6 +13,7 @@ import java.util.List;
 
 public class MyRequestOverviewCommand extends CommandProtectedPage {
     LogicFacade logicFacade;
+    SVGGenerator svg;
 
     public MyRequestOverviewCommand(String pageToShow, String role) {
         super(pageToShow, role);
@@ -21,28 +24,44 @@ public class MyRequestOverviewCommand extends CommandProtectedPage {
     public String execute(HttpServletRequest request, HttpServletResponse response) {
         int requestID = Integer.parseInt(request.getParameter("requestID"));
 
-        Request requestfound= null;
+        Request requestFound= null;
         try {
-            requestfound = logicFacade.getRequestByID(requestID);
+            requestFound = logicFacade.getRequestByID(requestID);
         } catch (UserException e) {
             e.printStackTrace();
         }
 
         request.setAttribute("requestID", requestID);
-        request.setAttribute("width", requestfound.getWidth() + " cm");
-        request.setAttribute("length", requestfound.getLength() +" cm");
-        request.setAttribute("roof", requestfound.getRoofName());
-        request.setAttribute("slope", requestfound.getSlope() + " grader");
-        request.setAttribute("statusID", requestfound.getStatusID());
-        request.setAttribute("price", requestfound.getPrice() + " DKK");
+        request.setAttribute("width", requestFound.getWidth() + " cm");
+        request.setAttribute("length", requestFound.getLength() +" cm");
+        request.setAttribute("roof", requestFound.getRoofName());
+        request.setAttribute("slope", requestFound.getSlope() + " grader");
+        request.setAttribute("statusID", requestFound.getStatusID());
+        request.setAttribute("price", requestFound.getPrice() + " DKK");
 
-        if (requestfound.getShedWidth()!=0){
-            request.setAttribute("shedwidth", requestfound.getShedWidth() +" cm");
-            request.setAttribute("shedlength", requestfound.getShedLength() + " cm");
+        if (requestFound.getShedWidth()!=0){
+            request.setAttribute("shedwidth", requestFound.getShedWidth() +" cm");
+            request.setAttribute("shedlength", requestFound.getShedLength() + " cm");
         }else{
             request.setAttribute("shedwidth", "Ønsker ikke redskabsrum");
             request.setAttribute("shedlength", "Ønsker ikke redskabsrum");
         }
+
+        int amountOfPoles = 0;
+
+        if(requestFound.getLength() <= 510){
+            amountOfPoles = 4;
+        } else{
+            amountOfPoles = 6;
+        }
+
+        svg = new SVGGenerator(requestFound.getWidth(),requestFound.getLength(),Math.abs((double) requestFound.getLength()/55),amountOfPoles,requestFound.getShedWidth(),requestFound.getShedLength());
+
+
+        List<SVG> svgList = svg.generateSVG();
+
+        request.setAttribute("aboveView",svgList.get(0));
+        request.setAttribute("sideView",svgList.get(1));
 
 
         return "myrequestoverviewpage";

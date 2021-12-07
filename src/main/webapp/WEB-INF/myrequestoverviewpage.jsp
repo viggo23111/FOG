@@ -148,7 +148,8 @@
                     </div>
                 </div>
                 <div class="col-sm-6 text-center">
-                    <img src="${pageContext.request.contextPath}/images/carportOverview.PNG" alt="" width="100%"></p>
+                    ${requestScope.aboveView}
+                    ${requestScope.sideView}
                 </div>
             </div>
         </div>
