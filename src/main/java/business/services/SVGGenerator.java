@@ -66,7 +66,6 @@ public class SVGGenerator {
 
             //sideview
             sideView.addRect(100, 20, 210, 9.7);
-        }
             if (shedWidth == 0) {
                 svg.addRect(length - 100, 12.575, 9.7, 9.7);
                 svg.addRect(length - 100, width - 17.425, 9.7, 9.7);
@@ -74,6 +73,7 @@ public class SVGGenerator {
                 //sideview
                 sideView.addRect(length - 100, 20, 210, 9.7);
             }
+        }
 
             if (shedWidth < width - 30 && shedWidth != 0) {
                 svg.addRect(length - 110, width - 17.425, 9.7, 9.7);

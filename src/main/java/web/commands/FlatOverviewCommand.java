@@ -58,7 +58,7 @@ public class FlatOverviewCommand extends CommandProtectedPage{
         }
 
 
-        svg = new SVGGenerator(width,length,Math.abs((double) length/55),amountOfPoles,shedWidth,shedLength);
+        svg = new SVGGenerator(width,length,Math.abs(length/55),amountOfPoles,shedWidth,shedLength);
 
 
         List<SVG> svgList = svg.generateSVG();

@@ -108,8 +108,7 @@ public class ViewRequestInfoCommand extends CommandProtectedPage {
             amountOfPoles = 6;
         }
 
-        svg = new SVGGenerator(requestFound.getWidth(),requestFound.getLength(),Math.abs((double) requestFound.getLength()/55),amountOfPoles,requestFound.getShedWidth(),requestFound.getShedLength());
-
+        svg = new SVGGenerator(requestFound.getWidth(),requestFound.getLength(),Math.abs(requestFound.getLength()/55),amountOfPoles,requestFound.getShedWidth(),requestFound.getShedLength());
 
         List<SVG> svgList = svg.generateSVG();
 
