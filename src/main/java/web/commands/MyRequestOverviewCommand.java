@@ -38,6 +38,7 @@ public class MyRequestOverviewCommand extends CommandProtectedPage {
         request.setAttribute("slope", requestFound.getSlope() + " grader");
         request.setAttribute("statusID", requestFound.getStatusID());
         request.setAttribute("price", requestFound.getPrice() + " DKK");
+        request.setAttribute("carportType", requestFound.getCarportType());
 
         if (requestFound.getShedWidth()!=0){
             request.setAttribute("shedwidth", requestFound.getShedWidth() +" cm");

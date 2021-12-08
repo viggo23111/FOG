@@ -94,20 +94,19 @@
                             <input type="text" class="form-control" id="sel3" disabled value="${requestScope.roof}">
                         </div>
 
-                        <div class="form-outline mb-4">
-                            <label for="sel6">Taghældning:</label>
-                            <input type="text" class="form-control" id="sel6" disabled value="${requestScope.slope}">
-                        </div>
-                        <p class="mb" style="font-weight: bold">Redskabsrum</p>
-                        <p class="mb-5">NB! Der skal beregnes 15cm tagudhæng på hver side af redskabsrummet!</p>
+                        <c:if test="${requestScope.carportType == 2}">
+                                <div class="form-outline mb-4">
+                                    <label for="sel6">Taghældning:</label>
+                                    <input type="text" class="form-control" id="sel6" disabled value="${requestScope.slope}">
+                                </div>
+                        </c:if>
+                        <p class="mb-1" style="font-weight: bold">Redskabsrum</p>
+                        <p class="mb-3">NB! Der skal beregnes 15cm tagudhæng på hver side af redskabsrummet!</p>
 
                         <div class="form-outline mb-4">
                             <label for="sel4">Redskabsrum bredde:</label>
-                            <input type="text" class="form-control" id="sel4" disabled
+                            <input type="text" class="form-control mb-2" id="sel4" disabled
                                    value="${requestScope.shedwidth}">
-                        </div>
-
-                        <div class="form-outline mb-4">
                             <label for="sel5">Redskabsrum længde:</label>
                             <input type="text" class="form-control" id="sel5" disabled
                                    value="${requestScope.shedlength}">
