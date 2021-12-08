@@ -168,7 +168,10 @@ public class SVGGenerator {
         outerSVGSide.addArrowLine(75, 230*0.75*1.3, length * 0.75 + 75, 230*0.75*1.3);
 
         //Shed length
-        outerSVGSide.addArrowLine((length-shedLength)*.75+75-15*.75, 230*0.75*1.1, length*.75+75-15*0.25, 230*0.75*1.1);
+        if  (shedLength != 0){
+            outerSVGSide.addArrowLine((length - shedLength) * .75 + 75 - 15 * .75, 230 * 0.75 * 1.1, length * .75 + 75 - 15 * 0.25, 230 * 0.75 * 1.1);
+            outerSVGSide.addText(length - shedLength / 2 - 75 + 15, 230 * 0.75 * 1.2, shedLength + " cm");
+        }
 
         //height other side
         outerSVGSide.addArrowLine(length * 0.75 + 75*1.2, 0+0.004*length, length * 0.75 + 75*1.2, 230*0.75);
@@ -176,7 +179,6 @@ public class SVGGenerator {
         //text
         outerSVGSide.addRoatedText(50*1.1, 230.0*1.25 / 2 - 75+15, 230 + " cm");
         outerSVGSide.addText(length / 2, 230*0.75*1.4, length + " cm");
-        outerSVGSide.addText(length-shedLength/2-75+15, 230*0.75*1.2, shedLength + " cm");
         outerSVGSide.addRotatedTextOtherWay(length * 0.75 + 75*1.3, 230*0.75/2, (int)Math.abs(230-length*0.0128) + " cm");
 
 
