@@ -75,7 +75,7 @@
             <div class="row" style="margin:auto">
                 <div class="col-sm-6">
                     <form class="card p-3 " action="${pageContext.request.contextPath}/fc/slopeoverviewcommand" method="post">
-                        <h1>QUICK-BYG TILBUD - CARPORT MED FLADT TAG</h1>
+                        <h1>QUICK-BYG TILBUD - CARPORT MED REJSNING</h1>
                         <p class="mb-5">Udfyld alle felter og tryk send forespørgelse</p>
                         <div class="form-outline mb-4">
                             <label for="width">Carport bredde:</label>

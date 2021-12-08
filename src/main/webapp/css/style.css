@@ -15,3 +15,10 @@ body p{
 .fogbtn{
    background-color:#0c2169 !important;
 }
+.carports{
+    opacity: 0.9;
+}
+
+.carports:hover{
+    opacity: 1;
+}

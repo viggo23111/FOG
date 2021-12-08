@@ -7,7 +7,8 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="wi dth=device-width, initial-scale=1">
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet"
+          integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
     <title>Fog</title>
     <t:genericpage> </t:genericpage>
 </head>
@@ -42,7 +43,8 @@
                         <!-- Left links -->
                         <ul class="navbar-nav me-auto mb-2 mb-lg-0">
                             <li class="nav-item">
-                                <a class="nav-link" href="${pageContext.request.contextPath}/fc/myrequestscommand">Mine forespørgelser</a>
+                                <a class="nav-link" href="${pageContext.request.contextPath}/fc/myrequestscommand">Mine
+                                    forespørgelser</a>
                             </li>
                         </ul>
                         <!-- Left links -->
@@ -60,7 +62,8 @@
                                 <a class="nav-link" href="#" style="pointer-events: none">${sessionScope.email}</a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link" href="${pageContext.request.contextPath}/fc/logoutcommand">Log ud</a>
+                                <a class="nav-link" href="${pageContext.request.contextPath}/fc/logoutcommand">Log
+                                    ud</a>
                             </li>
                         </ul>
                     </div>
@@ -73,39 +76,50 @@
     <div class="content">
         <div class="jumbotron bg-light mt-5 p-5 shadow-lg p-3 mb-5 bg-white rounded">
             <h1 class="display-4">QUICK-BYG TILBUD</h1>
-            <p class="lead">Med et specialudviklet computerprogram kan vi lynhurtigt beregne prisen og udskrive en skitsetegning på en carport indenfor vores standardprogram, der tilpasses
+            <p class="lead">Med et specialudviklet computerprogram kan vi lynhurtigt beregne prisen og udskrive en
+                skitsetegning på en carport indenfor vores standardprogram, der tilpasses
                 dine specifikke ønsker.</br></br>
 
                 Tilbud og skitsetegning fremsendes med post hurtigst muligt.
                 Ved bestilling medfølger standardbyggevejledning.</br></br>
 
-                Rekvirér tilbud - start med at vælge type:  </p>
+                Rekvirér tilbud - start med at vælge type: </p>
 
             <div class="row w-75" style="margin:auto">
                 <div class="col-sm-6">
-                    <div class="card text-center">
+                    <a href="${pageContext.request.contextPath}/fc/flatcarportcommand" class="text-decoration-none" style="color: black">
+                    <div class="card text-center carports">
                         <div class="card-body">
                             <h5 class="card-title">Carport med fladt tag</h5>
-                            <p class="card-text"><img src="${pageContext.request.contextPath}/images/fladtTag.png" alt=""></p>
-                            <a href="${pageContext.request.contextPath}/fc/flatcarportcommand" class="btn btn-primary fogbtn w-100">Design carport</a>
+                            <p class="card-text"><img src="${pageContext.request.contextPath}/images/fladtTag.png"
+                                                      alt=""></p>
+                            <a href="${pageContext.request.contextPath}/fc/flatcarportcommand"
+                               class="btn btn-primary fogbtn w-100">Design carport</a>
                         </div>
                     </div>
+                    </a>
                 </div>
                 <div class="col-sm-6">
-                    <div class="card text-center">
-                        <div class="card-body">
-                            <h5 class="card-title">Carport med rejsning</h5>
-                            <p class="card-text"><img src="${pageContext.request.contextPath}/images/rejsningTag.png" alt=""></p>
-                            <a href="${pageContext.request.contextPath}/fc/slopecarportcommand" class="btn btn-primary fogbtn w-100" >Design carport</a>
+                    <a href="${pageContext.request.contextPath}/fc/slopecarportcommand" class="text-decoration-none" style="color: black">
+                        <div class="card text-center carports">
+                            <div class="card-body">
+                                <h5 class="card-title">Carport med rejsning</h5>
+                                <p class="card-text"><img
+                                        src="${pageContext.request.contextPath}/images/rejsningTag.png" alt=""></p>
+                                <a href="${pageContext.request.contextPath}/fc/slopecarportcommand"
+                                   class="btn btn-primary fogbtn w-100">Design carport</a>
+                            </div>
                         </div>
-                    </div>
+                    </a>
                 </div>
             </div>
         </div>
     </div>
     <div class="bottom"></div>
 </div>
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p"
+        crossorigin="anonymous"></script>
 
 </body>
 </html>
