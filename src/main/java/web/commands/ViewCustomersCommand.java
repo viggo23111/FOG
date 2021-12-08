@@ -30,7 +30,7 @@ public class ViewCustomersCommand extends CommandProtectedPage {
             e.printStackTrace();
         }
 
-       request.setAttribute("userList", userList);
-        return "viewcustomerspage";
+        request.setAttribute("userList", userList);
+        return pageToShow;
     }
 }

@@ -11,9 +11,10 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.util.List;
 
-public class FlatOverviewCommand extends CommandProtectedPage{
+public class FlatOverviewCommand extends CommandProtectedPage {
     LogicFacade logicFacade;
     SVGGenerator svg;
+    List<Roof> roofList;
 
     public FlatOverviewCommand(String pageToShow, String role) {
         super(pageToShow, role);
@@ -23,59 +24,75 @@ public class FlatOverviewCommand extends CommandProtectedPage{
     @Override
     public String execute(HttpServletRequest request, HttpServletResponse response) {
 
-
-        int width = Integer.parseInt(request.getParameter("width"));
-        int length = Integer.parseInt(request.getParameter("length"));
-        String roof = request.getParameter("roof");
-
-        int roofID = 0;
-
         try {
-            for (Roof roof1 :logicFacade.getAllRoofsByType(1)) {
-                if(roof1.getName().equals(roof)){
-                    roofID = roof1.getID();
+            int width = Integer.parseInt(request.getParameter("width"));
+            int length = Integer.parseInt(request.getParameter("length"));
+            int shedWidth = Integer.parseInt(request.getParameter("shedWidth"));
+            int shedLength = Integer.parseInt(request.getParameter("shedLength"));
+            String roof = request.getParameter("roof");
+
+            if (roof.equals("0") || width == 0 || length == 0) {
+                request.setAttribute("error", "Du mangler at udfylde nogle felter!");
+                throw new Exception();
+            }
+
+            if (shedWidth > 0 && shedLength < 1 || shedLength > 0 && shedWidth < 1) {
+                request.setAttribute("error", "Du skal udfylde både redskabsskurs længde og bredde ");
+                throw new Exception();
+            }
+
+            int roofID = 0;
+            try {
+                for (Roof roof1 : logicFacade.getAllRoofsByType(1)) {
+                    if (roof1.getName().equals(roof)) {
+                        roofID = roof1.getID();
+                    }
+                }
+            } catch (UserException e) {
+                e.printStackTrace();
+            }
+
+            if (shedWidth != 0 && shedLength != 0) {
+                shedWidth = Integer.parseInt(request.getParameter("shedWidth"));
+                shedLength = Integer.parseInt(request.getParameter("shedLength"));
+            }
+            int amountOfPoles = 0;
+
+            if (length <= 510) {
+                amountOfPoles = 4;
+            } else {
+                amountOfPoles = 6;
+            }
+
+
+            svg = new SVGGenerator(width, length, Math.abs(length / 55), amountOfPoles, shedWidth, shedLength);
+
+
+            List<SVG> svgList = svg.generateSVG();
+
+            request.setAttribute("aboveView", svgList.get(0));
+            request.setAttribute("sideView", svgList.get(1));
+
+            request.setAttribute("width", width);
+            request.setAttribute("length", length);
+            request.setAttribute("roof", roof);
+            request.setAttribute("shedWidth", shedWidth);
+            request.setAttribute("shedLength", shedLength);
+            request.setAttribute("roofID", roofID);
+            request.setAttribute("carportType", 1);
+            return pageToShow;
+
+        } catch (Exception e) {
+            if (roofList == null) {
+                try {
+                    roofList = logicFacade.getAllRoofsByType(1);
+                } catch (UserException ex) {
+                    ex.printStackTrace();
                 }
             }
-        } catch (UserException e) {
-            e.printStackTrace();
+
+            request.setAttribute("roofList", roofList);
+            return "flatcarportpage";
         }
-
-        int shedWidth = Integer.parseInt(request.getParameter("shedWidth"));
-        int shedLength = Integer.parseInt(request.getParameter("shedLength"));
-
-
-
-        if (shedWidth != 0 && shedLength != 0){
-            shedWidth = Integer.parseInt(request.getParameter("shedWidth"));
-            shedLength = Integer.parseInt(request.getParameter("shedLength"));
-        }
-        int amountOfPoles = 0;
-
-        if(length <= 510){
-            amountOfPoles = 4;
-        } else{
-            amountOfPoles = 6;
-        }
-
-
-        svg = new SVGGenerator(width,length,Math.abs(length/55),amountOfPoles,shedWidth,shedLength);
-
-
-        List<SVG> svgList = svg.generateSVG();
-
-        request.setAttribute("aboveView",svgList.get(0));
-        request.setAttribute("sideView",svgList.get(1));
-
-        request.setAttribute("width", width);
-        request.setAttribute("length", length);
-        request.setAttribute("roof", roof);
-        request.setAttribute("shedWidth", shedWidth);
-        request.setAttribute("shedLength", shedLength);
-        request.setAttribute("roofID",roofID);
-        request.setAttribute("carportType", 1);
-
-
-        System.out.println("are we here? 5");
-        return "carportoverviewpage";
     }
 }

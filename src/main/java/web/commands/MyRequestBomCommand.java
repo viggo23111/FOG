@@ -24,16 +24,16 @@ public class MyRequestBomCommand extends CommandProtectedPage {
     @Override
     public String execute(HttpServletRequest request, HttpServletResponse response) {
         int requestID = Integer.parseInt(request.getParameter("requestID"));
-        Category category1=null;
-        Category category2=null;
+        Category category1 = null;
+        Category category2 = null;
         try {
             BOMList = logicFacade.getAllBomItemsByRequestID(requestID);
         } catch (UserException e) {
             e.printStackTrace();
         }
         try {
-            category1=logicFacade.getCategoryByID(1);
-            category2=logicFacade.getCategoryByID(2);
+            category1 = logicFacade.getCategoryByID(1);
+            category2 = logicFacade.getCategoryByID(2);
         } catch (UserException e) {
             e.printStackTrace();
         }
@@ -41,10 +41,10 @@ public class MyRequestBomCommand extends CommandProtectedPage {
         List<BomItem> BOMlistCategory2 = new ArrayList<>();
 
         for (BomItem bomItem : BOMList) {
-            if(bomItem.getCategoryID()==1){
+            if (bomItem.getCategoryID() == 1) {
                 BOMlistCategory1.add(bomItem);
 
-            }else if (bomItem.getCategoryID()==2){
+            } else if (bomItem.getCategoryID() == 2) {
                 BOMlistCategory2.add(bomItem);
             }
         }
@@ -54,6 +54,6 @@ public class MyRequestBomCommand extends CommandProtectedPage {
         request.setAttribute("category1", category1.getName());
         request.setAttribute("category2", category2.getName());
         request.setAttribute("requestID", requestID);
-        return "myrequestBOM";
+        return pageToShow;
     }
 }

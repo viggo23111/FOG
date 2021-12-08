@@ -8,7 +8,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.util.List;
 
-public class DesignSlopeCarportCommand extends CommandProtectedPage{
+public class DesignSlopeCarportCommand extends CommandProtectedPage {
     LogicFacade logicFacade;
     List<Roof> roofList;
 
@@ -20,8 +20,7 @@ public class DesignSlopeCarportCommand extends CommandProtectedPage{
     @Override
     public String execute(HttpServletRequest request, HttpServletResponse response) {
 
-
-        if (roofList == null){
+        if (roofList == null) {
             try {
                 roofList = logicFacade.getAllRoofsByType(2);
             } catch (UserException e) {
@@ -29,12 +28,7 @@ public class DesignSlopeCarportCommand extends CommandProtectedPage{
             }
         }
 
-        request.setAttribute("roofList",roofList);
-
-        for (Roof roof : roofList) {
-            System.out.println(roof.getName() + " " + roof.getID());
-        }
-
-        return "slopecarportpage";
+        request.setAttribute("roofList", roofList);
+        return pageToShow;
     }
 }

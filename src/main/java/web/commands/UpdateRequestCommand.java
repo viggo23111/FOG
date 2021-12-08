@@ -2,9 +2,6 @@ package web.commands;
 
 import business.Calculator.CarportCalculator;
 import business.entities.Material;
-import business.entities.Request;
-import business.entities.Roof;
-import business.entities.User;
 import business.exceptions.UserException;
 import business.services.LogicFacade;
 import business.services.UserFacade;
@@ -16,7 +13,6 @@ import java.util.List;
 public class UpdateRequestCommand extends CommandProtectedPage {
     UserFacade userFacade;
     LogicFacade logicFacade;
-    List<User> userList;
 
     public UpdateRequestCommand(String pageToShow, String role) {
         super(pageToShow, role);
@@ -29,23 +25,22 @@ public class UpdateRequestCommand extends CommandProtectedPage {
         CarportCalculator carportCalculator = new CarportCalculator();
         int requestID = Integer.parseInt(request.getParameter("requestID"));
         int carportType = Integer.parseInt(request.getParameter("carportType"));
-
         int width = Integer.parseInt(request.getParameter("width"));
         int length = Integer.parseInt(request.getParameter("length"));
         int roofID = Integer.parseInt(request.getParameter("roofID"));
         int shedWidth = Integer.parseInt(request.getParameter("shedWidth"));
         int shedLength = Integer.parseInt(request.getParameter("shedLength"));
 
-        if(carportType == 1){
+        if (carportType == 1) {
             try {
-                logicFacade.updateRequestCarportTypeOne(requestID,width,length,roofID,shedWidth,shedLength);
+                logicFacade.updateRequestCarportTypeOne(requestID, width, length, roofID, shedWidth, shedLength);
             } catch (UserException e) {
                 e.printStackTrace();
             }
         } else {
             int slope = Integer.parseInt(request.getParameter("slope"));
             try {
-                logicFacade.updateRequestCarportTypeTwo(requestID,width,length,roofID,slope,shedWidth,shedLength);
+                logicFacade.updateRequestCarportTypeTwo(requestID, width, length, roofID, slope, shedWidth, shedLength);
             } catch (UserException e) {
                 e.printStackTrace();
             }
@@ -56,19 +51,17 @@ public class UpdateRequestCommand extends CommandProtectedPage {
             e.printStackTrace();
         }
 
-        List<Material> BOM = carportCalculator.flatCarportBOM(width,length,shedWidth,shedLength);
+        List<Material> BOM = carportCalculator.flatCarportBOM(width, length, shedWidth, shedLength);
         try {
-            logicFacade.createBomItem(requestID,BOM);
+            logicFacade.createBomItem(requestID, BOM);
         } catch (UserException e) {
             e.printStackTrace();
         }
+        request.setAttribute("requestID", requestID);
 
+        ViewRequestInfoCommand viewRequestInfoCommand = new ViewRequestInfoCommand("viewrequestinfopage", "employee");
+        viewRequestInfoCommand.execute(request, response);
 
-        request.setAttribute("requestID",requestID);
-
-        ViewRequestInfoCommand viewRequestInfoCommand = new ViewRequestInfoCommand("viewrequestinfopage","employee");
-        viewRequestInfoCommand.execute(request,response);
-
-        return "viewrequestinfopage";
+        return pageToShow;
     }
 }

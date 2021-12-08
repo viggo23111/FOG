@@ -1,7 +1,6 @@
 package web.commands;
 
 import business.entities.Request;
-import business.entities.Roof;
 import business.exceptions.UserException;
 import business.services.LogicFacade;
 
@@ -22,14 +21,14 @@ public class MyRequestsCommand extends CommandProtectedPage {
     @Override
     public String execute(HttpServletRequest request, HttpServletResponse response) {
         HttpSession session = request.getSession();
-        int userid= (int) session.getAttribute("userid");
+        int userid = (int) session.getAttribute("userid");
         try {
-            requestList = logicFacade.getAllRequestsByID(userid);
+            requestList = logicFacade.getAllRequestsByUserID(userid);
         } catch (UserException e) {
             e.printStackTrace();
         }
 
-       request.setAttribute("requestList", requestList);
-        return "myrequests";
+        request.setAttribute("requestList", requestList);
+        return pageToShow;
     }
 }

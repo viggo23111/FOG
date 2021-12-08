@@ -34,7 +34,7 @@ public abstract class Command
         commands.put("slopeoverviewcommand", new SlopeOverviewCommand("carportoverviewpage", "customer"));
         commands.put("myrequestscommand", new MyRequestsCommand("myrequests", "customer"));
         commands.put("sendrequestcommand", new SendRequestCommand("requestsentpage", "customer"));
-        commands.put("myrequestoverviewcommand", new MyRequestOverviewCommand("myrequests", "customer"));
+        commands.put("myrequestoverviewcommand", new MyRequestOverviewCommand("myrequestoverviewpage", "customer"));
         commands.put("viewcustomerscommand", new ViewCustomersCommand("viewcustomerspage","employee"));
         commands.put("myrequestbomcommand", new MyRequestBomCommand("myrequestBOM", "customer"));
         commands.put("viewcustomerinfocommand", new ViewCustomerInfoCommand("viewcustomerinfopage","employee"));

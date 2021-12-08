@@ -261,13 +261,18 @@
                             <input name="profit" type="text" class="form-control" disabled value="${requestScope.profit} DKK">
                             </div>
                         <c:if test="${requestScope.statusID == 1}">
-                            <button class="btn btn-primary btn-lg btn-block fogbtn" type="submit">Opdater pris</button>
+                            <button class="btn btn-primary btn-lg btn-block fogbtn" type="submit">Bekræft pris</button>
                         </c:if>
                     </form>
                     <div class="mt-3">
                         <c:if test="${requestScope.statusID == 1}">
                             <form method="post" action="${pageContext.request.contextPath}/fc/updatestatuscommand">
                                 <input type="hidden" name="requestID" value="${requestScope.requestID}">
+                                <c:if test="${requestScope.error != null }">
+                                    <p style="color:red">
+                                            ${requestScope.error}
+                                    </p>
+                                </c:if>
                                 <button name="status" value="4" class="btn btn-success btn-lg btn-block" type="submit">
                                     Godkend
                                 </button>

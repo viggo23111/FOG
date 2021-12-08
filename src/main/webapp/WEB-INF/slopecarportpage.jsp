@@ -76,9 +76,14 @@
                 <div class="col-sm-6">
                     <form class="card p-3 " action="${pageContext.request.contextPath}/fc/slopeoverviewcommand" method="post">
                         <h1>QUICK-BYG TILBUD - CARPORT MED REJSNING</h1>
-                        <p class="mb-5">Udfyld alle felter og tryk send forespørgelse</p>
+                        <p class="mb-5">Udfyld alle felter med * og tryk send forespørgelse</p>
+                        <c:if test="${requestScope.error != null }">
+                            <p style="color:red">
+                                    ${requestScope.error}
+                            </p>
+                        </c:if>
                         <div class="form-outline mb-4">
-                            <label for="width">Carport bredde:</label>
+                            <label for="width">Carport bredde*</label>
                             <select name="width" class="form-control" id="width">
                                 <option value="0" selected>Vælg bredde</option>
                                 <option value="240">240 cm</option>
@@ -97,7 +102,7 @@
                             </select>
                         </div>
                         <div class="form-outline mb-4">
-                            <label for="length">Carport længde:</label>
+                            <label for="length">Carport længde*</label>
                             <select name="length" class="form-control" id="length">
                                 <option value="0" selected>Vælg længde</option>
                                 <option value="240">240 cm</option>
@@ -122,9 +127,9 @@
                             </select>
                         </div>
                         <div class="form-outline mb-4">
-                            <label for="roof">Carport tag:</label>
+                            <label for="roof">Carport tag*</label>
                             <select name="roof" class="form-control" id="roof">
-                                <option selected>Vælg tag</option>
+                                <option value="0"selected>Vælg tag</option>
                                 <c:forEach var="roofitem" items="${requestScope.roofList}">
                                     <option>${roofitem.name} </option>
                                 </c:forEach>

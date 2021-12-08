@@ -58,7 +58,7 @@ public class RequestMapper {
         return requestList;
     }
 
-    public List<Request> getAllRequestsByID(int userID) throws UserException {
+    public List<Request> getAllRequestsByUserID(int userID) throws UserException {
         List<Request> requestList = null;
 
         try (Connection connection = database.connect()) {
@@ -71,8 +71,6 @@ public class RequestMapper {
                     if (requestList == null) {
                         requestList = new ArrayList<>();
                     }
-
-
                     int id = rs.getInt("id");
                     String email = rs.getString("email");
                     String name = rs.getString("name");
@@ -89,8 +87,6 @@ public class RequestMapper {
                     double price = rs.getDouble("price");
                     int carportType = rs.getInt("carport_type");
                     Timestamp createdAt = rs.getTimestamp("created_at");
-
-                    //System.out.println(id+userID+email+name+phone+statusID+status+width+length+roofID+roofName+slope+shedWidth+shedLength+price);
 
                     Request request = new Request(id, userID, email, name, phone, statusID, status, width, length, roofID, roofName, slope, shedWidth, shedLength, price, createdAt);
                     request.setCarportType(carportType);

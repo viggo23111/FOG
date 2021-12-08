@@ -12,7 +12,6 @@ import java.util.List;
 public class UpdatePriceCommand extends CommandProtectedPage {
     UserFacade userFacade;
     LogicFacade logicFacade;
-    List<User> userList;
 
     public UpdatePriceCommand(String pageToShow, String role) {
         super(pageToShow, role);
@@ -23,19 +22,18 @@ public class UpdatePriceCommand extends CommandProtectedPage {
     @Override
     public String execute(HttpServletRequest request, HttpServletResponse response) {
         int requestID = Integer.parseInt(request.getParameter("requestID"));
-
         double price = Double.parseDouble(request.getParameter("price"));
 
         try {
-            logicFacade.updatePrice(requestID,price);
+            logicFacade.updatePrice(requestID, price);
         } catch (UserException e) {
             e.printStackTrace();
         }
 
-        request.setAttribute("requestID",requestID);
-        ViewRequestInfoCommand viewRequestInfoCommand = new ViewRequestInfoCommand("viewrequestinfopage","employee");
-        viewRequestInfoCommand.execute(request,response);
+        request.setAttribute("requestID", requestID);
+        ViewRequestInfoCommand viewRequestInfoCommand = new ViewRequestInfoCommand("viewrequestinfopage", "employee");
+        viewRequestInfoCommand.execute(request, response);
 
-        return "viewrequestinfopage";
+        return pageToShow;
     }
 }

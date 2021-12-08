@@ -21,13 +21,12 @@ public class ViewRequestsCommand extends CommandProtectedPage {
 
     @Override
     public String execute(HttpServletRequest request, HttpServletResponse response) {
-        HttpSession session = request.getSession();
         try {
             List<Request> requestList = logicFacade.getAllRequests();
-            request.setAttribute("requestList",requestList);
+            request.setAttribute("requestList", requestList);
         } catch (UserException e) {
             e.printStackTrace();
         }
-        return "viewrequestspage";
+        return pageToShow;
     }
 }

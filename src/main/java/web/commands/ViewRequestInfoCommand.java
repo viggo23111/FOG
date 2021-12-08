@@ -25,7 +25,7 @@ public class ViewRequestInfoCommand extends CommandProtectedPage {
 
     @Override
     public String execute(HttpServletRequest request, HttpServletResponse response) {
-        int requestID= Integer.parseInt(request.getParameter("requestID"));
+        int requestID = Integer.parseInt(request.getParameter("requestID"));
         Request requestFound = null;
         try {
             requestFound = logicFacade.getRequestByID(requestID);
@@ -33,15 +33,11 @@ public class ViewRequestInfoCommand extends CommandProtectedPage {
             e.printStackTrace();
         }
 
-
-
         List<Roof> roofList = null;
-
-
 
         try {
             for (Status status : logicFacade.getAllStatus()) {
-                if(requestFound.getStatusID() == status.getId()){
+                if (requestFound.getStatusID() == status.getId()) {
                     request.setAttribute("status", status.getName());
                 }
             }
@@ -53,15 +49,12 @@ public class ViewRequestInfoCommand extends CommandProtectedPage {
         request.setAttribute("width", requestFound.getWidth());
         request.setAttribute("length", requestFound.getLength());
         request.setAttribute("roof", requestFound.getRoofName());
-        request.setAttribute("roofID",requestFound.getRoofId());
+        request.setAttribute("roofID", requestFound.getRoofId());
         request.setAttribute("price", requestFound.getPrice());
         request.setAttribute("statusID", requestFound.getStatusID());
 
-
-        System.out.println("roofid: "+requestFound.getRoofId());
-        if(requestFound.getCarportType() == 2) {
+        if (requestFound.getCarportType() == 2) {
             request.setAttribute("slope", requestFound.getSlope());
-
             try {
                 roofList = logicFacade.getAllRoofsByType(2);
             } catch (UserException e) {
@@ -69,7 +62,7 @@ public class ViewRequestInfoCommand extends CommandProtectedPage {
             }
 
         }
-        if (requestFound.getCarportType() == 1){
+        if (requestFound.getCarportType() == 1) {
             try {
                 roofList = logicFacade.getAllRoofsByType(1);
             } catch (UserException e) {
@@ -84,44 +77,39 @@ public class ViewRequestInfoCommand extends CommandProtectedPage {
         }
         double price = 0;
 
-
         for (BomItem bomItem : BOMList) {
-            price +=bomItem.getPrice();
+            price += bomItem.getPrice();
         }
 
-        double priceRoundOff = Math.round(price*100)/100;
-
-
-        double suggestedPrice = Math.round(priceRoundOff*2.20*100)/100;
-        double profit =0;
-        if(requestFound.getPrice()>0){
-            profit = requestFound.getPrice()-priceRoundOff;
-        }else{
-            profit = suggestedPrice-priceRoundOff;
+        double priceRoundOff = Math.round(price * 100) / 100;
+        double suggestedPrice = Math.round(priceRoundOff * 2.20 * 100) / 100;
+        double profit = 0;
+        if (requestFound.getPrice() > 0) {
+            profit = requestFound.getPrice() - priceRoundOff;
+        } else {
+            profit = suggestedPrice - priceRoundOff;
         }
 
         int amountOfPoles = 0;
-
-        if(requestFound.getLength() <= 510){
+        if (requestFound.getLength() <= 510) {
             amountOfPoles = 4;
-        } else{
+        } else {
             amountOfPoles = 6;
         }
 
-        svg = new SVGGenerator(requestFound.getWidth(),requestFound.getLength(),Math.abs(requestFound.getLength()/55),amountOfPoles,requestFound.getShedWidth(),requestFound.getShedLength());
+        svg = new SVGGenerator(requestFound.getWidth(), requestFound.getLength(), Math.abs(requestFound.getLength() / 55), amountOfPoles, requestFound.getShedWidth(), requestFound.getShedLength());
 
         List<SVG> svgList = svg.generateSVG();
 
-        request.setAttribute("aboveView",svgList.get(0));
-        request.setAttribute("sideView",svgList.get(1));
-
-
-        request.setAttribute("roofList",roofList);
+        request.setAttribute("aboveView", svgList.get(0));
+        request.setAttribute("sideView", svgList.get(1));
+        request.setAttribute("roofList", roofList);
         request.setAttribute("shedWidth", requestFound.getShedWidth());
         request.setAttribute("shedLength", requestFound.getShedLength());
         request.setAttribute("carportType", requestFound.getCarportType());
-        request.setAttribute("suggestedPrice",suggestedPrice);
-        request.setAttribute("profit",profit);
-        return "viewrequestinfopage";
+        request.setAttribute("suggestedPrice", suggestedPrice);
+        request.setAttribute("profit", profit);
+
+        return pageToShow;
     }
 }

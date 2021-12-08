@@ -8,13 +8,11 @@ import business.services.UserFacade;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
 import java.util.List;
 
 public class ViewCustomerInfoCommand extends CommandProtectedPage {
     UserFacade userFacade;
     LogicFacade logicFacade;
-    List<User> userList;
 
     public ViewCustomerInfoCommand(String pageToShow, String role) {
         super(pageToShow, role);
@@ -25,7 +23,6 @@ public class ViewCustomerInfoCommand extends CommandProtectedPage {
     @Override
     public String execute(HttpServletRequest request, HttpServletResponse response) {
         int userID = Integer.parseInt(request.getParameter("customerID"));
-
         User user = null;
 
         try {
@@ -37,13 +34,14 @@ public class ViewCustomerInfoCommand extends CommandProtectedPage {
         List<Request> requestList = null;
 
         try {
-             requestList = logicFacade.getAllRequestsByID(userID);
+            requestList = logicFacade.getAllRequestsByUserID(userID);
         } catch (UserException e) {
             e.printStackTrace();
         }
 
         request.setAttribute("customer", user);
         request.setAttribute("requestList", requestList);
-        return "viewcustomerinfopage";
+
+        return pageToShow;
     }
 }

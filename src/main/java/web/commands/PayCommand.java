@@ -12,7 +12,6 @@ import java.util.List;
 public class PayCommand extends CommandProtectedPage {
     UserFacade userFacade;
     LogicFacade logicFacade;
-    List<User> userList;
 
     public PayCommand(String pageToShow, String role) {
         super(pageToShow, role);
@@ -23,18 +22,17 @@ public class PayCommand extends CommandProtectedPage {
     @Override
     public String execute(HttpServletRequest request, HttpServletResponse response) {
         int requestID = Integer.parseInt(request.getParameter("requestID"));
-
         int statusID = Integer.parseInt(request.getParameter("status"));
         try {
-            logicFacade.updateStatus(requestID,statusID);
+            logicFacade.updateStatus(requestID, statusID);
         } catch (UserException e) {
             e.printStackTrace();
         }
 
-        request.setAttribute("requestID",requestID);
-        MyRequestOverviewCommand myRequestOverviewCommand = new MyRequestOverviewCommand("myrequestoverviewpage","customer");
-        myRequestOverviewCommand.execute(request,response);
+        request.setAttribute("requestID", requestID);
+        MyRequestOverviewCommand myRequestOverviewCommand = new MyRequestOverviewCommand("myrequestoverviewpage", "customer");
+        myRequestOverviewCommand.execute(request, response);
 
-        return "myrequestoverviewpage";
+        return pageToShow;
     }
 }

@@ -11,7 +11,7 @@ import javax.servlet.http.HttpSession;
 import java.util.ArrayList;
 import java.util.List;
 
-public class SendRequestCommand extends CommandProtectedPage{
+public class SendRequestCommand extends CommandProtectedPage {
     LogicFacade logicFacade;
 
     public SendRequestCommand(String pageToShow, String role) {
@@ -24,26 +24,18 @@ public class SendRequestCommand extends CommandProtectedPage{
         CarportCalculator carportCalculator = new CarportCalculator();
 
         HttpSession session = request.getSession();
-
         int carportType = Integer.parseInt(request.getParameter("carportType"));
         int userID = Integer.parseInt(String.valueOf(session.getAttribute("userid")));
-
-
-
         int roofID = Integer.parseInt(request.getParameter("roofID"));
         int width = Integer.parseInt(request.getParameter("width"));
         int length = Integer.parseInt(request.getParameter("length"));
         int shedWidth = Integer.parseInt(request.getParameter("shedWidth"));
         int shedLength = Integer.parseInt(request.getParameter("shedLength"));
 
-        System.out.println("roof id is: " + roofID);
-
         int id = 0;
 
-        if(carportType == 2) {
+        if (carportType == 2) {
             int slope = Integer.parseInt(request.getParameter("slope"));
-
-
             try {
                 id = logicFacade.createRequestForCarportTypeTwo(userID, 1, width, length, roofID, slope, shedWidth, shedLength);
             } catch (UserException e) {
@@ -51,22 +43,17 @@ public class SendRequestCommand extends CommandProtectedPage{
             }
         }
 
-        if (carportType == 1){
+        if (carportType == 1) {
             try {
                 id = logicFacade.createRequestForCarportTypeOne(userID, 1, width, length, roofID, shedWidth, shedLength);
-              //  List<Material> materialList = logicFacade.getAllMaterials();
-                List<Material> BOM = carportCalculator.flatCarportBOM(width,length,shedWidth,shedLength);
-                logicFacade.createBomItem(id,BOM);
-
-
+                List<Material> BOM = carportCalculator.flatCarportBOM(width, length, shedWidth, shedLength);
+                logicFacade.createBomItem(id, BOM);
 
             } catch (UserException e) {
                 e.printStackTrace();
             }
         }
-
         request.setAttribute("requestID", id);
-
-        return "requestsentpage";
+        return pageToShow;
     }
 }
