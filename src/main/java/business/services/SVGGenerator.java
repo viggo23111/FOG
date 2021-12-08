@@ -24,8 +24,8 @@ public class SVGGenerator {
     public List<SVG> generateSVG() {
         List<SVG> drawings = new ArrayList<>();
 
-
-        SVG sideView = new SVG(0, 0, "0 0 " + length + " 230", 100, 100);
+        SVG outerSVGSide = new SVG(0, 0, "0 0 " + length + 75 + " 305", 100, 75);
+        SVG sideView = new SVG(75, 0, "0 0 " + length + " 230", 75, 75);
         SVG outerSVG = new SVG(0, 0, "0 0 " + length + 75 + " " + width + 75, 100, 75);
         SVG svg = new SVG(75, 0, "0 0 " + length + " " + width, 75, 75);
 
@@ -161,8 +161,29 @@ public class SVGGenerator {
         //remme
         sideView.addRotatedRect(0, 20, 19.5, length);
 
+        outerSVGSide.addArrowLine(50*1.2, 0, 50*1.2, 230*0.75);
+
+
+        //length
+        outerSVGSide.addArrowLine(75, 230*0.75*1.3, length * 0.75 + 75, 230*0.75*1.3);
+
+        //Shed length
+        outerSVGSide.addArrowLine((length-shedLength)*.75+75-15*.75, 230*0.75*1.1, length*.75+75-15*0.25, 230*0.75*1.1);
+
+        //height other side
+        outerSVGSide.addArrowLine(length * 0.75 + 75*1.2, 0+0.004*length, length * 0.75 + 75*1.2, 230*0.75);
+
+        //text
+        outerSVGSide.addRoatedText(50*1.1, 230.0*1.25 / 2 - 75+15, 230 + " cm");
+        outerSVGSide.addText(length / 2, 230*0.75*1.4, length + " cm");
+        outerSVGSide.addText(length-shedLength/2-75+15, 230*0.75*1.2, shedLength + " cm");
+        outerSVGSide.addRotatedTextOtherWay(length * 0.75 + 75*1.3, 230*0.75/2, (int)Math.abs(230-length*0.0128) + " cm");
+
+
+        outerSVGSide.addSvg(sideView);
+
         drawings.add(outerSVG);
-        drawings.add(sideView);
+        drawings.add(outerSVGSide);
 
         return drawings;
     }

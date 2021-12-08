@@ -44,10 +44,11 @@ public class SVG {
             "    marker-end: url(#endArrow);\"/>";
     private final String rotatedText ="<text style=\"text-anchor: middle\" transform=\"translate(%f,%f) rotate(-90)\">%s</text>";
     private final String text ="<text style=\"text-anchor: middle\" transform=\"translate(%f,%f)\">%s</text>";
-    private final String rotatedRect ="<g transform=\"rotate(0.75)\">\n" +
+    private final String rotatedRect ="<g transform=\"rotate(0.4)\">\n" +
             "      <rect x=\"%f\" y=\"%f\" height=\"%f\" width=\"%f \"\n" +
             "            style=\"stroke:#000000; fill: white\"/>\n" +
             "      </g>";
+    private final String rotatedTextOtherWay ="<text style=\"text-anchor: middle\" transform=\"translate(%f,%f) rotate(90)\">%s</text>";
 
 
     public SVG(int x, int y, String viewBox, int width, int height) {
@@ -96,6 +97,9 @@ public class SVG {
 
     public void addRotatedRect(double x, double y, double height, double width){
         svg.append(String.format(rotatedRect,x,y,height,width));
+    }
+    public void addRotatedTextOtherWay(double x, double y, String length){
+        svg.append(String.format(rotatedTextOtherWay,x,y,length));
     }
 
     @Override
