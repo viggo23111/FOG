@@ -8,7 +8,6 @@ import business.services.LogicFacade;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
-import java.util.ArrayList;
 import java.util.List;
 
 public class SendRequestCommand extends CommandProtectedPage {
@@ -38,6 +37,8 @@ public class SendRequestCommand extends CommandProtectedPage {
             int slope = Integer.parseInt(request.getParameter("slope"));
             try {
                 id = logicFacade.createRequestForCarportTypeTwo(userID, 1, width, length, roofID, slope, shedWidth, shedLength);
+                List<Material> BOM = carportCalculator.slopeCarportBOM(width, length, shedWidth, shedLength,slope,roofID);
+                logicFacade.createBomItem(id, BOM);
             } catch (UserException e) {
                 e.printStackTrace();
             }

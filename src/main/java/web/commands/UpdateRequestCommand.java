@@ -22,6 +22,7 @@ public class UpdateRequestCommand extends CommandProtectedPage {
 
     @Override
     public String execute(HttpServletRequest request, HttpServletResponse response) {
+        List<Material> BOM;
         CarportCalculator carportCalculator = new CarportCalculator();
         int requestID = Integer.parseInt(request.getParameter("requestID"));
         int carportType = Integer.parseInt(request.getParameter("carportType"));
@@ -37,6 +38,9 @@ public class UpdateRequestCommand extends CommandProtectedPage {
             } catch (UserException e) {
                 e.printStackTrace();
             }
+
+                BOM = carportCalculator.flatCarportBOM(width, length, shedWidth, shedLength);
+
         } else {
             int slope = Integer.parseInt(request.getParameter("slope"));
             try {
@@ -44,6 +48,7 @@ public class UpdateRequestCommand extends CommandProtectedPage {
             } catch (UserException e) {
                 e.printStackTrace();
             }
+        BOM = carportCalculator.slopeCarportBOM(width, length, shedWidth, shedLength,slope,roofID);
         }
         try {
             logicFacade.deleteBomItemsByRequestID(requestID);
@@ -51,7 +56,6 @@ public class UpdateRequestCommand extends CommandProtectedPage {
             e.printStackTrace();
         }
 
-        List<Material> BOM = carportCalculator.flatCarportBOM(width, length, shedWidth, shedLength);
         try {
             logicFacade.createBomItem(requestID, BOM);
         } catch (UserException e) {

@@ -14,9 +14,9 @@ public class CarportCalculator {
 
         BOM.add(calculatePoles(length));
         BOM.add(calculateRafters(width,length));
-        BOM.add(calculateFittingsRight(width,length));
-        BOM.add(calculateFittingsLeft(width,length));
-        BOM.add(calculateFittingScrews(width,length));
+        BOM.add(calculateFittingsRight(calculateRafters(width,length).getAmount()));
+        BOM.add(calculateFittingsLeft(calculateRafters(width,length).getAmount()));
+        BOM.add(calculateFittingScrews(calculateRafters(width,length).getAmount()));
         BOM.add(calculateAmountOfRoofItems(width,length));
         BOM.add(calculateAmountOfRoofScrews(width,length));
         BOM.add(calculateUnderFasciaBoardFrontBack(width,length));
@@ -50,12 +50,53 @@ public class CarportCalculator {
             //der vil altid være to stk hængsler til døren
             description = "Til skurdør";
             BOM.add(new Material(41,2,description));
-
         }
 
         //skruer til montering af vandbræt og stern, her skal altid bruges 1 pakke
         description ="Til montering af stern & vandbrædt";
         BOM.add(new Material(34,1,description));
+        return BOM;
+    }
+
+    public List<Material> slopeCarportBOM(int width, int length, int shedWidth, int shedLength, int slope, int roofID) {
+        List<Material> BOM = new ArrayList<>();
+        String description;
+
+        BOM.add(calculatePoles(length));
+        BOM.add(calculateFrameSides(length));
+        BOM.add(calculateRaftersBottom(width,length,shedLength));
+        BOM.add(calculateRaftersTop(calculateRaftersBottom(width,length,shedLength).getAmount(),width,slope));
+        BOM.add(calculateFittingsRight(calculateRaftersBottom(width,length,shedLength).getAmount()));
+        BOM.add(calculateFittingsLeft(calculateRaftersBottom(width,length,shedLength).getAmount()));
+        BOM.add(calculateFittingScrews(calculateRaftersBottom(width,length,shedLength).getAmount()));
+        BOM.add(calculateAmountOfBoardBolts(length));
+        BOM.add(calculateAmountOfSquareWashers(length));
+        BOM.add(calculateBargeBorads(width,slope));
+
+
+
+
+        if (shedLength > 0) {
+            BOM.add(calculateCladdingBoards(shedWidth, shedLength));
+            BOM.add(calculatePolesForShed(width, length, shedWidth, shedLength));
+            BOM.add(calculateNoggingsGable(shedWidth));
+            BOM.add(calculateNoggingsSides(shedLength));
+            BOM.add(calculateScrewsForInnerCladding(shedWidth, shedLength));
+            BOM.add(calculateScrewsForOuterCladding(shedWidth, shedLength));
+            BOM.add(calculateAngleFittingForShed(shedWidth, shedLength));
+
+            //Z på bagdør vil altid være det samme, da vi ikke kan ændre på dørens mål
+            description = "Til z på bagside af dør";
+            BOM.add(new Material(82, 1, description));
+
+            //dørgreb vil altid være det samme da vi ikke ændrer på døren
+            description = "Til lås på dør i skur";
+            BOM.add(new Material(40, 1, description));
+
+            //der vil altid være to stk hængsler til døren
+            description = "Til skurdør";
+            BOM.add(new Material(41, 2, description));
+        }
         return BOM;
     }
 
@@ -76,7 +117,7 @@ public class CarportCalculator {
         //SPÆR: (afstand mellem spær ca. 55cm, max 70cm)
         Material rafters;
 
-        int amountOfRafters = Math.abs(length/55);
+        int amountOfRafters = (int) Math.ceil((double)length/55);
         int id = 0;
 
         if(width <= 300){
@@ -97,33 +138,33 @@ public class CarportCalculator {
         return rafters = new Material(id,amountOfRafters,description);
     }
 
-    public Material calculateFittingsRight(int width, int length){
+    public Material calculateFittingsRight(int amountOfRafters){
         //UNIVERSAL BESLAG (2 stk pr spær)
         Material fittingsRight;
 
-        int amountOfFittings = calculateRafters(width,length).getAmount() * 2;
+        int amountOfFittings = amountOfRafters * 2;
 
         String description = "Til montering af spær på rem";
         return fittingsRight = new Material(32,amountOfFittings/2,description);
 
     }
 
-    public Material calculateFittingsLeft(int width, int length){
+    public Material calculateFittingsLeft(int amountOfRafters){
         //UNIVERSAL BESLAG (2 stk pr spær)
         Material fittingsLeft;
 
-        int amountOfFittings = calculateRafters(width,length).getAmount() * 2;
+        int amountOfFittings = amountOfRafters * 2;
         String description = "Til montering af spær på rem";
         return fittingsLeft = new Material(33,amountOfFittings/2,description);
 
     }
 
-    public Material calculateFittingScrews(int width, int length){
+    public Material calculateFittingScrews(int amountOfRafters){
         //skruer til beslag, 3 stk pr overflade, altså 9 pr beslag
         Material fittingScrews;
 
 
-        double amountOfFittingScrews = calculateFittingsLeft(width, length).getAmount() * 2 * 9;
+        double amountOfFittingScrews = calculateFittingsLeft(amountOfRafters).getAmount() * 2 * 9;
 
         int amountOfFittingScrewPackages = (int) Math.ceil(amountOfFittingScrews/250);
         String description = "Til montering af universalbeslag + hulbånd";
@@ -455,7 +496,7 @@ public class CarportCalculator {
     }
 
     public Material calculateAmountOfSquareWashers(int length){
-        //Udregner mængden af bræddebolte, 3 pr stolpe
+        //Udregner mængden af firkantskiver
         Material squareWasher;
 
         double amountOfScrews = (double)calculatePoles(length).getAmount()*2;
@@ -643,6 +684,160 @@ public class CarportCalculator {
 
     }
 
+    //Calculations for slope carport
+
+
+    public Material calculateRaftersTop(int amountOfRafters, int width, int angle){
+        Material rafterTop;
+        int amount = 0;
+
+        double a = 0;
+        double b = (double) width/2;
+        double c = 0;
+
+        double radians = Math.toRadians(angle);
+
+        c = b/Math.cos(radians);
+
+        a = Math.tan(radians)*c;
+
+
+        double lengthOfWood = Math.ceil(c*2 + a);
+
+
+        int id = 0;
+
+        if(lengthOfWood <= 300){
+            id = 43;
+            amount = 1;
+        }else if(lengthOfWood <= 360){
+            id = 44;
+            amount = 1;
+        }else if(lengthOfWood <= 420){
+            id = 45;
+            amount = 1;
+        }else if(lengthOfWood <= 480){
+            id = 46;
+            amount = 1;
+        }else if(lengthOfWood <= 540){
+            id = 47;
+            amount = 1;
+        }else if(lengthOfWood <= 600){
+            id = 48;
+            amount = 1;
+        }else if(lengthOfWood <= 720){
+            id = 44;
+            amount = 2;
+        }else if(lengthOfWood <= 840){
+            id = 45;
+            amount = 2;
+        }else if(lengthOfWood <= 960){
+            id = 46;
+            amount = 2;
+        }else if(lengthOfWood <= 1080){
+            id = 47;
+            amount = 2;
+        }else if(lengthOfWood <= 1200){
+            id = 48;
+            amount = 2;
+        }else if(lengthOfWood > 1200){
+            id = 46;
+            amount = 3;
+        }
+        return rafterTop = new Material(id,amount*amountOfRafters,"Top af spærkonstruktion");
+    }
+
+    public Material calculateRaftersBottom(int width,int length, int shedLength){
+        //SPÆR: (afstand mellem spær ca. 95, over skur 78)
+        Material rafters;
+
+        int amountOfRafters = (int) Math.ceil(((double)length-(double)shedLength)/95);
+
+        if(shedLength != 0) {
+            amountOfRafters += Math.abs(shedLength / 78);
+        }
+
+        int id = 0;
+
+        if(width <= 300){
+            id = 43;
+        } else if (width <=360){
+            id = 44;
+        } else if(width <= 420){
+            id = 45;
+        } else if(width <= 480){
+            id = 46;
+        } else if(width <= 540){
+            id = 47;
+        } else if (width <= 600){
+            id = 48;
+        }
+        String description = "Spær, monteres på rem";
+
+        return rafters = new Material(id,amountOfRafters,description);
+    }
+
+    public Material calculateBargeBorads(int width,int angle){
+        //udregner vindskeder
+        Material bargeBoard;
+
+        int amount = 0;
+
+        double b = (double) width/2;
+        double c = 0;
+
+        double radians = Math.toRadians(angle);
+
+        c = b/Math.cos(radians);
+
+        c = c*4;
+
+        System.out.println(c);
+
+
+        int id = 0;
+
+        if(c <= 300){
+            id = 83;
+            amount = 1;
+        }else if(c <= 360){
+            id = 84;
+            amount = 1;
+        }else if(c <= 420){
+            id = 85;
+            amount = 1;
+        }else if(c <= 480){
+            id = 86;
+            amount = 1;
+        }else if(c <= 540){
+            id = 87;
+            amount = 1;
+        }else if(c <= 600){
+            id = 88;
+            amount = 1;
+        }else if(c <= 720){
+            id = 84;
+            amount = 2;
+        }else if(c <= 840){
+            id = 85;
+            amount = 2;
+        }else if(c <= 960){
+            id = 86;
+            amount = 2;
+        }else if(c <= 1080){
+            id = 87;
+            amount = 2;
+        }else if(c <= 1200){
+            id = 88;
+            amount = 2;
+        }else if(c > 1200){
+            id = 86;
+            amount = 3;
+        }
+        String description = "Vindskeder på rejsning";
+
+        return bargeBoard = new Material(id,amount,description);
+    }
 
 
 
