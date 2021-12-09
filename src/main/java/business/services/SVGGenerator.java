@@ -135,8 +135,8 @@ public class SVGGenerator {
 
 
         //holeband
-        svg.addDottedLine(0, 15, length - shedLength, width - 15);
-        svg.addDottedLine(0, width - 15, length - shedLength, 15);
+        svg.addDottedLine(30, 15, length - shedLength-30, width - 15);
+        svg.addDottedLine(30, width - 15, length - shedLength-30, 15);
 
 
         outerSVG.addSvg(svg);
