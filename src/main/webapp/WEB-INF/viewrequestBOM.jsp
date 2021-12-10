@@ -99,6 +99,28 @@
 
                 </tbody>
             </table>
+            <c:if test="${requestScope.carportType==2}">
+                <table class="table table-striped mt-3 border border-dark">
+                    <thead class="mt-3">
+                    <tr>
+                        <th scope="col">${requestScope.category3}</th>
+                        <th scope="col">Antal</th>
+                        <th scope="col">Enhed</th>
+                        <th scope="col">Beskrivelse</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <c:forEach var="bomItem" items="${requestScope.BOMlistcategory3}">
+                        <tr>
+                            <td>${bomItem.name}</td>
+                            <td>${bomItem.amount}</td>
+                            <td>${bomItem.unit}</td>
+                            <td>${bomItem.description}</td>
+                        </tr>
+                    </c:forEach>
+                    </tbody>
+                </table>
+            </c:if>
             <table class="table table-striped mt-3 border border-dark">
                 <thead class="mt-3">
                 <tr>
