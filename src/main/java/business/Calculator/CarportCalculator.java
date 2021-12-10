@@ -72,9 +72,14 @@ public class CarportCalculator {
         BOM.add(calculateAmountOfBoardBolts(length));
         BOM.add(calculateAmountOfSquareWashers(length));
         BOM.add(calculateBargeBorads(width,slope));
-
-
-
+        BOM.add(calculateAmountOfTiles(length, width,slope,roofID));
+        BOM.add(calculateRidgeStones(length,roofID));
+        BOM.add(calculateTopHolders(length));
+        BOM.add(calculateRidgeStoneFittings(roofID));
+        BOM.add(calculateAmountOfBattens(width,slope,length));
+        BOM.add(calculateTileBinders(calculateAmountOfBattens(width,slope,length).getAmount(), calculateAmountOfTiles(length,width,slope,roofID).getAmount()));
+        BOM.add(calculateVergeClips(calculateAmountOfBattens(width,slope,length).getAmount(), calculateAmountOfTiles(length,width,slope,roofID).getAmount()));
+        BOM.add(calculateTopBatten(length));
 
         if (shedLength > 0) {
             BOM.add(calculateCladdingBoards(shedWidth, shedLength));
@@ -837,6 +842,236 @@ public class CarportCalculator {
         String description = "Vindskeder på rejsning";
 
         return bargeBoard = new Material(id,amount,description);
+    }
+
+    public Material calculateAmountOfTiles(int length, int width, int angle, int roofID){
+        //udregner tagsten til carport med rejsning, 9stk pr kvm
+
+        Material roofTiles;
+
+        double b = width/2;
+        double c = 0;
+
+        double radians = Math.toRadians(angle);
+
+        c = b/Math.cos(radians);
+
+        int squareMeters = (int) Math.ceil(c/100*length/100*2);
+        int tilesNeeded = squareMeters*9;
+        int amount=0;
+
+        if(tilesNeeded <= 108){
+            amount = 108;
+        } else if (tilesNeeded <=216){
+            amount = 216;
+        } else if (tilesNeeded <= 324){
+            amount = 324;
+        } else if (tilesNeeded <= 432){
+            amount = 432;
+        }else if (tilesNeeded <= 540 ){
+            amount = 540;
+        }else if (tilesNeeded <= 648 ){
+            amount = 648;
+        }else if (tilesNeeded <= 756 ){
+            amount = 756;
+        }else if (tilesNeeded <= 864 ){
+            amount = 864;
+        }
+
+        String description = "Monteres på taglægter";
+        int id = 0;
+
+        switch (roofID){
+            case 2:
+                id = 90;
+                break;
+            case 3:
+                id = 91;
+                break;
+            case 4:
+                id = 92;
+            break;
+            case 5:
+                id = 89;
+            break;
+        }
+        return  roofTiles = new Material(id,amount,description);
+    }
+
+    public Material calculateRidgeStones(int length, int roofID){
+        //beregner rygningsten 3 pr meter
+        Material ridgeStone;
+
+        int amount = (int)Math.ceil((double)  length/100*3);
+        String description = "Monteres på toplægte med medfølgende beslag";
+
+        int id = 0;
+
+        switch (roofID){
+            case 2:
+                id = 94;
+                break;
+            case 3:
+                id = 95;
+                break;
+            case 4:
+                id = 96;
+                break;
+            case 5:
+                id = 39;
+                break;
+        }
+
+        return ridgeStone = new Material(id,amount,description);
+    }
+
+    public Material calculateTopHolders(int length){
+        //bergner antallet af toplægte holdere, 1 pr meter
+        Material topHolder;
+        int amount = (int)Math.ceil((double) length/100);
+
+        String description = "Monteres på toppen af spæret til toplægte";
+
+        return topHolder = new Material(97,amount,description);
+    }
+
+    public Material calculateRidgeStoneFittings(int roofID){
+        //finder den rigtige farve af rygstensbeslag, der skal altid være en pakke på 50
+        Material ridgeStoneFitting;
+
+        int id = 0;
+
+        switch (roofID){
+            case 2:
+                id = 99;
+                break;
+            case 3:
+                id = 100;
+                break;
+            case 4:
+                id = 101;
+                break;
+            case 5:
+                id = 98;
+                break;
+        }
+
+        String description ="Til fastgørelse af rygningsten";
+
+        return ridgeStoneFitting = new Material(id,1,description);
+    }
+
+    public Material calculateAmountOfBattens(int width, int angle, int length){
+        //bergener lægter afstand til toplægte 30mm, afstand mellem lægter ca 339mm
+
+        Material battens;
+
+        double b = width/2;
+        double c = 0;
+        int amountPerSide = 0;
+        int amount = 0;
+
+        double radians = Math.toRadians(angle);
+        c = b/Math.cos(radians);
+
+        c = c-3;
+
+        amountPerSide= (int)Math.ceil(c/33.9);
+
+        int id = 0;
+
+        if(length <= 360){
+            id = 102;
+            amount = amountPerSide*2;
+        } else if(length <=420){
+            id = 103;
+            amount = amountPerSide*2;
+        } else if(length <=480){
+            id = 104;
+            amount = amountPerSide*2;
+        } else if (length <= 720){
+            id = 102;
+            amount = amountPerSide*2*2;
+        } else if (length <= 840){
+            id = 103;
+            amount = amountPerSide*2*2;
+        }
+
+        String description = "Til montering på spær, " + amountPerSide + " rækker lægter på hver side";
+
+        return battens = new Material(id,amount,description);
+    }
+
+    public Material calculateTileBinders(int amountOfBattens,int amountOfTiles){
+        //bergener mængden af tagstensbindere 1 til alle yderste tagsten + 1 til hver anden tagsten fås i pakke af 200
+        Material tileBinder;
+        int amountNeeded = (amountOfTiles-((amountOfBattens-2)*4))/2+((amountOfBattens-2)*4);
+        int amount = 0;
+
+        if(amountNeeded<200){
+            amount = 1;
+        } else if( amountNeeded <= 400){
+            amount = 2;
+        }else if( amountNeeded <= 600){
+            amount = 3;
+        }
+
+        String description = "Til montering af tagsten, alle ydersten + hver anden fastgøres";
+
+        return tileBinder = new Material(105,amount,description);
+    }
+
+    public Material calculateVergeClips(int amountOfBattens,int amountOfTiles){
+        //bergener mængden af tagstens nakkekroge 1 til alle yderste tagsten + 1 til hver anden tagsten fås i pakke af 100
+        Material vergeClip;
+        int amountNeeded = (amountOfTiles-((amountOfBattens-2)*4))/2+((amountOfBattens-2)*4);
+        int amount = 0;
+
+        if(amountNeeded<100){
+            amount = 1;
+        } else if( amountNeeded <= 200){
+            amount = 2;
+        }else if( amountNeeded <= 300){
+            amount = 3;
+        }else if( amountNeeded <= 400){
+            amount = 4;
+        }else if( amountNeeded <= 500){
+            amount = 5;
+        }else if( amountNeeded <= 600){
+            amount = 6;
+        }
+
+        String description = "Til montering af tagsten, alle ydersten + hver anden fastgøres";
+
+        return vergeClip = new Material(106,amount,description);
+    }
+
+    public Material calculateTopBatten(int length){
+        //beregner antal af brædder til toplægte, toplægten skal være lige så lang som carporten
+        Material batten;
+
+        int id = 0;
+        int amount = 0;
+
+        if(length <= 360){
+            id = 102;
+            amount = 2;
+        } else if(length <=420){
+            id = 103;
+            amount = 2;
+        } else if(length <=480){
+            id = 104;
+            amount = 2;
+        } else if (length <= 720){
+            id = 102;
+            amount = 4;
+        } else if (length <= 840){
+            id = 103;
+            amount = 4;
+        }
+        String description = "Toplægte til montering af rygningsten lægges i toplægteholder";
+
+        return batten = new Material(id,amount,description);
     }
 
 
