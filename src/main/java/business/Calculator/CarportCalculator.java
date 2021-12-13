@@ -709,7 +709,7 @@ public class CarportCalculator {
 
         c = b/Math.cos(radians);
 
-        a = Math.tan(radians)*c;
+        a = Math.tan(radians)*width/2;
 
 
         double lengthOfWood = Math.ceil(c*2 + a);
