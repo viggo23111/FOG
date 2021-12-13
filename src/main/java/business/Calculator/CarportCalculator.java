@@ -80,6 +80,10 @@ public class CarportCalculator {
         BOM.add(calculateTileBinders(calculateAmountOfBattens(width,slope,length).getAmount(), calculateAmountOfTiles(length,width,slope,roofID).getAmount()));
         BOM.add(calculateVergeClips(calculateAmountOfBattens(width,slope,length).getAmount(), calculateAmountOfTiles(length,width,slope,roofID).getAmount()));
         BOM.add(calculateTopBatten(length));
+        BOM.add(calculateCladdingBoardsForRoof(width,slope));
+        BOM.add(calculateFasciaBoardCarport(length,shedLength));
+        BOM.add(calculateLathingBoard(length));
+        BOM.add(calculateWeatherBoard(width,slope));
 
         if (shedLength > 0) {
             BOM.add(calculateCladdingBoards(shedWidth, shedLength));
@@ -89,6 +93,7 @@ public class CarportCalculator {
             BOM.add(calculateScrewsForInnerCladding(shedWidth, shedLength));
             BOM.add(calculateScrewsForOuterCladding(shedWidth, shedLength));
             BOM.add(calculateAngleFittingForShed(shedWidth, shedLength));
+            BOM.add(calculateFasciaBoardShed(shedLength));
 
             //Z på bagdør vil altid være det samme, da vi ikke kan ændre på dørens mål
             description = "Til z på bagside af dør";
@@ -1072,6 +1077,223 @@ public class CarportCalculator {
         String description = "Toplægte til montering af rygningsten lægges i toplægteholder";
 
         return batten = new Material(id,amount,description);
+    }
+
+    public Material calculateCladdingBoardsForRoof(int width, int angle){
+        //beregner antal brædder der skal bruges til at lave 1 på 2 beklædning af tagets gavle
+        Material claddingBoard;
+
+
+
+        double a = 0;
+        double b = (double) width/2;
+        double c = 0;
+        double radians = Math.toRadians(angle);
+        c = b/Math.cos(radians);
+        a = Math.tan(radians)*c;
+
+        double area = 0.5*a*width;
+        double areaOfBoard = 7.5*300;
+
+        int amount = (int)Math.ceil(area/areaOfBoard*2*2);
+
+        String description = "til beklædning af tagets gavle 1 på 2 ";
+        return claddingBoard = new Material(67, amount,description);
+    }
+
+    public Material calculateFasciaBoardCarport(int length,int shedLength){
+        //beregner sternbrædder til carport del
+        Material facsiaBoard;
+        int lengthNeeded = length -shedLength;
+        int id = 0;
+        int amount = 0;
+
+        if(lengthNeeded <= 300){
+            id = 83;
+            amount = 2;
+        } else if(lengthNeeded <= 360){
+            id = 84;
+            amount = 2;
+        }else if(lengthNeeded <= 420){
+            id = 85;
+            amount = 2;
+        }else if(lengthNeeded <= 480){
+            id = 86;
+            amount = 2;
+        }else if(lengthNeeded <= 540){
+            id = 87;
+            amount = 2;
+        }else if(lengthNeeded <= 600){
+            id = 88;
+            amount = 2;
+        }else if(lengthNeeded <= 720){
+            id = 84;
+            amount = 4;
+        }else if(lengthNeeded <= 840){
+            id = 85;
+            amount = 4;
+        }
+
+        String description = "";
+        if(shedLength != 0) {
+             description = "Sternbrædder til siderne af carport del";
+        } else{
+             description = "Sternbrædder til siderne";
+        }
+
+        return facsiaBoard = new Material(id,amount,description);
+    }
+
+    public Material calculateFasciaBoardShed(int shedLength){
+        //beregner sternbrædder til skur del
+        Material facsiaBoard;
+
+        int id = 0;
+        int amount = 0;
+
+        if(shedLength <= 300){
+            id = 83;
+            amount = 2;
+        } else if(shedLength <= 360){
+            id = 84;
+            amount = 2;
+        }else if(shedLength <= 420){
+            id = 85;
+            amount = 2;
+        }else if(shedLength <= 480){
+            id = 86;
+            amount = 2;
+        }else if(shedLength <= 540){
+            id = 87;
+            amount = 2;
+        }else if(shedLength <= 600){
+            id = 88;
+            amount = 2;
+        }else if(shedLength <= 720){
+            id = 84;
+            amount = 4;
+        }else if(shedLength <= 840){
+            id = 85;
+            amount = 4;
+        }
+
+        String description = "Sternbrædder til siderne af skur del";
+
+
+        return facsiaBoard = new Material(id,amount,description);
+    }
+
+    public Material calculateLathingBoard(int length){
+        //bergener antal af brædder der skal bruges til afstandsliste
+        Material lathingBoard;
+        int id = 0;
+        int amount = 0;
+
+        if(length <= 300){
+            id = 107;
+            amount = 2;
+        } else if(length <= 330){
+            id = 108;
+            amount = 2;
+        }else if(length <= 360){
+            id = 109;
+            amount = 2;
+        }else if(length <= 390){
+            id = 110;
+            amount = 2;
+        }else if(length <= 420){
+            id = 111;
+            amount = 2;
+        }else if(length <= 450){
+            id = 112;
+            amount = 2;
+        }else if(length <= 480){
+            id = 113;
+            amount = 2;
+        }else if(length <= 510){
+            id = 114;
+            amount = 2;
+        }else if(length <= 540){
+            id = 115;
+            amount = 2;
+        }else if(length <= 600){
+            id = 107;
+            amount = 4;
+        }else if(length <= 630){
+            id = 111;
+            amount = 3;
+        }else if(length <= 720){
+            id =113;
+            amount = 3;
+        }else if(length <= 780){
+            id = 115;
+            amount = 3;
+        }
+        String description = "Til montering oven på tagfodslægte";
+
+        return lathingBoard = new Material(id,amount,description);
+    }
+
+    public Material calculateWeatherBoard(int width, int angle){
+        //bergerner længden af vandbræt der skal bruges
+        Material weatherBoard;
+
+        double b = width/2;
+        double c = 0;
+
+        double radians = Math.toRadians(angle);
+
+        c = b/Math.cos(radians);
+
+        int length = (int)Math.ceil(c*4);
+
+        int id = 0;
+        int amount = 0;
+
+        if(length <= 300){
+            id = 67;
+            amount = 1;
+        } else if(length <= 360){
+            id = 68;
+            amount = 1;
+        } else if(length <= 420){
+            id = 69;
+            amount = 1;
+        }else if(length <= 480){
+            id = 70;
+            amount = 1;
+        } else if(length <= 600){
+            id = 67;
+            amount = 2;
+        }else if(length <= 720){
+            id = 68;
+            amount = 2;
+        }else if(length <= 840){
+            id = 69;
+            amount = 2;
+        }else if(length <= 960){
+            id = 70;
+            amount = 2;
+        }else if(length <= 1080){
+            id = 68;
+            amount = 3;
+        }else if(length <= 1260){
+            id = 69;
+            amount = 3;
+        }else if(length <= 1440){
+            id = 70;
+            amount = 3;
+        }else if(length <= 1680){
+            id = 69;
+            amount = 4;
+        }else if(length <= 1920){
+            id = 70;
+            amount = 4;
+        }
+
+        String description = "Vand bræt på vindskeder";
+
+        return weatherBoard = new Material(id,amount,description);
     }
 
 
