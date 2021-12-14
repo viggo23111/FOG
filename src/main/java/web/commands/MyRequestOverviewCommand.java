@@ -8,7 +8,6 @@ import business.services.SVGGenerator;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
 import java.util.List;
 
 public class MyRequestOverviewCommand extends CommandProtectedPage {
@@ -55,13 +54,18 @@ public class MyRequestOverviewCommand extends CommandProtectedPage {
         } else {
             amountOfPoles = 6;
         }
+        List<SVG> svgList = null;
 
-        svg = new SVGGenerator(requestFound.getWidth(), requestFound.getLength(), Math.abs(requestFound.getLength() / 55), amountOfPoles, requestFound.getShedWidth(), requestFound.getShedLength());
-
-        List<SVG> svgList = svg.generateSVG();
+        if(requestFound.getCarportType() == 1) {
+            svg = new SVGGenerator(requestFound.getWidth(), requestFound.getLength(), Math.abs(requestFound.getLength() / 55), amountOfPoles, requestFound.getShedWidth(), requestFound.getShedLength(), 0);
+            svgList = svg.generateSVGFlat();
+            request.setAttribute("sideView", svgList.get(1));
+        } else {
+            SVGGenerator svg = new SVGGenerator(requestFound.getWidth(),requestFound.getLength(),0,amountOfPoles,requestFound.getShedWidth(),requestFound.getShedLength(),requestFound.getSlope());
+            svgList = svg.generateSVGSlope();
+        }
 
         request.setAttribute("aboveView", svgList.get(0));
-        request.setAttribute("sideView", svgList.get(1));
 
         return pageToShow;
     }

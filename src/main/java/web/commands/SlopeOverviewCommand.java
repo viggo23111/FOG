@@ -3,6 +3,8 @@ package web.commands;
 import business.entities.Roof;
 import business.exceptions.UserException;
 import business.services.LogicFacade;
+import business.services.SVG;
+import business.services.SVGGenerator;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -54,6 +56,19 @@ public class SlopeOverviewCommand extends CommandProtectedPage {
                 shedWidth = Integer.parseInt(request.getParameter("shedWidth"));
                 shedLength = Integer.parseInt(request.getParameter("shedLength"));
             }
+            int amountOfPoles = 0;
+
+            if (length <= 510) {
+                amountOfPoles = 4;
+            } else {
+                amountOfPoles = 6;
+            }
+
+            SVGGenerator svg = new SVGGenerator(width,length,0,amountOfPoles,shedWidth,shedLength,slope);
+
+            List<SVG> svgList = svg.generateSVGSlope();
+
+            request.setAttribute("aboveView", svgList.get(0));
 
             request.setAttribute("width", width);
             request.setAttribute("length", length);

@@ -10,18 +10,19 @@ public class SVGGenerator {
     private int amountOfPoles;
     private double shedWidth;
     private double shedLength;
+    private int angle;
 
-    public SVGGenerator(double width, double length, double amountOfRafters, int amountOfPoles, double shedWidth, double shedLength) {
+    public SVGGenerator(double width, double length, double amountOfRafters, int amountOfPoles, double shedWidth, double shedLength, int angle) {
         this.width = width;
         this.length = length;
         this.amountOfRafters = amountOfRafters;
         this.amountOfPoles = amountOfPoles;
         this.shedWidth = shedWidth;
         this.shedLength = shedLength;
+        this.angle = angle;
     }
 
-
-    public List<SVG> generateSVG() {
+    public List<SVG> generateSVGFlat() {
         List<SVG> drawings = new ArrayList<>();
 
         SVG outerSVGSide = new SVG(0, 0, "0 0 " + length + 75 + " 305", 100, 75);
@@ -186,6 +187,148 @@ public class SVGGenerator {
 
         drawings.add(outerSVG);
         drawings.add(outerSVGSide);
+
+        return drawings;
+    }
+
+    public List<SVG> generateSVGSlope(){
+        List<SVG> drawings = new ArrayList<>();
+
+        double b = width/2;
+        double c = 0;
+        int amountPerSide = 0;
+        int amount = 0;
+
+        double radians = Math.toRadians(angle);
+        c = b/Math.cos(radians);
+
+        c = c-3;
+
+        amountPerSide= (int)Math.ceil(c/33.9);
+
+        SVG outerSVG = new SVG(0, 0, "0 0 " + length + 75 + " " + width + 75, 100, 75);
+        SVG svgSlope = new SVG(75, 0, "0 0 " + length + " " + width, 75, 75);
+
+        double distanceToEdge = 17;
+        if(shedLength == 0){
+            distanceToEdge = 32;
+        }
+        int amountOfRaftersCarport = (int) Math.ceil((length-shedLength)/95);
+        int amountOfRaftersShed = (int)Math.ceil(shedLength/78);
+
+        double distance = (length-shedLength) / (amountOfRaftersCarport - 1) - 4.5 / (amountOfRaftersCarport - 1)-distanceToEdge/(double)amountOfRaftersCarport;
+        double distanceShed = (shedLength) / (amountOfRaftersShed - 1) - 4.5 / (amountOfRaftersShed - 1)-17/(double)amountOfRaftersShed;
+
+        //outline
+        svgSlope.addRect(0, 0, width, length);
+
+        //remme
+        svgSlope.addRect(0, 15, 4.5, length);
+        svgSlope.addRect(0, width - 15, 4.5, length);
+
+        //spær carport
+        for (int x = 0; x < amountOfRaftersCarport; x++) {
+            svgSlope.addRect(distance * x+15, 0, 600, 4.5);
+        }
+        //spær skur
+        for (int x = 0; x < amountOfRaftersShed; x++) {
+            svgSlope.addRect(distanceShed * x+length-shedLength+distanceShed, 0, 600, 4.5);
+        }
+
+        //lægter
+        double distanceTop = (width-3)/2/((double)(amountPerSide-1));
+        for (int x = 0; x < amountPerSide; x++) {
+            svgSlope.addRect(0,distanceTop*x,4.3,length);
+        }
+        double distanceBottom = (width+3)/2/((double)(amountPerSide-1));
+        for (int x = 0; x < amountPerSide; x++) {
+            svgSlope.addRect(0,width-x*distanceBottom-4.3,4.3,length);
+        }
+
+        //toplægte
+        svgSlope.addRect(0,(width-4)/2,4.3,length);
+
+        //vandbræt
+        svgSlope.addRect(0,0,width,5);
+        svgSlope.addRect(0,0,width/2,5);
+        svgSlope.addRect(length-5,0,width,5);
+        svgSlope.addRect(length-5,0,width/2,5);
+
+
+        //poles
+        if (length < 510) {
+            svgSlope.addRect(55, 12.575, 9.7, 9.7);
+            svgSlope.addRect(55, width - 17.425, 9.7, 9.7);
+
+            if(shedWidth == 0) {
+                svgSlope.addRect(length - 55, 12.575, 9.7, 9.7);
+                svgSlope.addRect(length - 55, width - 17.425, 9.7, 9.7);
+            }
+        }
+        if (length > 480) {
+            svgSlope.addRect(100, 12.575, 9.7, 9.7);
+            svgSlope.addRect(100, width - 17.425, 9.7, 9.7);
+
+            if(shedWidth == 0) {
+                svgSlope.addRect(length - 100, 12.575, 9.7, 9.7);
+                svgSlope.addRect(length - 100, width - 17.425, 9.7, 9.7);
+            }
+        }
+
+        if (shedWidth < width - 30 && shedWidth != 0) {
+            svgSlope.addRect(length - 110, width - 17.425, 9.7, 9.7);
+            svgSlope.addRect(length - 15 - 4.85, 12.425, 9.7, 9.7);
+            svgSlope.addRect(length - shedLength - 4.85, 12.425, 9.7, 9.7);
+            svgSlope.addRect(length - 15 - 4.85, 10 + shedWidth, 9.7, 9.7);
+            svgSlope.addRect(length - shedLength - 4.85, 10 + shedWidth, 9.7, 9.7);
+
+        }
+        if (shedWidth > 540) {
+            svgSlope.addRect(length - 15 - 4.85, 10 + shedWidth / 2, 9.7, 9.7);
+            svgSlope.addRect(length - shedLength - 4.85, 10 + shedWidth / 2, 9.7, 9.7);
+        }
+
+
+        if (amountOfPoles > 4) {
+            svgSlope.addRect(length / 2, 12.575, 9.7, 9.7);
+            svgSlope.addRect(length / 2, width - 17.425, 9.7, 9.7);
+
+        }
+
+
+        if (shedWidth == width - 30 && shedWidth != 0) {
+            svgSlope.addRect(length - 17.425, 12.575, 9.7, 9.7);
+            svgSlope.addRect(length - shedLength - 2.425, 12.575, 9.7, 9.7);
+
+
+            svgSlope.addRect(length - 17.425, width - 17.425, 9.7, 9.7);
+            svgSlope.addRect(length - shedLength - 2.425, width - 17.425, 9.7, 9.7);
+
+        }
+
+
+        //shed outline
+        if (shedWidth != 0) {
+            svgSlope.addLineForShed(length - shedLength, 15, length - 15, 15);
+            svgSlope.addLineForShed(length - shedLength, shedWidth + 15, length - 15, shedWidth + 15);
+            svgSlope.addLineForShed(length - shedLength, 15, length - shedLength, shedWidth + 15);
+            svgSlope.addLineForShed(length - 15, 15, length - 15, shedWidth + 15);
+
+        }
+
+        outerSVG.addSvg(svgSlope);
+
+        //messurements
+        outerSVG.addArrowLine(50, 0, 50, width * 0.75);
+
+        outerSVG.addArrowLine(75, width * 0.8, length * 0.75 + 75, width * 0.8);
+
+        //text
+        outerSVG.addRoatedText(30, width / 2 - 75, width + " cm");
+
+        outerSVG.addText(length / 2, width * 0.85, length + " cm");
+
+        drawings.add(outerSVG);
 
         return drawings;
     }

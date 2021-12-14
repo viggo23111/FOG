@@ -97,12 +97,18 @@ public class ViewRequestInfoCommand extends CommandProtectedPage {
             amountOfPoles = 6;
         }
 
-        svg = new SVGGenerator(requestFound.getWidth(), requestFound.getLength(), Math.abs(requestFound.getLength() / 55), amountOfPoles, requestFound.getShedWidth(), requestFound.getShedLength());
+        List<SVG> svgList = null;
 
-        List<SVG> svgList = svg.generateSVG();
+        if(requestFound.getCarportType() == 1) {
+            svg = new SVGGenerator(requestFound.getWidth(), requestFound.getLength(), Math.abs(requestFound.getLength() / 55), amountOfPoles, requestFound.getShedWidth(), requestFound.getShedLength(), 0);
+            svgList = svg.generateSVGFlat();
+            request.setAttribute("sideView", svgList.get(1));
+        } else {
+            SVGGenerator svg = new SVGGenerator(requestFound.getWidth(),requestFound.getLength(),0,amountOfPoles,requestFound.getShedWidth(),requestFound.getShedLength(),requestFound.getSlope());
+            svgList = svg.generateSVGSlope();
+        }
 
         request.setAttribute("aboveView", svgList.get(0));
-        request.setAttribute("sideView", svgList.get(1));
         request.setAttribute("roofList", roofList);
         request.setAttribute("shedWidth", requestFound.getShedWidth());
         request.setAttribute("shedLength", requestFound.getShedLength());

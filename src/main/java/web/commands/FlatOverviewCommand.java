@@ -1,6 +1,5 @@
 package web.commands;
 
-import business.entities.Request;
 import business.entities.Roof;
 import business.exceptions.UserException;
 import business.services.LogicFacade;
@@ -65,10 +64,10 @@ public class FlatOverviewCommand extends CommandProtectedPage {
             }
 
 
-            svg = new SVGGenerator(width, length, Math.abs(length / 55), amountOfPoles, shedWidth, shedLength);
+            svg = new SVGGenerator(width, length, Math.abs(length / 55), amountOfPoles, shedWidth, shedLength,0);
 
 
-            List<SVG> svgList = svg.generateSVG();
+            List<SVG> svgList = svg.generateSVGFlat();
 
             request.setAttribute("aboveView", svgList.get(0));
             request.setAttribute("sideView", svgList.get(1));
