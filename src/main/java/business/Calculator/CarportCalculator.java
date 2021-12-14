@@ -769,7 +769,7 @@ public class CarportCalculator {
         int amountOfRafters = (int) Math.ceil(((double)length-(double)shedLength)/95);
 
         if(shedLength != 0) {
-            amountOfRafters += Math.abs(shedLength / 78);
+            amountOfRafters += Math.ceil((double)shedLength / 78);
         }
 
         int id = 0;
