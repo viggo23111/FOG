@@ -68,7 +68,7 @@ public class CarportCalculator {
         BOM.add(calculateRaftersTop(calculateRaftersBottom(width,length,shedLength).getAmount(),width,slope));
         BOM.add(calculateFittingsRight(calculateRaftersBottom(width,length,shedLength).getAmount()));
         BOM.add(calculateFittingsLeft(calculateRaftersBottom(width,length,shedLength).getAmount()));
-        BOM.add(calculateFittingScrews(calculateRaftersBottom(width,length,shedLength).getAmount()));
+        BOM.add(calculateFittingScrewsSlope(calculateRaftersBottom(width,length,shedLength).getAmount(),calculateTopHolders(length).getAmount()));
         BOM.add(calculateAmountOfBoardBolts(length));
         BOM.add(calculateAmountOfSquareWashers(length));
         BOM.add(calculateBargeBorads(width,slope));
@@ -84,14 +84,18 @@ public class CarportCalculator {
         BOM.add(calculateFasciaBoardCarport(length,shedLength));
         BOM.add(calculateLathingBoard(length));
         BOM.add(calculateWeatherBoard(width,slope));
+        BOM.add(calculateScrewsForBattens(calculateAmountOfBattens(width,slope,length).getAmount(),calculateRaftersBottom(width,length,shedLength).getAmount(),length));
+        BOM.add(calculateScrewsForInnerCladdingSlope(shedWidth,shedLength,slope,width));
+        BOM.add(calculateScrewsForOuterCladdingSlope(shedWidth,shedLength,width,slope));
+        BOM.add(calculateHolePlateWide(calculateRaftersBottom(width,length,shedLength).getAmount()));
+        BOM.add(calculateHolePlateSlim(calculateRaftersBottom(width,length,shedLength).getAmount()));
+        BOM.add(calculateScrewsForHoleplates(calculateHolePlateWide(calculateRaftersBottom(width,length,shedLength).getAmount()).getAmount(),calculateHolePlateSlim(calculateRaftersBottom(width,length,shedLength).getAmount()).getAmount()));
 
         if (shedLength > 0) {
             BOM.add(calculateCladdingBoards(shedWidth, shedLength));
             BOM.add(calculatePolesForShed(width, length, shedWidth, shedLength));
             BOM.add(calculateNoggingsGable(shedWidth));
             BOM.add(calculateNoggingsSides(shedLength));
-            BOM.add(calculateScrewsForInnerCladding(shedWidth, shedLength));
-            BOM.add(calculateScrewsForOuterCladding(shedWidth, shedLength));
             BOM.add(calculateAngleFittingForShed(shedWidth, shedLength));
             BOM.add(calculateFasciaBoardShed(shedLength));
 
@@ -670,6 +674,7 @@ public class CarportCalculator {
 
         double amountOfScrews = (double)calculateCladdingBoards(shedWidth,shedLength).getAmount()/2*6;
 
+
         int amount = (int) Math.ceil(amountOfScrews/300);
 
 
@@ -923,7 +928,7 @@ public class CarportCalculator {
                 id = 96;
                 break;
             case 5:
-                id = 39;
+                id = 93;
                 break;
         }
 
@@ -1296,6 +1301,117 @@ public class CarportCalculator {
         return weatherBoard = new Material(id,amount,description);
     }
 
+    public Material calculateScrewsForBattens(int amountOfbattens, int amountOfRafters, int length){
+        //bergener antal skruer der skal bruges til at fastne taglægter, 1 skrue skal bruges hver gang en taglæte krydser et spær
+        Material screw;
+        int amountNeeded = 0;
+
+        if(length <= 720) {
+            amountNeeded = amountOfbattens * amountOfRafters;
+        } else{
+            amountNeeded = amountOfbattens/2 * amountOfRafters;
+        }
+
+
+        int amount = 0;
+        int id = 116;
+
+        if (amountNeeded <= 200){
+            amount = 1;
+        } else if (amountNeeded <= 400){
+            amount = 2;
+        } else if (amountNeeded <= 600){
+            amountNeeded = 3;
+        }
+
+        String description = "Til taglægter";
+
+        return screw = new Material(id,amount,description);
+    }
+
+    public Material calculateScrewsForInnerCladdingSlope(int shedWidth, int shedLength,int angle, int width){
+        //udrenger antal skruer til den inderste beklædning 2pr løsholt/rem, altså 6 stk pr bræt
+        Material screw;
+
+        double amountOfScrews = (double)calculateCladdingBoardsForRoof(width,angle).getAmount()/2*4;
+
+
+        if(shedLength != 0) {
+            amountOfScrews += (double) calculateCladdingBoards(shedWidth, shedLength).getAmount() / 2 * 6;
+        }
+
+        int amount = (int) Math.ceil(amountOfScrews/300);
+
+
+        String description = "til montering af inderste beklædning";
+
+        return screw = new Material(39,amount,description);
+
+    }
+
+    public Material calculateScrewsForOuterCladdingSlope(int shedWidth, int shedLength,int width, int angle){
+        //udrenger antal skruer til den yderste beklædning 2pr løsholt/rem, altså 6 stk pr bræt
+        Material screw;
+
+        double amountOfScrews = (double)calculateCladdingBoardsForRoof(width,angle).getAmount()/2*4;
+
+        if(shedLength != 0) {
+            amountOfScrews += (double) calculateCladdingBoards(shedWidth, shedLength).getAmount() / 2 * 6;
+        }
+
+        int amount = (int) Math.ceil(amountOfScrews/400);
+
+
+        String description = "til montering af yderste beklædning";
+
+        return screw = new Material(38,amount,description);
+    }
+
+    public Material calculateFittingScrewsSlope(int amountOfRafters, int amountOfTopHolders){
+        //skruer til beslag, 3 stk pr overflade, altså 9 pr beslag
+        Material fittingScrews;
+
+
+        double amountOfFittingScrews = calculateFittingsLeft(amountOfRafters).getAmount() * 2 * 9;
+        amountOfFittingScrews += amountOfTopHolders*4;
+
+        int amountOfFittingScrewPackages = (int) Math.ceil(amountOfFittingScrews/250);
+        String description = "Til montering af universalbeslag + toplægte";
+        return fittingScrews = new Material(35,amountOfFittingScrewPackages,description);
+    }
+
+    public Material calculateHolePlateWide(int amountOfRafters){
+        //bergener antal af brede hulplader til spær konstruktion 2 pr spær
+        Material holePlate;
+
+        int amount = amountOfRafters*2;
+
+        String description ="Hulplade til spærkonstruktion";
+
+        return holePlate = new Material(117,amount,description);
+    }
+
+    public Material calculateHolePlateSlim(int amountOfRafters){
+        //bergener antal af smalle hulplader til spær konstruktion 6 pr spær
+        Material holePlate;
+
+        int amount = amountOfRafters*6;
+
+        String description ="Hulplade til spærkonstruktion";
+
+        return holePlate = new Material(118,amount,description);
+    }
+
+    public Material calculateScrewsForHoleplates(int amountOfWideHoleplates, int amountOfSlimHoleplates){
+        //bregner skruer der skal bruges til at montere hulplader, 12 pr bred hulplade 8 pr smal
+        Material screw;
+
+        int amount = (int)Math.ceil(((double)amountOfWideHoleplates*12+(double)amountOfSlimHoleplates*8)/250);
+
+        String description ="Til montering af hulplader";
+
+        return screw = new Material(119,amount,description);
+    }
 
 
 
