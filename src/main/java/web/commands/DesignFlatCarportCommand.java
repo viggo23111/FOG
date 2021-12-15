@@ -2,7 +2,7 @@ package web.commands;
 
 import business.entities.Roof;
 import business.exceptions.UserException;
-import business.services.LogicFacade;
+import business.persistence.LogicFacade;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;

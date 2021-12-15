@@ -4,11 +4,10 @@ import business.entities.BomItem;
 import business.entities.Category;
 import business.entities.Request;
 import business.exceptions.UserException;
-import business.services.LogicFacade;
+import business.persistence.LogicFacade;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
 import java.util.ArrayList;
 import java.util.List;
 

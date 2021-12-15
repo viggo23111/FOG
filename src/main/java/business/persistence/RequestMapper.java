@@ -11,11 +11,11 @@ import java.util.List;
 public class RequestMapper {
     private Database database;
 
-    public RequestMapper(Database database) {
+    protected RequestMapper(Database database) {
         this.database = database;
     }
 
-    public List<Request> getAllRequests() throws UserException {
+    protected List<Request> getAllRequests() throws UserException {
         List<Request> requestList = null;
 
         try (Connection connection = database.connect()) {
@@ -58,7 +58,7 @@ public class RequestMapper {
         return requestList;
     }
 
-    public List<Request> getAllRequestsByUserID(int userID) throws UserException {
+    protected List<Request> getAllRequestsByUserID(int userID) throws UserException {
         List<Request> requestList = null;
 
         try (Connection connection = database.connect()) {
@@ -101,7 +101,7 @@ public class RequestMapper {
         return requestList;
     }
 
-    public Request getRequestByID(int requestID) throws UserException {
+    protected Request getRequestByID(int requestID) throws UserException {
         Request request = null;
 
         try (Connection connection = database.connect()) {
@@ -139,7 +139,7 @@ public class RequestMapper {
         return request;
     }
 
-    public int createRequestForCarportTypeTwo(int userID, int statusID, int width, int length, int roofID, int slope, int shedWidth, int shedLength) throws UserException
+    protected int createRequestForCarportTypeTwo(int userID, int statusID, int width, int length, int roofID, int slope, int shedWidth, int shedLength) throws UserException
     {
         int id = 0;
 
@@ -180,7 +180,7 @@ public class RequestMapper {
         return id;
     }
 
-    public int createRequestForCarportTypeOne(int userID, int statusID, int width, int length, int roofID, int shedWidth, int shedLength) throws UserException
+    protected int createRequestForCarportTypeOne(int userID, int statusID, int width, int length, int roofID, int shedWidth, int shedLength) throws UserException
     {
         int id = 0;
 
@@ -222,7 +222,7 @@ public class RequestMapper {
         return id;
     }
 
-    public void updateRequestCarportTypeTwo(int requestID, int width, int length, int roofID, int slope, int shedWidth, int shedLength) throws UserException {
+    protected void updateRequestCarportTypeTwo(int requestID, int width, int length, int roofID, int slope, int shedWidth, int shedLength) throws UserException {
 
         try (Connection connection = database.connect()) {
 
@@ -252,7 +252,7 @@ public class RequestMapper {
         }
     }
 
-    public void updateRequestCarportTypeOne(int requestID, int width, int length, int roofID, int shedWidth, int shedLength) throws UserException {
+    protected void updateRequestCarportTypeOne(int requestID, int width, int length, int roofID, int shedWidth, int shedLength) throws UserException {
 
         try (Connection connection = database.connect()) {
 
@@ -281,7 +281,7 @@ public class RequestMapper {
         }
     }
 
-    public void updatePrice(int requestID, double price) throws UserException {
+    protected void updatePrice(int requestID, double price) throws UserException {
 
         try (Connection connection = database.connect()) {
 
@@ -306,7 +306,7 @@ public class RequestMapper {
         }
     }
 
-    public void updateStatus(int requestID, int status) throws UserException {
+    protected void updateStatus(int requestID, int status) throws UserException {
 
         try (Connection connection = database.connect()) {
 

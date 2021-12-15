@@ -14,11 +14,11 @@ import java.util.List;
 public class CategoryMapper {
     private Database database;
 
-    public CategoryMapper(Database database) {
+    protected CategoryMapper(Database database) {
         this.database = database;
     }
 
-    public Category getCategoryByID(int categoryID) throws UserException {
+    protected Category getCategoryByID(int categoryID) throws UserException {
         Category category = null;
 
         try (Connection connection = database.connect()) {

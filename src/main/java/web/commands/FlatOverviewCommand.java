@@ -2,7 +2,7 @@ package web.commands;
 
 import business.entities.Roof;
 import business.exceptions.UserException;
-import business.services.LogicFacade;
+import business.persistence.LogicFacade;
 import business.services.SVG;
 import business.services.SVGGenerator;
 

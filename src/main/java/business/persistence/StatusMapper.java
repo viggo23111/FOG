@@ -14,11 +14,11 @@ import java.util.List;
 public class StatusMapper {
     private Database database;
 
-    public StatusMapper(Database database) {
+    protected StatusMapper(Database database) {
         this.database = database;
     }
 
-    public List<Status> getAllStatus() throws UserException {
+    protected List<Status> getAllStatus() throws UserException {
         List<Status> statusList = null;
 
         try (Connection connection = database.connect()) {

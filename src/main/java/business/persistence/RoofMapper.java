@@ -13,11 +13,11 @@ import java.util.List;
 public class RoofMapper {
     private Database database;
 
-    public RoofMapper(Database database) {
+    protected RoofMapper(Database database) {
         this.database = database;
     }
 
-    public List<Roof> getAllRoofsByType(int caportType) throws UserException {
+    protected List<Roof> getAllRoofsByType(int caportType) throws UserException {
         List<Roof> roofList = null;
 
         try (Connection connection = database.connect()) {

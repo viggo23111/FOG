@@ -13,11 +13,11 @@ public class BomItemMapper {
     private Database database;
 
 
-    public BomItemMapper(Database database) {
+    protected BomItemMapper(Database database) {
         this.database = database;
     }
 
-    public List<BomItem> getAllBomItemsByRequestID(int requestID) throws UserException {
+    protected List<BomItem> getAllBomItemsByRequestID(int requestID) throws UserException {
         List<BomItem> BOMList = null;
         try (Connection connection = database.connect()) {
             String sql = "SELECT * FROM bom_overview WHERE request_id =+ '" + requestID + "'";
@@ -53,7 +53,7 @@ public class BomItemMapper {
         return BOMList;
     }
 
-    public void insertBOM(int requestID, List<Material> materialList) throws UserException {
+    protected void insertBOM(int requestID, List<Material> materialList) throws UserException {
 
         try (Connection connection = database.connect()) {
             String sql = "INSERT INTO bom (request_id, material_id, amount,description) VALUES (?,?,?,?)";
@@ -73,7 +73,7 @@ public class BomItemMapper {
         }
     }
 
-    public void deleteBomItemsByRequestID(int requestID) throws UserException {
+    protected void deleteBomItemsByRequestID(int requestID) throws UserException {
 
         try (Connection connection = database.connect()) {
             String sql = "DELETE FROM bom WHERE request_id = ('"+requestID+"') ";

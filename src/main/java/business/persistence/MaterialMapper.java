@@ -15,11 +15,11 @@ public class MaterialMapper {
     private Database database;
 
 
-    public MaterialMapper(Database database) {
+    protected MaterialMapper(Database database) {
         this.database = database;
     }
 
-    public List<Material> getAllMaterials() throws UserException {
+    protected List<Material> getAllMaterials() throws UserException {
         List<Material> materialList = null;
         try (Connection connection = database.connect()) {
             String sql = "SELECT * FROM materials";

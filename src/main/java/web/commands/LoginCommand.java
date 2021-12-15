@@ -1,7 +1,7 @@
 package web.commands;
 
 import business.entities.User;
-import business.services.UserFacade;
+import business.persistence.UserFacade;
 import business.exceptions.UserException;
 
 import javax.servlet.http.HttpServletRequest;

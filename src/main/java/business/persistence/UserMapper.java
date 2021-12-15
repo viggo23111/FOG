@@ -12,12 +12,12 @@ public class UserMapper
 {
     private Database database;
 
-    public UserMapper(Database database)
+    protected UserMapper(Database database)
     {
         this.database = database;
     }
 
-    public void createUser(User user) throws UserException
+    protected void createUser(User user) throws UserException
     {
         try (Connection connection = database.connect())
         {
@@ -47,7 +47,7 @@ public class UserMapper
         }
     }
 
-    public User login(String email, String password) throws UserException
+    protected User login(String email, String password) throws UserException
     {
         try (Connection connection = database.connect())
         {
@@ -86,7 +86,7 @@ public class UserMapper
         }
     }
 
-    public List<User> getAllCustomers() throws UserException {
+    protected List<User> getAllCustomers() throws UserException {
         List<User> userList = null;
 
         try (Connection connection = database.connect()) {
@@ -116,7 +116,7 @@ public class UserMapper
         return userList;
     }
 
-    public User getUserById(int userID) throws UserException {
+    protected User getUserById(int userID) throws UserException {
         User user=null;
 
         try (Connection connection = database.connect()) {
@@ -140,7 +140,4 @@ public class UserMapper
         }
         return user;
     }
-
-
-
 }
