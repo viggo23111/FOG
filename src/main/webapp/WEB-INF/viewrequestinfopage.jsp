@@ -107,8 +107,6 @@
                             <label for="sel2">Carport længde:</label>
                             <select name="length" class="form-control" id="sel2">
                                 <option value="${requestScope.length}" selected>${requestScope.length} cm</option>
-                                <option value="240">240 cm</option>
-                                <option value="270">270 cm</option>
                                 <option value="300">300 cm</option>
                                 <option value="330">330 cm</option>
                                 <option value="360">360 cm</option>

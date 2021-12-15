@@ -105,8 +105,6 @@
                             <label for="length">Carport længde*</label>
                             <select name="length" class="form-control" id="length">
                                 <option value="0" selected>Vælg længde</option>
-                                <option value="240">240 cm</option>
-                                <option value="270">270 cm</option>
                                 <option value="300">300 cm</option>
                                 <option value="330">330 cm</option>
                                 <option value="360">360 cm</option>
