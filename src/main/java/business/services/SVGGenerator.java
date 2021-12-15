@@ -436,7 +436,7 @@ public class SVGGenerator {
 
         //text
         outerSVGSideSlope.addRoatedText(50*1.1, height*1.25 / 2 - 75+15, Math.round(210+a) + " cm");
-        outerSVGSideSlope.addText(length / 2, height*0.75*1.4, length + " cm");
+        outerSVGSideSlope.addText(length / 2, height*0.75*1.25, length + " cm");
 
 
         outerSVGSideSlope.addSvg(sideViewSlope);
