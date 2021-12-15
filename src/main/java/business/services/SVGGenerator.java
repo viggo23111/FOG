@@ -337,7 +337,7 @@ public class SVGGenerator {
 
         double height = 210 + a;
 
-        SVG outerSVGSideSlope = new SVG(0, 0, "0 0 " + length + 75 + " 305", 100, 75);
+        SVG outerSVGSideSlope = new SVG(0, 0, "0 0 " + length + 75 + " "+height+75, 100, 75);
         SVG sideViewSlope = new SVG(75, 0, "0 0 " + length + " " + height, 75, 75);
 
         //outline
