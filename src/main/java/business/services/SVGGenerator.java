@@ -330,6 +330,119 @@ public class SVGGenerator {
 
         drawings.add(outerSVG);
 
+        //SIDEVIEW
+        double a = 0;
+
+        a = Math.tan(radians)*width/2;
+
+        double height = 210 + a;
+
+        SVG outerSVGSideSlope = new SVG(0, 0, "0 0 " + length + 75 + " 305", 100, 75);
+        SVG sideViewSlope = new SVG(75, 0, "0 0 " + length + " " + height, 75, 75);
+
+        //outline
+        sideViewSlope.addLine(0,height,length,height);
+
+
+        //remme
+        sideViewSlope.addRect(15,a+19.5,19.5,length-30);
+
+
+
+        //poles
+        if (length < 510) {
+            sideViewSlope.addRect(55, a, 210, 9.7);
+            if(shedWidth ==0) {
+                sideViewSlope.addRect(length - 55, a, 210, 9.7);
+            }
+        }
+        if (length > 480) {
+            sideViewSlope.addRect(100, a, 210, 9.7);
+
+            if(shedWidth == 0) {
+                sideViewSlope.addRect(length - 100, a, 210, 9.7);
+            }
+
+
+        }
+
+        if (shedWidth < width - 30 && shedWidth != 0) {
+            //stople til carport
+            sideViewSlope.addRect(length - 100, a, 210, 9.7);
+
+            //stolper til skur
+            sideViewSlope.addRect(length - shedLength - 15-9.7, a, 210, 9.7);
+            sideViewSlope.addRect(length - 15-9.7, a, 210, 9.7);
+
+            for (int i = 0; i < shedLength+9.7+4; i +=4) {
+                sideViewSlope.addRect(length-shedLength-30+i,a,210,5);
+            }
+
+            //STOPLER FORAN SKUR
+            if(length > 480) {
+                sideViewSlope.addRect(length - 100, a, 210, 9.7);
+            } else if(length < 510) {
+                sideViewSlope.addRect(length - 55, a, 210, 9.7);
+            }
+
+        }
+
+
+        if (amountOfPoles > 4) {
+            sideViewSlope.addRect(length / 2, a, 210, 9.7);
+        }
+
+        //remme
+        sideViewSlope.addRect(15,a+19.5,19.5,length-30);
+
+        if (shedWidth == width - 30 && shedWidth != 0) {
+            sideViewSlope.addRect(length - 15-9.7, a, 210, 9.7);
+            sideViewSlope.addRect(length - shedLength - 30, a, 210, 9.7);
+
+            //sideview
+            for (int i = 0; i < shedLength+9.7+5; i +=5) {
+                sideViewSlope.addRect(length-shedLength-30+i,a,210,5);
+            }
+        }
+
+        //roof
+        for (int i = 0; i < length; i +=7) {
+            sideViewSlope.addRect(i,0,a,7);
+        }
+
+        //waterboard
+        sideViewSlope.addRect(0,0,a,10);
+        sideViewSlope.addRect(length-10,0,a,10);
+
+        //rygsten
+        sideViewSlope.addRect(10,0,10,length-20);
+
+        //stern
+        sideViewSlope.addRect(0,a,19.5,length);
+
+
+        outerSVGSideSlope.addArrowLine(50*1.2, 0, 50*1.2, (210+a)*0.75);
+
+
+        //length
+        outerSVGSideSlope.addArrowLine(75, height*0.75*1.3, length * 0.75 + 75, height*0.75*1.3);
+
+        //Shed length
+        if  (shedLength != 0){
+            outerSVGSideSlope.addArrowLine((length - shedLength) * .75 + 75 - 15 * .75-9.7, height * 0.75 * 1.1, length * .75 + 75 - 15 * 0.25-9.7, height * 0.75 * 1.1);
+            outerSVGSideSlope.addText(length - shedLength / 2 - 90, height * 0.75 * 1.2, shedLength + " cm");
+        }
+
+
+        //text
+        outerSVGSideSlope.addRoatedText(50*1.1, height*1.25 / 2 - 75+15, Math.round(210+a) + " cm");
+        outerSVGSideSlope.addText(length / 2, height*0.75*1.4, length + " cm");
+
+
+        outerSVGSideSlope.addSvg(sideViewSlope);
+
+        drawings.add(outerSVGSideSlope);
+
         return drawings;
     }
 }

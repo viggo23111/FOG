@@ -69,6 +69,7 @@ public class SlopeOverviewCommand extends CommandProtectedPage {
             List<SVG> svgList = svg.generateSVGSlope();
 
             request.setAttribute("aboveView", svgList.get(0));
+            request.setAttribute("sideView", svgList.get(1));
 
             request.setAttribute("width", width);
             request.setAttribute("length", length);
