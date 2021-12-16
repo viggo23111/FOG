@@ -6,17 +6,13 @@ import java.util.List;
 public class SVGGenerator {
     private double width;
     private double length;
-    private double amountOfRafters;
-    private int amountOfPoles;
     private double shedWidth;
     private double shedLength;
     private int angle;
 
-    public SVGGenerator(double width, double length, double amountOfRafters, int amountOfPoles, double shedWidth, double shedLength, int angle) {
+    public SVGGenerator(double width, double length, double shedWidth, double shedLength, int angle) {
         this.width = width;
         this.length = length;
-        this.amountOfRafters = amountOfRafters;
-        this.amountOfPoles = amountOfPoles;
         this.shedWidth = shedWidth;
         this.shedLength = shedLength;
         this.angle = angle;
@@ -30,7 +26,18 @@ public class SVGGenerator {
         SVG outerSVG = new SVG(0, 0, "0 0 " + length + 75 + " " + width + 75, 100, 75);
         SVG svg = new SVG(75, 0, "0 0 " + length + " " + width, 75, 75);
 
+        double amountOfRafters = Math.ceil(length / 55);
+
         double distance = length / (amountOfRafters - 1) - 4.5 / (amountOfRafters - 1);
+
+        int amountOfPoles = 0;
+        if (length <= 510) {
+            amountOfPoles = 4;
+        } else {
+            amountOfPoles = 6;
+        }
+
+
 
         //outline
         svg.addRect(0, 0, width, length);
@@ -209,12 +216,22 @@ public class SVGGenerator {
         SVG outerSVG = new SVG(0, 0, "0 0 " + length + 75 + " " + width + 75, 100, 75);
         SVG svgSlope = new SVG(75, 0, "0 0 " + length + " " + width, 75, 75);
 
+        int amountOfPoles = 0;
+        if (length <= 510) {
+            amountOfPoles = 4;
+        } else {
+            amountOfPoles = 6;
+        }
+
         double distanceToEdge = 17;
         if(shedLength == 0){
             distanceToEdge = 32;
         }
         int amountOfRaftersCarport = (int) Math.ceil((length-shedLength)/95);
         int amountOfRaftersShed = (int)Math.ceil(shedLength/78);
+
+        System.out.println("amount of rafters: " + amountOfRaftersCarport);
+        System.out.println("amount of rafters: " + amountOfRaftersShed);
 
         double distance = (length-shedLength) / (amountOfRaftersCarport - 1) - 4.5 / (amountOfRaftersCarport - 1)-distanceToEdge/(double)amountOfRaftersCarport;
         double distanceShed = (shedLength) / (amountOfRaftersShed - 1) - 4.5 / (amountOfRaftersShed - 1)-17/(double)amountOfRaftersShed;

@@ -55,16 +55,9 @@ public class FlatOverviewCommand extends CommandProtectedPage {
                 shedWidth = Integer.parseInt(request.getParameter("shedWidth"));
                 shedLength = Integer.parseInt(request.getParameter("shedLength"));
             }
-            int amountOfPoles = 0;
-
-            if (length <= 510) {
-                amountOfPoles = 4;
-            } else {
-                amountOfPoles = 6;
-            }
 
 
-            svg = new SVGGenerator(width, length, Math.abs(length / 55), amountOfPoles, shedWidth, shedLength,0);
+            svg = new SVGGenerator(width, length, shedWidth, shedLength,0);
 
 
             List<SVG> svgList = svg.generateSVGFlat();

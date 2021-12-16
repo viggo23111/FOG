@@ -56,15 +56,8 @@ public class SlopeOverviewCommand extends CommandProtectedPage {
                 shedWidth = Integer.parseInt(request.getParameter("shedWidth"));
                 shedLength = Integer.parseInt(request.getParameter("shedLength"));
             }
-            int amountOfPoles = 0;
 
-            if (length <= 510) {
-                amountOfPoles = 4;
-            } else {
-                amountOfPoles = 6;
-            }
-
-            SVGGenerator svg = new SVGGenerator(width,length,0,amountOfPoles,shedWidth,shedLength,slope);
+            SVGGenerator svg = new SVGGenerator(width,length,shedWidth,shedLength,slope);
 
             List<SVG> svgList = svg.generateSVGSlope();
 

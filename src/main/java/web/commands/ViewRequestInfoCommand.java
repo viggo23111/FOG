@@ -90,20 +90,14 @@ public class ViewRequestInfoCommand extends CommandProtectedPage {
             profit = suggestedPrice - priceRoundOff;
         }
 
-        int amountOfPoles = 0;
-        if (requestFound.getLength() <= 510) {
-            amountOfPoles = 4;
-        } else {
-            amountOfPoles = 6;
-        }
 
         List<SVG> svgList = null;
 
         if(requestFound.getCarportType() == 1) {
-            svg = new SVGGenerator(requestFound.getWidth(), requestFound.getLength(), Math.abs(requestFound.getLength() / 55), amountOfPoles, requestFound.getShedWidth(), requestFound.getShedLength(), 0);
+            svg = new SVGGenerator(requestFound.getWidth(), requestFound.getLength(), requestFound.getShedWidth(), requestFound.getShedLength(), 0);
             svgList = svg.generateSVGFlat();
         } else {
-            SVGGenerator svg = new SVGGenerator(requestFound.getWidth(),requestFound.getLength(),0,amountOfPoles,requestFound.getShedWidth(),requestFound.getShedLength(),requestFound.getSlope());
+            SVGGenerator svg = new SVGGenerator(requestFound.getWidth(),requestFound.getLength(),requestFound.getShedWidth(),requestFound.getShedLength(),requestFound.getSlope());
             svgList = svg.generateSVGSlope();
         }
 

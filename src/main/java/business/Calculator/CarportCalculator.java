@@ -544,13 +544,12 @@ public class CarportCalculator {
         int amount = 0;
 
         //her vil stolperne gå helt ud til remmen
-        if (shedWidth == width-30){
+        if (shedWidth == width-30 && shedWidth >=570){
             amount = 4;
+        } else if (shedWidth == width-30 && shedWidth <570){
+            amount = 2;
         }
-        //her vil der være brug for en stolpe mere i hver side, da brættet max kan være 540cm
-        else if(shedWidth > 540){
-            amount = 5;
-        }
+
         else {
             amount = 3;
         }
@@ -769,7 +768,7 @@ public class CarportCalculator {
         int amountOfRafters = (int) Math.ceil(((double)length-(double)shedLength)/95);
 
         if(shedLength != 0) {
-            amountOfRafters += Math.ceil((double)shedLength / 78);
+            amountOfRafters += Math.abs((double)shedLength / 78);
         }
 
         int id = 0;
