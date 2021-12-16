@@ -58,14 +58,15 @@ public class MyRequestBomCommand extends CommandProtectedPage {
             } else if (bomItem.getCategoryID() == 2) {
                 BOMlistCategory2.add(bomItem);
             }
+
             else if (bomItem.getCategoryID() == 3) {
                 BOMlistCategory3.add(bomItem);
             }
-
         }
 
         request.setAttribute("BOMlistcategory1", BOMlistCategory1);
         request.setAttribute("BOMlistcategory2", BOMlistCategory2);
+        request.setAttribute("BOMlistcategory3", BOMlistCategory3);
         request.setAttribute("category1", category1.getName());
         request.setAttribute("category2", category2.getName());
         request.setAttribute("category3", category3.getName());
