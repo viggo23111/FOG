@@ -10,7 +10,7 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet"
           integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
     <title>Fog</title>
-    <t:genericpage> </t:genericpage>
+    <t:FOGfont> </t:FOGfont>
 </head>
 <body>
 <div class="container">
@@ -45,7 +45,7 @@
                                 <a class="nav-link" href="${pageContext.request.contextPath}/fc/viewcustomerscommand">Kunder</a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link" href="${pageContext.request.contextPath}/fc/viewrequestscommand">Forespørgelser</a>
+                                <a class="nav-link" href="${pageContext.request.contextPath}/fc/viewrequestscommand">Forespørgsler</a>
                             </li>
 
                         </ul>
