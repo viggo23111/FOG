@@ -91,6 +91,10 @@ public class CarportCalculator {
         BOM.add(calculateHolePlateSlim(calculateRaftersBottom(width,length,shedLength).getAmount()));
         BOM.add(calculateScrewsForHoleplates(calculateHolePlateWide(calculateRaftersBottom(width,length,shedLength).getAmount()).getAmount(),calculateHolePlateSlim(calculateRaftersBottom(width,length,shedLength).getAmount()).getAmount()));
 
+        //SKruer til montering af stern, vindskeder, vindkryds & vandbræt, her skal altid være 1 pakke af 200
+        description = "Til montering af Stern, vindskeder, vindkryds & vand bræt";
+        BOM.add(new Material(34,1,description));
+
         if (shedLength > 0) {
             BOM.add(calculateCladdingBoards(shedWidth, shedLength));
             BOM.add(calculatePolesForShed(width, length, shedWidth, shedLength));
