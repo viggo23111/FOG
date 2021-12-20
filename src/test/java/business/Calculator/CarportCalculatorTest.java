@@ -52,7 +52,7 @@ class CarportCalculatorTest {
     }
 
     @Test
-    void calculateAmountOTilesTest(){
+    void calculateAmountOfTilesTest(){
         //Test af hvor mange tagsten der skal bruges, tagstenene kommer i paller af 216 eller halvpaller af 108
         int width = 390;
         int length = 780;
