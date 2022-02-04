@@ -16,7 +16,7 @@
   </component>
   <component name="JavacSettings">
     <option name="ADDITIONAL_OPTIONS_OVERRIDE">
-      <module name="FOG" options="-endorseddirs E:\Github\2semester\FOG\FOG\target/endorsed" />
+      <module name="FOG" options="-endorseddirs E:\Github\3semester\FOGCI\target/endorsed" />
       <module name="dynamicSVG" options="-endorseddirs $PROJECT_DIR$/target/endorsed" />
     </option>
   </component>
